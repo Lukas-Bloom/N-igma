@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "kaboom": "^2000.0.0-beta.19"
+  },
+  "name": "n-igma",
+  "description": "Best Group Project Game!",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lukasbloom93/N-igma.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lukasbloom93/N-igma/issues"
+  },
+  "homepage": "https://github.com/lukasbloom93/N-igma#readme"
+}
