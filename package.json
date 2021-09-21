@@ -1,12 +1,12 @@
 {
   "dependencies": {
-    "kaboom": "^2000.0.0-beta.19"
+    "kaboom": "^2000.0.0-beta.19",
+    "node.js": "^0.0.1-security"
   },
   "name": "n-igma",
   "description": "Best Group Project Game!",
   "version": "1.0.0",
   "main": "main.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
