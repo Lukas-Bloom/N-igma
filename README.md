@@ -1,2 +1,2 @@
 # N-igma
-Group Project Game!
+Best Group Project Game!
