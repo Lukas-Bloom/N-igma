@@ -1,3 +1,13 @@
+import Kaboom from './kaboomClass.js'
+
+
+const hugo = new Kaboom([0,0,0])
+
+hugo.doThis()
+
+const vadSomHelst=hugo.k
+
+
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
   console.log(msg);
@@ -5,8 +15,6 @@ socket.on("init", (msg) => {
 
 
 let currentKey
-
-
 const start=()=>{
 
   document.addEventListener("keydown", keydown);
@@ -21,14 +29,9 @@ const keydown = (e) => {
 
 start()
 // import kaboom lib
-import kaboom from "./node_modules/kaboom/dist/kaboom.mjs";
 
-// initialize kaboom context
-kaboom({
-  clearColor: ["black"],
-});
 
-loadSprite("bean", "sprites/bean.png");
+vadSomHelst.loadSprite("bean", "sprites/bean.png");
 
 
 // define some constants
@@ -37,7 +40,7 @@ const FALL_DEATH = 2400;
 
 
 
-scene("game", () => {
+vadSomHelst.scene("game", () => {
   gravity(3200);
 
   // add level to scene
@@ -77,25 +80,25 @@ scene("game", () => {
  
  
 
-  keyDown("left", () => {
+  vadSomHelst.keyDown("left", () => {
     player.move(-MOVE_SPEED, 0);
   });
 
-  keyDown("right", () => {
+  vadSomHelst.keyDown("right", () => {
     player.move(MOVE_SPEED, 0);
   });
 
 
 });
 
-scene("lose", () => {
+vadSomHelst.scene("lose", () => {
   add([text("You Lose")]);
   keyPress(() => go("game"));
 });
 
-scene("win", () => {
+vadSomHelst.scene("win", () => {
   add([text("You Win")]);
   keyPress(() => go("game"));
 });
 
-go("game");
+vadSomHelst.go("game");
