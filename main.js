@@ -5,11 +5,28 @@ socket.on("init", (msg) => {
 
 
 let currentKey
+let playerNumber
 
 
 const start=()=>{
 
   document.addEventListener("keydown", keydown);
+
+  const newGameBtn = document.getElementById('newGameButton');
+  const joinGameBtn = document.getElementById('joinGameButton');
+
+  newGameBtn.addEventListener('click', newGame);
+  joinGameBtn.addEventListener('click', joinGame);
+
+  function newGame() {
+    playerNumber = 1
+    go("game");
+  }
+
+  function joinGame() {
+    playerNumber = 2
+    go("game");
+  }
 }
 
 
@@ -35,8 +52,6 @@ loadSprite("bean", "sprites/bean.png");
 const MOVE_SPEED = 480;
 const FALL_DEATH = 2400;
 
-
-
 scene("game", () => {
   gravity(3200);
 
@@ -53,9 +68,20 @@ scene("game", () => {
   ]);
 
   // define player object
-  const player = add([
+  const player1 = add([
     sprite("bean"),
-    pos(0, 0),
+    pos(-400, 0),
+    area(),
+    scale(2),
+    // makes it fall to gravity and jumpable
+    body(),
+    // the custom component we defined above
+    origin("bot"),
+  ]);
+
+  const player2 = add([
+    sprite("bean"),
+    pos(-200, 0),
     area(),
     scale(2),
     // makes it fall to gravity and jumpable
@@ -65,25 +91,44 @@ scene("game", () => {
   ]);
 
   // action() runs every frame
-  player.action(() => {
+  player1.action(() => {
     // center camera to player
-    camPos(player.pos);
+    camPos(player1.pos);
     // check fall death
-    if (player.pos.y >= FALL_DEATH) {
+    if (player1.pos.y >= FALL_DEATH) {
+      go("lose");
+    }
+  });
+
+  player2.action(() => {
+    // center camera to player
+    camPos(player2.pos);
+    // check fall death
+    if (player2.pos.y >= FALL_DEATH) {
       go("lose");
     }
   });
 
  
- 
+ if(playerNumber === 1) {
+   keyDown("left", () => {
+     player1.move(-MOVE_SPEED, 0);
+   });
 
-  keyDown("left", () => {
-    player.move(-MOVE_SPEED, 0);
-  });
+   keyDown("right", () => {
+     player1.move(MOVE_SPEED, 0);
+   });
+ } else if (playerNumber === 2) {
+   keyDown("left", () => {
+     player2.move(-MOVE_SPEED, 0);
+   });
 
-  keyDown("right", () => {
-    player.move(MOVE_SPEED, 0);
-  });
+   keyDown("right", () => {
+     player2.move(MOVE_SPEED, 0);
+   });
+ }
+
+  
 
 
 });
@@ -98,4 +143,4 @@ scene("win", () => {
   keyPress(() => go("game"));
 });
 
-go("game");
+
