@@ -8,7 +8,8 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sg": "concurrently \"nodemon server/server.js\" \"npx live-server --browser=CHROME\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/lukasbloom93/N-igma/issues"
   },
-  "homepage": "https://github.com/lukasbloom93/N-igma#readme"
+  "homepage": "https://github.com/lukasbloom93/N-igma#readme",
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
 }

@@ -81,6 +81,7 @@ scene("game", () => {
     pos(-200, 0),
     area(),
     scale(2),
+    color(0,0,240),
     // makes it fall to gravity and jumpable
     body(),
     // the custom component we defined above
