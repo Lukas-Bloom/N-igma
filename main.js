@@ -1,3 +1,4 @@
+import kaboom from './node_modules/kaboom/dist/kaboom.mjs'
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
   console.log(msg);
@@ -8,7 +9,7 @@ let currentKey
 let playerNumber
 
 
-const start=()=>{
+const start = () => {
 
   document.addEventListener("keydown", keydown);
 
@@ -31,26 +32,22 @@ const start=()=>{
 
 
 const keydown = (e) => {
-  currentKey=e.keyCode
-  console.log("e keycode:",e.keyCode ," and current Key:", currentKey);
+  currentKey = e.keyCode
+  console.log("e keycode:", e.keyCode, " and current Key:", currentKey);
   socket.emit("keyPressedNow", currentKey);
 };
 
 start()
 // import kaboom lib
-import kaboom from "./node_modules/kaboom/dist/kaboom.mjs";
-
-// initialize kaboom context
 kaboom({
-  clearColor: ["black"],
-});
-
-loadSprite("bean", "sprites/bean.png");
-
+  clearColor: ['black'],
+})
 
 // define some constants
 const MOVE_SPEED = 480;
 const FALL_DEATH = 2400;
+
+loadSprite("bean", "sprites/bean.png");
 
 scene("game", () => {
   gravity(3200);
@@ -109,38 +106,25 @@ scene("game", () => {
     }
   });
 
- 
- if(playerNumber === 1) {
-   keyDown("left", () => {
-     player1.move(-MOVE_SPEED, 0);
-   });
 
-   keyDown("right", () => {
-     player1.move(MOVE_SPEED, 0);
-   });
- } else if (playerNumber === 2) {
-   keyDown("left", () => {
-     player2.move(-MOVE_SPEED, 0);
-   });
+  if (playerNumber === 1) {
+    keyDown("left", () => {
+      player1.move(-MOVE_SPEED, 0);
+    });
 
-   keyDown("right", () => {
-     player2.move(MOVE_SPEED, 0);
-   });
- }
+    keyDown("right", () => {
+      player1.move(MOVE_SPEED, 0);
+    });
+  } else if (playerNumber === 2) {
+    keyDown("left", () => {
+      player2.move(-MOVE_SPEED, 0);
+    });
 
-  
+    keyDown("right", () => {
+      player2.move(MOVE_SPEED, 0);
+    });
+  }
 
-
-});
-
-scene("lose", () => {
-  add([text("You Lose")]);
-  keyPress(() => go("game"));
-});
-
-scene("win", () => {
-  add([text("You Win")]);
-  keyPress(() => go("game"));
 });
 
 
