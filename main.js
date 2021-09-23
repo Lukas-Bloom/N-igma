@@ -71,6 +71,8 @@ scene("game", () => {
   });
 
   keyPress("space", () => {
-    players[playerNumber - 1].jump();
+    if (players[playerNumber - 1].grounded()) {
+      players[playerNumber - 1].jump();
+    }
   });
 });
