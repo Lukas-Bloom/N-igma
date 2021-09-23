@@ -7,7 +7,11 @@ socket.on("init", (msg) => {
   console.log(msg);
 });
 
-let playerNumber;
+let playerNumber
+let jumps = 2
+let jumping = false
+
+console.log('doublejump: ' + jumps)
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -34,7 +38,7 @@ start();
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
-
+  
   // add level to scene
   //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
   addLevel(levels()[1], levelConf());
@@ -60,6 +64,11 @@ scene("game", () => {
     if (players[playerNumber - 1].pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
+    if (players[playerNumber - 1].grounded()) {
+      jumps = 2
+      jumping = false
+      console.log('jumps: ' + jumps)
+    }
   });
 
   keyDown("left", () => {
@@ -71,8 +80,17 @@ scene("game", () => {
   });
 
   keyPress("space", () => {
-    if (players[playerNumber - 1].grounded()) {
+    if (jumps > 0 && !jumping) {
       players[playerNumber - 1].jump();
+      
+    
     }
+
   });
+  keyRelease("space", () => {
+      jumping = false
+      jumps --
+  });
+
+
 });
