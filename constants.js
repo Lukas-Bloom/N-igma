@@ -10,11 +10,20 @@ export const P2 = {
 };
 
 export const COL = {
+  BLACK: [0, 0, 0],
+  WHITE: [255, 255, 255],
   RED: [255, 0, 0],
   BLUE: [0, 0, 255],
   GREEN: [0, 255, 0],
-  BLACK: [0, 0, 0],
-  WHITE: [255, 255, 255],
+  ORANGE: [255, 150, 0],
+  GREY: [160, 160 , 160],
+  LGREY: [215, 215, 215],
+  DGREY: [75, 75, 75],
+  CYAN: [0, 255, 255],
+  MAGENTA: [255, 0, 255],
+  PURPLE: [128, 0, 128],
+  SKYBLUE: [0, 190, 255],
+  LGREEN: [0 , 255, 128],
   //ADD MORE COLORS AS WE NEED THEM
 };
 
