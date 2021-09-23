@@ -1,11 +1,11 @@
 import k from "./initKaboom.js";
 import {P1,P2, COL} from "./constants.js"
 
-k.loadSprite("bean", "sprites/bean.png");
+loadSprite("bean", "sprites/bean.png");
 
 export const p1 = () => {
   
-  return (k.add([
+  return (add([
     sprite("bean"),
     pos(P1.POSX, P1.POSY),
     area(),
@@ -19,7 +19,7 @@ export const p1 = () => {
 
 export const p2 = () => {
 
-  return k.add([
+  return add([
     sprite("bean"),
     pos(P2.POSX, P2.POSY),
     area(),

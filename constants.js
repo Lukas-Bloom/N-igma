@@ -1,11 +1,11 @@
 export const P1 = {
   SCALE: 2,
-  POSX: -400,
+  POSX: 50,
   POSY: 0,
 };
 export const P2 = {
   SCALE: 2,
-  POSX: -200,
+  POSX: 100,
   POSY: 0,
 };
 

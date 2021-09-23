@@ -1,6 +1,6 @@
-import k from "./initKaboom.js";
-import { PHYS } from "./constants.js";
+import {PHYS } from "./constants.js";
 import { p1, p2 } from "./players.js";
+import {levels,levelConf } from "./levels.js";
 
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
@@ -10,8 +10,6 @@ socket.on("init", (msg) => {
 let playerNumber;
 
 const start = () => {
-  document.addEventListener("keydown", keydown);
-
   const newGameBtn = document.getElementById("newGameButton");
   const joinGameBtn = document.getElementById("joinGameButton");
 
@@ -20,12 +18,12 @@ const start = () => {
 
   function newGame() {
     playerNumber = 1;
-    k.go("game");
+    go("game");
   }
 
   function joinGame() {
     playerNumber = 2;
-    k.go("game");
+    go("game");
   }
 };
 
@@ -33,10 +31,17 @@ start();
 
 // define some constants
 
-k.scene("game", () => {
+
+scene("game", () => {
+  gravity(PHYS.GRAVITY);
+
+  // add level to scene
+  //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
+  addLevel(levels()[1], levelConf());
+
   const players = [p1(), p2()];
 
-  k.action(() => {
+  action(() => {
     socket.emit(
       "pos",
       players[playerNumber - 1].pos.x,
@@ -46,18 +51,6 @@ k.scene("game", () => {
       players[playerNumber === 1 ? 1 : 0].moveTo(x, y);
     });
   });
-
-  gravity(PHYS.GRAVITY);
-  
-  k.add([
-    rect(width(), 100),
-    outline(4),
-    pos(-500, height()),
-    origin("botleft"),
-    area(),
-    solid(),
-    color(127, 200, 255),
-  ]);
 
   // action() runs every frame
   players[playerNumber - 1].action(() => {
@@ -69,11 +62,15 @@ k.scene("game", () => {
     }
   });
 
-  k.keyDown("left", () => {
+  keyDown("left", () => {
     players[playerNumber - 1].move(-PHYS.MOVE_SPEED, 0);
   });
 
-  k.keyDown("right", () => {
+  keyDown("right", () => {
     players[playerNumber - 1].move(PHYS.MOVE_SPEED, 0);
+  });
+
+  keyPress("space", () => {
+    players[playerNumber - 1].jump();
   });
 });
