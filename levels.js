@@ -1,5 +1,5 @@
 import {COL} from "./constants.js"
-loadSprite("bean", "sprites/bean.png");
+loadSprite("beanMonster", "sprites/bean.png");
 loadSprite("grass", "sprites/grass.png");
 loadSprite("grass_l", "sprites/grass_l.png");
 loadSprite("grass_l_top", "sprites/grass_l_top.png");
@@ -38,12 +38,12 @@ return [
     "                                                          ",
     "                                            L=============",
     "                                            1             ",
-    "                        # ======     L======              ",
-    "                                     1                    ",
-    "              L===R          @       1                    ",
-    "              1   2                  1                    ",
-    "              1   2                  1                    ",
-    "==============     ==================                     ",
+    "                        # ======     L======                 ",
+    "                                     1                           ",
+    "              L===R          @       1                              ",
+    "              1   2                                                                                            ",
+    "              1   2                                                                                          ",
+    "==============     =======================================================================================                    ",
   ],
 ];
 }
@@ -89,7 +89,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.BLUE),
     ],
     "@": () => [
-      sprite("bean"),
+      sprite("beanMonster"),
       area(),
       body(),
       color(COL.GREEN),

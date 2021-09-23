@@ -1,6 +1,6 @@
-import {PHYS } from "./constants.js";
+import { PHYS } from "./constants.js";
 import { p1, p2 } from "./players.js";
-import {levels,levelConf } from "./levels.js";
+import { levels, levelConf } from "./levels.js";
 
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
@@ -30,7 +30,6 @@ const start = () => {
 start();
 
 // define some constants
-
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
@@ -63,14 +62,28 @@ scene("game", () => {
   });
 
   keyDown("left", () => {
+    players[playerNumber - 1].flipX(true);
     players[playerNumber - 1].move(-PHYS.MOVE_SPEED, 0);
+    players[playerNumber - 1].play("run");
   });
 
   keyDown("right", () => {
+    players[playerNumber - 1].flipX(false);
     players[playerNumber - 1].move(PHYS.MOVE_SPEED, 0);
+    players[playerNumber - 1].play("run");
   });
 
   keyPress("space", () => {
     players[playerNumber - 1].jump();
+  });
+
+  keyRelease("left", () => {
+    players[playerNumber - 1].stop();
+    players[playerNumber - 1].play("idle");
+  });
+
+  keyRelease("right", () => {
+    players[playerNumber - 1].stop();
+    players[playerNumber - 1].play("idle");
   });
 });
