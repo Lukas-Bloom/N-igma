@@ -31,6 +31,11 @@ let player1Pos = {
   posX: 0,
   posY: 0,
 };
+
+let player1Pos = {
+  posX: 0,
+  posY: 0,
+};
 let player1UpdatedPos = {
   posX: 0,
   posY: 0,
