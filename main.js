@@ -42,11 +42,7 @@ scene("game", () => {
   const p = players[playerNumber - 1];
 
   action(() => {
-    socket.emit(
-      "pos",
-      p.pos.x,
-      p.pos.y
-    );
+    socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
       players[playerNumber === 1 ? 1 : 0].moveTo(x, y);
     });
@@ -67,50 +63,50 @@ scene("game", () => {
     p.move(-PHYS.MOVE_SPEED, 0);
     p.play("run");
     if (p.slideRight > PHYS.SLIDE) {
-      return
+      return;
     }
     if (p.slideLeft) {
       p.move(-p.slideLeft, 0);
-      p.slideLeft = Math.min(p.slideLeft + (p.slideLeft / PHYS.SLIDE), PHYS.MOVE_SPEED)
-    } else {
-      p.move(-PHYS.MOVE_SPEED, 0);
-    }
-
+      p.slideLeft = Math.min(
+        p.slideLeft + p.slideLeft / PHYS.SLIDE,
+        PHYS.MOVE_SPEED
+      );
+    } 
   });
 
   keyRelease("left", () => {
     if (p.slideRight > PHYS.SLIDE) {
-      return
+      return;
     }
     if (p.isOnIce) {
-      slideLeft()
+      slideLeft();
     }
-  })
+  });
 
   keyDown("right", () => {
-    p.flipX(false);
-    p.move(PHYS.MOVE_SPEED, 0);
-    p.play("run");
+     p.flipX(false);
+     p.move(PHYS.MOVE_SPEED, 0);
+     p.play("run");
     if (p.slideLeft > PHYS.SLIDE) {
-      return
+      return;
     }
     if (p.slideRight) {
       p.move(p.slideRight, 0);
-      p.slideRight = Math.min(p.slideRight + (p.slideRight / PHYS.SLIDE), PHYS.MOVE_SPEED)
-    } else {
-      p.move(PHYS.MOVE_SPEED, 0);
-    }
-
+      p.slideRight = Math.min(
+        p.slideRight + p.slideRight / PHYS.SLIDE,
+        PHYS.MOVE_SPEED
+      );
+    } 
   });
 
   keyRelease("right", () => {
     if (p.slideLeft > PHYS.SLIDE) {
-      return
+      return;
     }
     if (p.isOnIce) {
-      slideRight()
+      slideRight();
     }
-  })
+  });
 
   keyPress("space", () => {
     if (p.grounded()) {
@@ -129,48 +125,45 @@ scene("game", () => {
   });
   p.collides("ice", () => {
     if (p.isOnIce) {
-      return
+      return;
     }
-    p.isOnIce = true
+    p.isOnIce = true;
 
     if (keyIsDown("right")) {
-      p.slideRight = PHYS.MOVE_SPEED
-      p.slideLeft = PHYS.SLIDE
-      slideRight()
-    }
-    else if (keyIsDown("left")) {
-      p.slideLeft = PHYS.MOVE_SPEED
-      p.slideRight = PHYS.SLIDE
-      slideLeft()
+      p.slideRight = PHYS.MOVE_SPEED;
+      p.slideLeft = PHYS.SLIDE;
+      slideRight();
+    } else if (keyIsDown("left")) {
+      p.slideLeft = PHYS.MOVE_SPEED;
+      p.slideRight = PHYS.SLIDE;
+      slideLeft();
     } else {
-
     }
-
-  })
+  });
 
   function slideRight() {
     if (p.slideRight > PHYS.SLIDE) {
-      p.slideRight -= PHYS.SLIDE
-      p.move(p.slideRight, 0)
+      p.slideRight -= PHYS.SLIDE;
+      p.move(p.slideRight, 0);
       setTimeout(function () {
-        slideRight()
-      }, 1000 / 60)
+        slideRight();
+      }, 1000 / 60);
     }
   }
 
   function slideLeft() {
     if (p.slideLeft > PHYS.SLIDE) {
-      p.slideLeft -= PHYS.SLIDE
-      p.move(-p.slideLeft, 0)
+      p.slideLeft -= PHYS.SLIDE;
+      p.move(-p.slideLeft, 0);
       setTimeout(function () {
-        slideLeft()
-      }, 1000 / 60)
+        slideLeft();
+      }, 1000 / 60);
     }
   }
 
   p.collides("grass", () => {
-    p.isOnIce = null
-    p.slideRight = null
-    p.slideLeft = null
-  })
+    p.isOnIce = null;
+    p.slideRight = null;
+    p.slideLeft = null;
+  });
 });
