@@ -45,7 +45,26 @@ return [
     "              1   2                  1                    ",
     "==============     ==================                     ",
   ],
-];
+  [
+    "============iiiiiiiiiiiiiiiiiiii                          ",
+    "                                                          ",
+    "                                                          ",
+    "        iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii           ",
+    "                                                          ",
+    "                                                          ",
+    " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                         ",
+    "                                                          ",
+    "                                                          ",
+    "     iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii            ",
+    "                                                          ",
+    "                                                          ",
+    " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                         ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                          =iiiiiiiiiiiiiii                ",
+  ],
+  ];
 }
 
 export const levelConf =()=>{  return({    // define the size of each block
@@ -56,6 +75,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("grass"),
       area(),
       solid(),
+      "grass"
     ],
     "1": () => [
       sprite("grass_l"),
@@ -96,7 +116,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       scale(2),
       patrol()
     ],
-    
-
+    "i": () => [
+      sprite("grass"),
+      area(),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "ice",
+    ],
+  }
+  )
 }
-)}
