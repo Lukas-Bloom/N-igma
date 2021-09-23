@@ -90,6 +90,12 @@ scene("game", () => {
 
   const players = [player1, player2]
 
+  action(() => {
+    socket.emit("pos", players[playerNumber - 1].pos.x, players[playerNumber - 1].pos.y)
+    socket.on("moveOtherPlayer", (x, y) => {
+      players[playerNumber === 1 ? 1 : 0].moveTo(x, y)
+    })
+  });
 
   // action() runs every frame
   players[playerNumber - 1].action(() => {

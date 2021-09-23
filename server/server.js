@@ -2,17 +2,20 @@ const app = require("express")();
 const gameServer = require("http").createServer(app);
 const io = require("socket.io")(gameServer, {
   cors: {
-  origin: ["http://127.0.0.1:8080"],
-  methods: ["GET", "POST"]
+    origin: ["http://127.0.0.1:8080"],
+    methods: ["GET", "POST"]
   },
 });
 
 io.on("connection", (client) => {
   client.emit("init", mama(client.id));
-  client.on("keyPressedNow",(key)=>{
+  client.on("keyPressedNow", (key) => {
     console.log(key)
   })
 
+  client.on("pos", (posX, posY) => {
+    client.broadcast.emit("moveOtherPlayer", posX, posY)
+  })
 });
 
 function mama(id) {
