@@ -1,47 +1,48 @@
-import kaboom from './node_modules/kaboom/dist/kaboom.mjs'
+import kaboom from "./node_modules/kaboom/dist/kaboom.mjs";
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
   console.log(msg);
 });
 
-
-let currentKey
-let playerNumber
-
+let currentKey;
+let playerNumber;
 
 const start = () => {
-
   document.addEventListener("keydown", keydown);
 
-  const newGameBtn = document.getElementById('newGameButton');
-  const joinGameBtn = document.getElementById('joinGameButton');
+  const newGameBtn = document.getElementById("newGameButton");
+  const joinGameBtn = document.getElementById("joinGameButton");
 
-  newGameBtn.addEventListener('click', newGame);
-  joinGameBtn.addEventListener('click', joinGame);
+  newGameBtn.addEventListener("click", newGame);
+  joinGameBtn.addEventListener("click", joinGame);
 
   function newGame() {
-    playerNumber = 1
+    playerNumber = 1;
     go("game");
   }
 
   function joinGame() {
-    playerNumber = 2
+    playerNumber = 2;
     go("game");
   }
-}
+};
+
+let player1Pos = {
+  posX: 0,
+  posY: 0,
+};
 
 
 const keydown = (e) => {
-  currentKey = e.keyCode
-  console.log("e keycode:", e.keyCode, " and current Key:", currentKey);
+  currentKey = e.keyCode;
   socket.emit("keyPressedNow", currentKey);
 };
 
-start()
+start();
 // import kaboom lib
 kaboom({
-  clearColor: ['black'],
-})
+  clearColor: ["black"],
+});
 
 // define some constants
 const MOVE_SPEED = 480;
@@ -81,7 +82,7 @@ scene("game", () => {
     pos(-200, 0),
     area(),
     scale(2),
-    color(0,0,240),
+    color(0, 0, 240),
     // makes it fall to gravity and jumpable
     body(),
     // the custom component we defined above
@@ -107,16 +108,24 @@ scene("game", () => {
     }
   });
 
-
   if (playerNumber === 1) {
     keyDown("left", () => {
       player1.move(-MOVE_SPEED, 0);
+      player1Pos.posX = player1.pos.x;
+      player1Pos.posY = player1.pos.y;
+      socket.emit("posP1", player1.pos.x, player1.pos.y);
     });
 
     keyDown("right", () => {
       player1.move(MOVE_SPEED, 0);
+      player1Pos.posX = player1.pos.x;
+      player1Pos.posY = player1.pos.y;
+      socket.emit("posP1", player1.pos.x, player1.pos.y);
     });
   } else if (playerNumber === 2) {
+    socket.on("test", (x, y) => {
+      player1.moveTo(x, y);
+    });
     keyDown("left", () => {
       player2.move(-MOVE_SPEED, 0);
     });
@@ -125,7 +134,4 @@ scene("game", () => {
       player2.move(MOVE_SPEED, 0);
     });
   }
-
 });
-
-
