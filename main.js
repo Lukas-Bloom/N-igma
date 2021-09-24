@@ -43,11 +43,6 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
-  addLevel(levels()[3], levelConf());
-
-  const players = [p1(), p2()];
-  const p = players[playerNumber - 1];
-
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
