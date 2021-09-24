@@ -186,17 +186,8 @@ scene("game", () => {
     });
 
     p.collides("ghostblock", () => {
-      // const allGhostblocks = get("ghostblock");
-      // allGhostblocks
-      //every(("ghostblock") => { opacity(1) })
-      
-      const ghostblk = get("ghostblock")
-      for (let i = 0; i < ghostblk.length; i++) {
-        console.log('sdfsdf')
-        level.spawn("G", ghostblk.gridPos.sub(0, 0));
-        destroy(ghostblk)
-      }
-      
+
+
     });
   }
 
@@ -265,14 +256,20 @@ scene("game", () => {
     });
     p.collides("ghost", (g) => {
       pickupGhost(p, g)
+      spawnGhostblocks()
     });
     otherPlayer.collides("ghost", (g) => {
       pickupGhost(otherPlayer, g)
     });
   }
   
-
-
+  function spawnGhostblocks() {
+    const ghostblks = get("invisibleBlock")
+    for (let i = 0; i < ghostblks.length; i++) {
+      destroy(ghostblks[i])
+      level.spawn("G", ghostblks[i].gridPos.sub(0, 0));
+    }
+  }
 
   function doubleJump(onPlayer, obj) {
     destroy(obj)
@@ -291,6 +288,7 @@ scene("game", () => {
   function pickupGhost(onPlayer, obj) {
     destroy(obj)
     onPlayer.ghost = 1
+
   }
 
 

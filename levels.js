@@ -93,7 +93,7 @@ return [
     "                                                          ",
     "                         ggggg                            ",
     "            0                                             ",
-    "=======================                                   ",
+    "==========================================================",
   ],
   [
     "                             =============R               ",
@@ -246,10 +246,9 @@ export const levelConf =()=>{  return({    // define the size of each block
     "g": () => [
       sprite("ghostblock"),
       area(),
-      opacity(0.1),
-      solid(),
+      opacity(0),
       color(COL.LIGHT_BLUE),
-      "ghostblock",
+      "invisibleBlock",
     ],
     "G": () => [
       sprite("ghostblock"),
@@ -257,7 +256,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       opacity(1),
       solid(),
       color(COL.LIGHT_BLUE),
-      "ghostblockV",
+      "ghostblock",
     ],
   }
   )
