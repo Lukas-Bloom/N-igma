@@ -8,6 +8,7 @@ socket.on("init", (msg) => {
 });
 
 let playerNumber
+let hasKey = false
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -167,6 +168,12 @@ scene("game", () => {
       p.isOnSlime = null
     });
 
+    p.collides("closedDoor", () => {
+      if (hasKey) {
+        go("win");
+      }
+    });
+
     p.collides("slime", () => {
       p.isOnSlime = true
     });
@@ -218,6 +225,7 @@ scene("game", () => {
     });
     p.collides("bigKey", (O) => {
       destroy(O)
+      hasKey = true
   })}
 });
 
@@ -227,4 +235,10 @@ scene("lose", () => {
   ]);
   keyPress(() => go("game"));
 });
+  scene("win", () => {
+    add([
+      text("You Win!"),
+    ]);
+    keyPress(() => go("game"));
 
+});

@@ -27,7 +27,8 @@ function patrol(speed = 60, dir = 1) {
 export const levels =()=>{
 return [
   [
-    "                               O                  D       ",
+    "                                                  D       ",
+    "                               O                          ",
     "                             ####           L=============",
     "                                            1             ",
     "                        #            L======              ",
@@ -155,7 +156,8 @@ export const levelConf =()=>{  return({    // define the size of each block
     "D": () => [
       sprite("closedDoor"),
       area(),
-      solid(),
+      body(),
+      scale(2),
       color(COL.BLUE),
       "closedDoor",
     ],
