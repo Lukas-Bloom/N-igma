@@ -223,7 +223,9 @@ scene("game", () => {
 
 scene("lose", () => {
   add([
-    text("You Lose"),
+    text("You lose!"),
+    pos(screen.width/2-200, screen.height/2),
+    scale(1.5)
   ]);
   keyPress(() => go("game"));
 });
