@@ -9,6 +9,8 @@ loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
 loadSprite("bigKey", "sprites/bigKey.png");
 loadSprite("closedDoor", "sprites/closedDoor.png");
+loadSprite("tramp1", "sprites/tramp1.png");
+loadSprite("tramp2", "sprites/tramp2.png");
 loadSprite("doublejump", "sprites/doublejump.png");
 
 
@@ -39,15 +41,15 @@ return [
     "==============     ==================                     ",
   ],
   [
-    "                                                          ",
-    "                                            L=============",
-    "                                            1             ",
-    "                        # ======     L======                 ",
-    "                                     1                           ",
-    "              L===R          @       1                              ",
-    "              1   2                                                                                            ",
-    "              1   2                                                                                          ",
-    "==============     =======================================================================================                    ",
+    "                                                                                      1 ",
+    "                                            L=============                             1",
+    "                                            1                                          1",
+    "                        # ======     L======                                           1                   ",
+    "                                     1                                                 1                  ",
+    "              L===R          @       1                                                 1                  ",
+    "              1   2                                                                                       ",
+    "              1   2                                                                                       ",
+    "==============     =======================================================================================",
   ],
   [
     "============iiiiiiiiiiiiiiiiiiii                          ",
@@ -78,6 +80,26 @@ return [
     "                             1       2                    ",
     "                             1       2                    ",
     "=================ssssssssssss         ====================",
+  ],
+  [
+    "                                                          ",
+    "                             =============R               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                   t                      2               ",
+    "====================                       ============   ",
   ],
   ];
 }
@@ -129,7 +151,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       body(),
       color(COL.GREEN),
-      scale(2),
+      scale(),
       patrol()
     ],
     "J": () => [
@@ -167,6 +189,18 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LGREEN),
       "slime",
+    ],
+    "t": () => [
+      sprite("tramp1"),
+      area(),
+      solid(),
+      "tramp1",
+    ],
+    "T": () => [
+      sprite("tramp2"),
+      area(),
+      solid(),
+      "tramp2",
     ],
   }
   )

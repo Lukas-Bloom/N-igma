@@ -35,10 +35,11 @@ scene("game", () => {
   gravity(PHYS.GRAVITY);
   
   // add level to scene
-  addLevel(levels()[0], levelConf());
+  const level = addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
+  const otherPlayer = players[playerNumber === 1 ? 1 : 0];
   let jumps;
   let isJumping = false;
 
@@ -46,7 +47,7 @@ scene("game", () => {
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
-      players[playerNumber === 1 ? 1 : 0].moveTo(x, y);
+      otherPlayer.moveTo(x, y);
     });
   });
 
@@ -209,6 +210,26 @@ scene("game", () => {
   }
 
 
+  p.collides("slime", () => {
+    p.isOnSlime = true
+  })
+
+  p.on("ground", (obj) => {
+    if (obj.is("tramp1")) trampHandler(obj, p)
+  })
+  otherPlayer.on("ground", (obj) => {
+    if (obj.is("tramp1")) trampHandler(obj, players[playerNumber == 1 ? 1 : 0])
+  })
+
+  function trampHandler(obj, onPlayer) {
+    onPlayer.jump(PHYS.TRAMP_JUMP_HEIGHT)
+    destroy(obj)
+    const tramp = level.spawn("T", obj.gridPos.sub(0, 0))
+    setTimeout(function () {
+      destroy(tramp)
+      level.spawn("t", tramp.gridPos.sub(0, 0))
+    }, 500)
+  }
 
   //reset jumps when landing
   function checkIfGrounded() {
@@ -220,18 +241,30 @@ scene("game", () => {
 
   function pickupPowerup() {
     p.collides("doublejump", (j) => {
-      destroy(j)
-      p.jumpsAmount = 2
+      doubleJump(p, j)
+    });
+    otherPlayer.collides("doublejump", (j) => {
+      doubleJump(otherPlayer, j)
     });
     p.collides("bigKey", (O) => {
       destroy(O)
       hasKey = true
-  })}
+    });
+  }
+  
+  function doubleJump(onPlayer, obj) {
+    destroy(obj)
+    onPlayer.jumpsAmount = 2
+  }
+
+
 });
 
 scene("lose", () => {
   add([
-    text("You Lose"),
+    text("You lose!"),
+    pos(screen.width/2-200, screen.height/2),
+    scale(1.5)
   ]);
   keyPress(() => go("game"));
 });

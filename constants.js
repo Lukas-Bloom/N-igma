@@ -1,10 +1,8 @@
 export const P1 = {
-  SCALE: 2,
   POSX: 50,
   POSY: 0,
 };
 export const P2 = {
-  SCALE: 2,
   POSX: 100,
   POSY: 0,
 };
@@ -28,10 +26,12 @@ export const COL = {
 };
 
 export const PHYS = {
-  MOVE_SPEED: 480,
+  WORLD_SCALE:2,
+  MOVE_SPEED: 280,
   FALL_DEATH: 2400,
   GRAVITY: 3200,
   SLIDE: 6,  // any factor of MOVE_SPEED. The smaller the more slippery
   SLIME_JUMP: 200,
   SLIME_MOVE_SPEED: 120,
+  TRAMP_JUMP_HEIGHT: 1500,
 };
