@@ -7,9 +7,9 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
-loadSprite("tramp1", "sprites/tramp1.png");
-loadSprite("tramp2", "sprites/tramp2.png");
 loadSprite("doublejump", "sprites/doublejump.png");
+loadSprite("ghost", "sprites/ghost.png");
+loadSprite("ghostblock", "sprites/ghostblock.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -80,23 +80,14 @@ return [
   ],
   [
     "                                                          ",
-    "                             =============R               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                                          2               ",
-    "                   t                      2               ",
-    "====================                       ============   ",
+    "                                                          ",
+    "                                       ===============    ",
+    "                                                          ",
+    "                               ggggg                      ",
+    "                                                          ",
+    "                         ggggg                            ",
+    "            G                                             ",
+    "=======================                                   ",
   ],
   ];
 }
@@ -172,17 +163,21 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.LGREEN),
       "slime",
     ],
-    "t": () => [
-      sprite("tramp1"),
+    "G": () => [
+      sprite("ghost"),
       area(),
+      opacity(1),
       solid(),
-      "tramp1",
+      color(COL.LIGHT_BLUE),
+      "ghost",
     ],
-    "T": () => [
-      sprite("tramp2"),
+    "g": () => [
+      sprite("ghostblock"),
       area(),
+      opacity(0.1),
       solid(),
-      "tramp2",
+      color(COL.LIGHT_BLUE),
+      "ghostblock",
     ],
   }
   )

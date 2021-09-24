@@ -27,6 +27,7 @@ export const p1 = () => {
     origin("bot"),
     {
       jumpsAmount: 1,
+      ghost: 0,
     }
   ]);
 };
@@ -48,6 +49,7 @@ export const p2 = () => {
     origin("bot"),
     {
       jumpsAmount: 1,
+      ghost: 0,
     }
   ]);
 };
