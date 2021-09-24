@@ -36,7 +36,7 @@ scene("game", () => {
 
   // add level to scene
   //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-  addLevel(levels()[1], levelConf());
+  addLevel(levels()[2], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
@@ -60,7 +60,6 @@ scene("game", () => {
 
   keyDown("left", () => {
     p.flipX(true);
-    p.move(-PHYS.MOVE_SPEED, 0);
     p.play("run");
     if (p.slideRight > PHYS.SLIDE) {
       return;
@@ -71,7 +70,9 @@ scene("game", () => {
         p.slideLeft + p.slideLeft / PHYS.SLIDE,
         PHYS.MOVE_SPEED
       );
-    } 
+    } else {
+      p.move(-PHYS.MOVE_SPEED, 0);
+    }
   });
 
   keyRelease("left", () => {
@@ -84,9 +85,8 @@ scene("game", () => {
   });
 
   keyDown("right", () => {
-     p.flipX(false);
-     p.move(PHYS.MOVE_SPEED, 0);
-     p.play("run");
+    p.flipX(false);
+    p.play("run");
     if (p.slideLeft > PHYS.SLIDE) {
       return;
     }
@@ -96,7 +96,9 @@ scene("game", () => {
         p.slideRight + p.slideRight / PHYS.SLIDE,
         PHYS.MOVE_SPEED
       );
-    } 
+    } else {
+      p.move(PHYS.MOVE_SPEED, 0);
+    }
   });
 
   keyRelease("right", () => {
