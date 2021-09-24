@@ -14,6 +14,9 @@ export const p1 = () => {
     body(),
     // the custom component we defined above
     origin("bot"),
+    {
+      jumpsAmount: 2,
+    }
   ]));
 };
 
@@ -29,5 +32,8 @@ export const p2 = () => {
     body(),
     // the custom component we defined above
     origin("bot"),
+    {
+      jumpsAmount: 2,
+    }
   ]);
 };

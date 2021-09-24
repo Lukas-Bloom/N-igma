@@ -8,10 +8,6 @@ socket.on("init", (msg) => {
 });
 
 let playerNumber
-let jumps = 2
-let jumping = false
-
-console.log('doublejump: ' + jumps)
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -44,6 +40,9 @@ scene("game", () => {
   addLevel(levels()[1], levelConf());
 
   const players = [p1(), p2()];
+  const p = players[playerNumber - 1];
+  let jumps;
+  let isJumping = false
 
   action(() => {
     socket.emit(
@@ -64,10 +63,9 @@ scene("game", () => {
     if (players[playerNumber - 1].pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
-    if (players[playerNumber - 1].grounded()) {
-      jumps = 2
-      jumping = false
-      console.log('jumps: ' + jumps)
+    if (p.grounded()) {
+      p.jumps = p.jumpsAmount
+      p.isJumping = false
     }
   });
 
@@ -80,17 +78,19 @@ scene("game", () => {
   });
 
   keyPress("space", () => {
-    if (jumps > 0 && !jumping) {
-      players[playerNumber - 1].jump();
-      
-    
+    if (p.jumps > 0 && !p.isJumping) {
+      p.jump();
     }
-
   });
+
   keyRelease("space", () => {
-      jumping = false
-      jumps --
+      isJumping = false
+      p.jumps --
   });
 
+
+
+
+  
 
 });
