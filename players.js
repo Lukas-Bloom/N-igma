@@ -6,7 +6,7 @@ loadSprite('bean', 'sprites/tileMap.png', {
 	sliceY: 20,
 	anims: {
 		idle: 300,
-		run: { from: 302, to: 303  }
+		run: { from: 302, to: 303 ,loop:true }
 	}
 })
 
