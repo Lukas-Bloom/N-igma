@@ -7,7 +7,8 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
-
+loadSprite("tramp1", "sprites/tramp1.png");
+loadSprite("tramp2", "sprites/tramp2.png");
 
 function patrol(speed = 60, dir = 1) {
     return {
@@ -75,6 +76,26 @@ return [
     "                             1       2                    ",
     "=================ssssssssssss         ====================",
   ],
+  [
+    "                                                          ",
+    "                             =============R               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                   t                      2               ",
+    "====================                       ============   ",
+  ],
   ];
 }
 
@@ -140,6 +161,18 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LGREEN),
       "slime",
+    ],
+    "t": () => [
+      sprite("tramp1"),
+      area(),
+      solid(),
+      "tramp1",
+    ],
+    "T": () => [
+      sprite("tramp2"),
+      area(),
+      solid(),
+      "tramp2",
     ],
   }
   )

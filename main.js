@@ -175,4 +175,21 @@ scene("game", () => {
   p.collides("slime", () => {
     p.isOnSlime = true
   })
+
+  p.on("ground", (obj) => {
+    if (obj.is("tramp1")) trampHandler(obj, p)
+  })
+  players[playerNumber == 1 ? 1 : 0].on("ground", (obj) => {
+    if (obj.is("tramp1")) trampHandler(obj, players[playerNumber == 1 ? 1 : 0])
+  })
+
+  function trampHandler(obj, onPlayer) {
+    onPlayer.jump(PHYS.TRAMP_JUMP_HEIGHT)
+    destroy(obj)
+    const tramp = level.spawn("T", obj.gridPos.sub(0, 0))
+    setTimeout(function () {
+      destroy(tramp)
+      level.spawn("t", tramp.gridPos.sub(0, 0))
+    }, 500)
+  }
 });
