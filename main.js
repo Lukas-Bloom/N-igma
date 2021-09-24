@@ -29,13 +29,11 @@ const start = () => {
 
 start();
 
-// define some constants
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
   
   // add level to scene
-  //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
   addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
@@ -43,6 +41,7 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
+// network actions
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
@@ -50,9 +49,9 @@ scene("game", () => {
     });
   });
 
-  // action() runs every frame
+  //player actions
   p.action(() => {
-    // center camera to player
+
     camPos(p.pos);
     // check fall death
     if (p.pos.y >= PHYS.FALL_DEATH) {
@@ -62,6 +61,11 @@ scene("game", () => {
   });
 
   pickupPowerup();
+
+
+
+  
+  //key events
 
   keyDown("left", () => {
     p.flipX(true);
@@ -81,6 +85,8 @@ scene("game", () => {
   });
 
   keyRelease("left", () => {
+    p.stop();
+    p.play("idle");
     if (p.slideRight > PHYS.SLIDE) {
       return;
     }
@@ -107,6 +113,8 @@ scene("game", () => {
   });
 
   keyRelease("right", () => {
+    p.stop();
+    p.play("idle");
     if (p.slideLeft > PHYS.SLIDE) {
       return;
     }
@@ -126,15 +134,9 @@ scene("game", () => {
       p.jumps --
   });
 
-  keyRelease("left", () => {
-    p.stop();
-    p.play("idle");
-  });
 
-  keyRelease("right", () => {
-    p.stop();
-    p.play("idle");
-  });
+
+  //misc funtions
   p.collides("ice", () => {
     if (p.isOnIce) {
       return;
