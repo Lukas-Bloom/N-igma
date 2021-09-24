@@ -38,6 +38,7 @@ scene("game", () => {
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
+  const otherPlayer = players[playerNumber === 1 ? 1 : 0];
   let jumps;
   let isJumping = false;
 
@@ -45,7 +46,7 @@ scene("game", () => {
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
-      players[playerNumber === 1 ? 1 : 0].moveTo(x, y);
+      otherPlayer.moveTo(x, y);
     });
   });
 
@@ -209,7 +210,7 @@ scene("game", () => {
   p.on("ground", (obj) => {
     if (obj.is("tramp1")) trampHandler(obj, p)
   })
-  players[playerNumber == 1 ? 1 : 0].on("ground", (obj) => {
+  otherPlayer.on("ground", (obj) => {
     if (obj.is("tramp1")) trampHandler(obj, players[playerNumber == 1 ? 1 : 0])
   })
 
@@ -233,9 +234,16 @@ scene("game", () => {
 
   function pickupPowerup() {
     p.collides("doublejump", (j) => {
-      destroy(j)
-      p.jumpsAmount = 2
+      doubleJump(p, j)
     });
+    otherPlayer.collides("doublejump", (j) => {
+      doubleJump(otherPlayer, j)
+    });
+  }
+
+  function doubleJump(onPlayer, obj) {
+    destroy(obj)
+    onPlayer.jumpsAmount = 2
   }
 
 
