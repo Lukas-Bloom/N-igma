@@ -1,4 +1,4 @@
-import { PHYS } from "./constants.js";
+import { PHYS, ANSWERS } from "./constants.js";
 import { p1, p2 } from "./players.js";
 import { levels, levelConf } from "./levels.js";
 
@@ -8,7 +8,8 @@ socket.on("init", (msg) => {
 });
 
 let playerNumber
-let hasKey = false
+let keys = ''
+let levelIndex = 4
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -35,7 +36,7 @@ scene("game", () => {
   gravity(PHYS.GRAVITY);
   
   // add level to scene
-  const level = addLevel(levels()[0], levelConf());
+  const level = addLevel(levels()[levelIndex], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
@@ -169,10 +170,13 @@ scene("game", () => {
       p.isOnSlime = null
     });
 
-    p.collides("closedDoor", () => {
-      if (hasKey) {
-        go("win");
-      }
+    p.collides("openedDoor", () => {
+      levelIndex++
+      go("win")
+    });
+    otherPlayer.collides("openedDoor", () => {
+      levelIndex++
+      go("win")
     });
 
     p.collides("slime", () => {
@@ -246,15 +250,27 @@ scene("game", () => {
     otherPlayer.collides("doublejump", (j) => {
       doubleJump(otherPlayer, j)
     });
-    p.collides("bigKey", (O) => {
-      destroy(O)
-      hasKey = true
+    p.collides("bigKey", (key) => {
+      pickUpKey(key)
+    });
+    otherPlayer.collides("bigKey", (key) => {
+      pickUpKey(key)
     });
   }
   
   function doubleJump(onPlayer, obj) {
     destroy(obj)
     onPlayer.jumpsAmount = 2
+  }
+  function pickUpKey(obj) {
+    keys += obj.name
+    destroy(obj)
+    if(keys === ANSWERS[levelIndex]) {
+      const door = get("closedDoor")[0]
+      destroy(door)
+      level.spawn("O", door.gridPos.sub(0, 0));
+      keys = ''
+    }
   }
 
 

@@ -35,3 +35,7 @@ export const PHYS = {
   SLIME_MOVE_SPEED: 120,
   TRAMP_JUMP_HEIGHT: 1500,
 };
+
+export const ANSWERS = {
+  5: 'key1key2key3'
+}
