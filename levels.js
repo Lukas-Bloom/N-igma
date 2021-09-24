@@ -1,5 +1,5 @@
 import {COL} from "./constants.js"
-loadSprite("bean", "sprites/bean.png");
+loadSprite("beanMonster", "sprites/bean.png");
 loadSprite("grass", "sprites/grass.png");
 loadSprite("grass_l", "sprites/grass_l.png");
 loadSprite("grass_l_top", "sprites/grass_l_top.png");
@@ -39,14 +39,44 @@ return [
     "                                                          ",
     "                                            L=============",
     "                                            1             ",
-    "                        # ======     L======              ",
-    "                                     1                    ",
-    "              L===R          @       1                    ",
-    "              1   2                  1                    ",
-    "              1   2                  1                    ",
-    "==============     ==================                     ",
+    "                        # ======     L======                 ",
+    "                                     1                           ",
+    "              L===R          @       1                              ",
+    "              1   2                                                                                            ",
+    "              1   2                                                                                          ",
+    "==============     =======================================================================================                    ",
   ],
-];
+  [
+    "============iiiiiiiiiiiiiiiiiiii                          ",
+    "                                                          ",
+    "                                                          ",
+    "        iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii           ",
+    "                                                          ",
+    "                                                          ",
+    " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                         ",
+    "                                                          ",
+    "                                                          ",
+    "     iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii            ",
+    "                                                          ",
+    "                                                          ",
+    " iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii                         ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                          =iiiiiiiiiiiiiii                ",
+  ],
+  [
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                             L=======R                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "=================ssssssssssss         ====================",
+  ],
+  ];
 }
 
 export const levelConf =()=>{  return({    // define the size of each block
@@ -57,6 +87,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("grass"),
       area(),
       solid(),
+      "grass"
     ],
     "1": () => [
       sprite("grass_l"),
@@ -90,7 +121,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.BLUE),
     ],
     "@": () => [
-      sprite("bean"),
+      sprite("beanMonster"),
       area(),
       body(),
       color(COL.GREEN),
@@ -104,7 +135,20 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.CYAN),
       "doublejump"
     ],
-    
-
+    "i": () => [
+      sprite("grass"),
+      area(),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "ice",
+    ],
+    "s": () => [
+      sprite("grass"),
+      area(),
+      solid(),
+      color(COL.LGREEN),
+      "slime",
+    ],
+  }
+  )
 }
-)}

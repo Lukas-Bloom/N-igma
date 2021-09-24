@@ -1,6 +1,6 @@
-import {PHYS } from "./constants.js";
+import { PHYS } from "./constants.js";
 import { p1, p2 } from "./players.js";
-import {levels,levelConf } from "./levels.js";
+import { levels, levelConf } from "./levels.js";
 
 const socket = io("ws://localhost:3000");
 socket.on("init", (msg) => {
@@ -31,7 +31,6 @@ start();
 
 // define some constants
 
-
 scene("game", () => {
   gravity(PHYS.GRAVITY);
   
@@ -44,23 +43,24 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
+  addLevel(levels()[3], levelConf());
+
+  const players = [p1(), p2()];
+  const p = players[playerNumber - 1];
+
   action(() => {
-    socket.emit(
-      "pos",
-      players[playerNumber - 1].pos.x,
-      players[playerNumber - 1].pos.y
-    );
+    socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
       players[playerNumber === 1 ? 1 : 0].moveTo(x, y);
     });
   });
 
   // action() runs every frame
-  players[playerNumber - 1].action(() => {
+  p.action(() => {
     // center camera to player
-    camPos(players[playerNumber - 1].pos);
+    camPos(p.pos);
     // check fall death
-    if (players[playerNumber - 1].pos.y >= PHYS.FALL_DEATH) {
+    if (p.pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
     checkIfGrounded()
@@ -69,16 +69,60 @@ scene("game", () => {
   pickupPowerup();
 
   keyDown("left", () => {
-    players[playerNumber - 1].move(-PHYS.MOVE_SPEED, 0);
+    p.flipX(true);
+    p.play("run");
+    if (p.slideRight > PHYS.SLIDE) {
+      return;
+    }
+    if (p.slideLeft) {
+      p.move(-p.slideLeft, 0);
+      p.slideLeft = Math.min(
+        p.slideLeft + p.slideLeft / PHYS.SLIDE,
+        PHYS.MOVE_SPEED
+      );
+    } else {
+      p.move(p.isOnSlime ? -PHYS.SLIME_MOVE_SPEED : -PHYS.MOVE_SPEED, 0);
+    }
+  });
+
+  keyRelease("left", () => {
+    if (p.slideRight > PHYS.SLIDE) {
+      return;
+    }
+    if (p.isOnIce) {
+      slideLeft();
+    }
   });
 
   keyDown("right", () => {
-    players[playerNumber - 1].move(PHYS.MOVE_SPEED, 0);
+    p.flipX(false);
+    p.play("run");
+    if (p.slideLeft > PHYS.SLIDE) {
+      return;
+    }
+    if (p.slideRight) {
+      p.move(p.slideRight, 0);
+      p.slideRight = Math.min(
+        p.slideRight + p.slideRight / PHYS.SLIDE,
+        PHYS.MOVE_SPEED
+      );
+    } else {
+      p.move(p.isOnSlime ? PHYS.SLIME_MOVE_SPEED : PHYS.MOVE_SPEED, 0);
+    }
+  });
+
+  keyRelease("right", () => {
+    if (p.slideLeft > PHYS.SLIDE) {
+      return;
+    }
+    if (p.isOnIce) {
+      slideRight();
+    }
   });
 
   keyPress("space", () => {
     if (p.jumps > 0 && !p.isJumping) {
-      p.jump();
+      p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : null);
     }
   });
 
@@ -87,13 +131,65 @@ scene("game", () => {
       p.jumps --
   });
 
+  keyRelease("left", () => {
+    p.stop();
+    p.play("idle");
+  });
 
+  keyRelease("right", () => {
+    p.stop();
+    p.play("idle");
+  });
+  p.collides("ice", () => {
+    if (p.isOnIce) {
+      return;
+    }
+    p.isOnIce = true;
 
+    if (keyIsDown("right")) {
+      p.slideRight = PHYS.MOVE_SPEED;
+      p.slideLeft = PHYS.SLIDE;
+      slideRight();
+    } else if (keyIsDown("left")) {
+      p.slideLeft = PHYS.MOVE_SPEED;
+      p.slideRight = PHYS.SLIDE;
+      slideLeft();
+    } else {
+      p.slideLeft = PHYS.SLIDE
+      p.slideRight = PHYS.SLIDE
+    }
+  });
 
+  function slideRight() {
+    if (p.slideRight > PHYS.SLIDE) {
+      p.slideRight -= PHYS.SLIDE;
+      p.move(p.slideRight, 0);
+      setTimeout(function () {
+        slideRight();
+      }, 1000 / 60);
+    }
+  }
 
+  function slideLeft() {
+    if (p.slideLeft > PHYS.SLIDE) {
+      p.slideLeft -= PHYS.SLIDE;
+      p.move(-p.slideLeft, 0);
+      setTimeout(function () {
+        slideLeft();
+      }, 1000 / 60);
+    }
+  }
 
+  p.collides("grass", () => {
+    p.isOnIce = null;
+    p.slideRight = null;
+    p.slideLeft = null;
+    p.isOnSlime = null
+  });
 
-
+  p.collides("slime", () => {
+    p.isOnSlime = true
+  });
 
   //reset jumps when landing
   function checkIfGrounded() {
@@ -103,7 +199,6 @@ scene("game", () => {
     }
   }
 
-  
   function pickupPowerup() {
     p.collides("doublejump", (j) => {
       destroy(j)
@@ -111,6 +206,6 @@ scene("game", () => {
     });
   }
 
-  
 
 });
+
