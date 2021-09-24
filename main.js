@@ -34,7 +34,7 @@ scene("game", () => {
   gravity(PHYS.GRAVITY);
   
   // add level to scene
-  const level = addLevel(levels()[4], levelConf());
+  const level = addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
