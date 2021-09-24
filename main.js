@@ -138,6 +138,8 @@ scene("game", () => {
       p.slideRight = PHYS.SLIDE;
       slideLeft();
     } else {
+      p.slideLeft = PHYS.SLIDE
+      p.slideRight = PHYS.SLIDE
     }
   });
 
