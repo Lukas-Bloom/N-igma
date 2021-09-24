@@ -7,7 +7,7 @@ socket.on("init", (msg) => {
   console.log(msg);
 });
 
-let playerNumber
+let playerNumber;
 let keys = ''
 let levelIndex = 4
 
@@ -31,10 +31,9 @@ const start = () => {
 
 start();
 
-
 scene("game", () => {
   gravity(PHYS.GRAVITY);
-  
+
   // add level to scene
   const level = addLevel(levels()[levelIndex], levelConf());
 
@@ -44,7 +43,7 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
-// network actions
+  // network actions
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
@@ -54,26 +53,24 @@ scene("game", () => {
 
   //player actions
   p.action(() => {
-
     camPos(p.pos);
     // check fall death
     if (p.pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
-    checkIfGrounded()
+    checkIfGrounded();
   });
 
   pickupPowerup();
   handleCollision();
 
-
-
-
   //key events
 
   keyDown("left", () => {
-    p.flipX(true);
-    p.play("run");
+    if (keyIsPressed("left")) {
+      p.flipX(true);
+      p.play("run");
+    }
     if (p.slideRight > PHYS.SLIDE) {
       return;
     }
@@ -89,7 +86,6 @@ scene("game", () => {
   });
 
   keyRelease("left", () => {
-    p.stop();
     p.play("idle");
     if (p.slideRight > PHYS.SLIDE) {
       return;
@@ -100,8 +96,10 @@ scene("game", () => {
   });
 
   keyDown("right", () => {
-    p.flipX(false);
-    p.play("run");
+    if (keyIsPressed("right")) {
+      p.flipX(false);
+      p.play("run");
+    }
     if (p.slideLeft > PHYS.SLIDE) {
       return;
     }
@@ -117,7 +115,6 @@ scene("game", () => {
   });
 
   keyRelease("right", () => {
-    p.stop();
     p.play("idle");
     if (p.slideLeft > PHYS.SLIDE) {
       return;
@@ -134,11 +131,9 @@ scene("game", () => {
   });
 
   keyRelease("space", () => {
-      p.isJumping = false
-      p.jumps --
+    p.isJumping = false;
+    p.jumps--;
   });
-
-
 
   //misc funtions
 
@@ -158,8 +153,8 @@ scene("game", () => {
         p.slideRight = PHYS.SLIDE;
         slideLeft();
       } else {
-        p.slideLeft = PHYS.SLIDE
-        p.slideRight = PHYS.SLIDE
+        p.slideLeft = PHYS.SLIDE;
+        p.slideRight = PHYS.SLIDE;
       }
     });
 
@@ -167,7 +162,7 @@ scene("game", () => {
       p.isOnIce = null;
       p.slideRight = null;
       p.slideLeft = null;
-      p.isOnSlime = null
+      p.isOnSlime = null;
     });
 
     p.collides("openedDoor", () => {
@@ -180,18 +175,16 @@ scene("game", () => {
     });
 
     p.collides("slime", () => {
-      p.isOnSlime = true
+      p.isOnSlime = true;
     });
 
-    p.collides("spikes", (s,side) => {
+    p.collides("spikes", (s, side) => {
       if (side !== "bottom") {
-        return
+        return;
       }
       go("lose");
     });
-
   }
-
 
   function slideRight() {
     if (p.slideRight > PHYS.SLIDE) {
@@ -238,8 +231,8 @@ scene("game", () => {
   //reset jumps when landing
   function checkIfGrounded() {
     if (p.grounded()) {
-      p.jumps = p.jumpsAmount
-      p.isJumping = false
+      p.jumps = p.jumpsAmount;
+      p.isJumping = false;
     }
   }
 
@@ -279,8 +272,8 @@ scene("game", () => {
 scene("lose", () => {
   add([
     text("You lose!"),
-    pos(screen.width/2-200, screen.height/2),
-    scale(1.5)
+    pos(screen.width / 2 - 200, screen.height / 2),
+    scale(1.5),
   ]);
   keyPress(() => go("game"));
 });
