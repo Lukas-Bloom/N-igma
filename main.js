@@ -34,10 +34,6 @@ scene("game", () => {
   gravity(PHYS.GRAVITY);
   
   // add level to scene
-<<<<<<< HEAD
-  //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-=======
->>>>>>> develop
   addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
@@ -64,9 +60,6 @@ scene("game", () => {
     checkIfGrounded()
   });
 
-<<<<<<< HEAD
-  pickupKey();
-=======
   pickupPowerup();
   handleCollision();
 
@@ -74,7 +67,6 @@ scene("game", () => {
 
 
   //key events
->>>>>>> develop
 
   keyDown("left", () => {
     p.flipX(true);
@@ -209,19 +201,6 @@ scene("game", () => {
     }
   }
 
-<<<<<<< HEAD
-  p.collides("grass", () => {
-    p.isOnIce = null;
-    p.slideRight = null;
-    p.slideLeft = null;
-  });
-
-  function pickupKey() {
-    p.collides("bigKey"), (bigKey) => {
-      destroy(bigKey)
-    }
-  }
-=======
 
 
   //reset jumps when landing
