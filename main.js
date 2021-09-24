@@ -216,10 +216,9 @@ scene("game", () => {
       destroy(j)
       p.jumpsAmount = 2
     });
-  }
-
-
->>>>>>> develop
+    p.collides("bigKey", (O) => {
+      destroy(O)
+  })}
 });
 
 scene("lose", () => {
