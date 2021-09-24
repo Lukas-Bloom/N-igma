@@ -249,8 +249,17 @@ scene("game", () => {
     otherPlayer.collides("bigKey", (key) => {
       pickUpKey(key)
     });
+    p.collides("ghost", (g) => {
+      pickupGhost(p, g)
+    });
+    otherPlayer.collides("ghost", (g) => {
+      pickupGhost(otherPlayer, g)
+    });
   }
   
+
+
+
   function doubleJump(onPlayer, obj) {
     destroy(obj)
     onPlayer.jumpsAmount = 2
@@ -264,6 +273,10 @@ scene("game", () => {
       level.spawn("O", door.gridPos.sub(0, 0));
       keys = ''
     }
+  }
+  function pickupGhost(onPlayer, obj) {
+    destroy(obj)
+    onPlayer.ghost = 1
   }
 
 
