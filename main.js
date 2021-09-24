@@ -37,12 +37,12 @@ scene("game", () => {
   
   // add level to scene
   //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-  addLevel(levels()[1], levelConf());
+  addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
   let jumps;
-  let isJumping = false
+  let isJumping = false;
 
   action(() => {
     socket.emit(
@@ -63,11 +63,10 @@ scene("game", () => {
     if (players[playerNumber - 1].pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
-    if (p.grounded()) {
-      p.jumps = p.jumpsAmount
-      p.isJumping = false
-    }
+    checkIfGrounded()
   });
+
+  pickupPowerup();
 
   keyDown("left", () => {
     players[playerNumber - 1].move(-PHYS.MOVE_SPEED, 0);
@@ -84,12 +83,33 @@ scene("game", () => {
   });
 
   keyRelease("space", () => {
-      isJumping = false
+      p.isJumping = false
       p.jumps --
   });
 
 
 
+
+
+
+
+
+
+  //reset jumps when landing
+  function checkIfGrounded() {
+    if (p.grounded()) {
+      p.jumps = p.jumpsAmount
+      p.isJumping = false
+    }
+  }
+
+  
+  function pickupPowerup() {
+    p.collides("doublejump", (j) => {
+      destroy(j)
+      p.jumpsAmount = 2
+    });
+  }
 
   
 

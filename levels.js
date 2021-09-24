@@ -7,6 +7,7 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
+loadSprite("doublejump", "sprites/doublejump.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -28,7 +29,7 @@ return [
     "                             ####           L=============",
     "                                            1             ",
     "                        #            L======              ",
-    "                                     1                    ",
+    "                J                    1                    ",
     "              L===R                  1                    ",
     "              1   2                  1                    ",
     "              1   2       ^^^^^      1                    ",
@@ -95,6 +96,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.GREEN),
       scale(2),
       patrol()
+    ],
+    "J": () => [
+      sprite("doublejump"),
+      area(),
+      solid(),
+      color(COL.CYAN),
+      "doublejump"
     ],
     
 

@@ -15,7 +15,7 @@ export const p1 = () => {
     // the custom component we defined above
     origin("bot"),
     {
-      jumpsAmount: 2,
+      jumpsAmount: 1,
     }
   ]));
 };
@@ -33,7 +33,7 @@ export const p2 = () => {
     // the custom component we defined above
     origin("bot"),
     {
-      jumpsAmount: 2,
+      jumpsAmount: 1,
     }
   ]);
 };
