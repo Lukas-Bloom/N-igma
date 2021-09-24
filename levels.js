@@ -119,6 +119,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       color(COL.BLUE),
+      "spikes"
     ],
     "@": () => [
       sprite("beanMonster"),

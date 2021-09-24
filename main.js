@@ -61,10 +61,11 @@ scene("game", () => {
   });
 
   pickupPowerup();
+  handleCollision();
 
 
 
-  
+
   //key events
 
   keyDown("left", () => {
@@ -137,25 +138,48 @@ scene("game", () => {
 
 
   //misc funtions
-  p.collides("ice", () => {
-    if (p.isOnIce) {
-      return;
-    }
-    p.isOnIce = true;
 
-    if (keyIsDown("right")) {
-      p.slideRight = PHYS.MOVE_SPEED;
-      p.slideLeft = PHYS.SLIDE;
-      slideRight();
-    } else if (keyIsDown("left")) {
-      p.slideLeft = PHYS.MOVE_SPEED;
-      p.slideRight = PHYS.SLIDE;
-      slideLeft();
-    } else {
-      p.slideLeft = PHYS.SLIDE
-      p.slideRight = PHYS.SLIDE
-    }
-  });
+  function handleCollision() {
+    p.collides("ice", () => {
+      if (p.isOnIce) {
+        return;
+      }
+      p.isOnIce = true;
+
+      if (keyIsDown("right")) {
+        p.slideRight = PHYS.MOVE_SPEED;
+        p.slideLeft = PHYS.SLIDE;
+        slideRight();
+      } else if (keyIsDown("left")) {
+        p.slideLeft = PHYS.MOVE_SPEED;
+        p.slideRight = PHYS.SLIDE;
+        slideLeft();
+      } else {
+        p.slideLeft = PHYS.SLIDE
+        p.slideRight = PHYS.SLIDE
+      }
+    });
+
+    p.collides("grass", () => {
+      p.isOnIce = null;
+      p.slideRight = null;
+      p.slideLeft = null;
+      p.isOnSlime = null
+    });
+
+    p.collides("slime", () => {
+      p.isOnSlime = true
+    });
+
+    p.collides("spikes", (s,side) => {
+      if (side !== "bottom") {
+        return
+      }
+      go("lose");
+    });
+
+  }
+
 
   function slideRight() {
     if (p.slideRight > PHYS.SLIDE) {
@@ -177,16 +201,7 @@ scene("game", () => {
     }
   }
 
-  p.collides("grass", () => {
-    p.isOnIce = null;
-    p.slideRight = null;
-    p.slideLeft = null;
-    p.isOnSlime = null
-  });
 
-  p.collides("slime", () => {
-    p.isOnSlime = true
-  });
 
   //reset jumps when landing
   function checkIfGrounded() {
@@ -204,5 +219,12 @@ scene("game", () => {
   }
 
 
+});
+
+scene("lose", () => {
+  add([
+    text("You Lose"),
+  ]);
+  keyPress(() => go("game"));
 });
 
