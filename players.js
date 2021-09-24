@@ -20,7 +20,7 @@ export const p1 = () => {
     }),
     pos(P1.POSX, P1.POSY),
     area(),
-    scale(P1.SCALE),
+    scale(),
     // makes it fall to gravity and jumpable
     body(),
     // the custom component we defined above
@@ -40,7 +40,7 @@ export const p2 = () => {
     }),
     pos(P2.POSX, P2.POSY),
     area(),
-    scale(P2.SCALE),
+    scale(),
     color(COL.RED),
     // makes it fall to gravity and jumpable
     body(),
