@@ -59,7 +59,7 @@ scene("game", () => {
   });
 
   pickupKey();
-  
+
   keyDown("left", () => {
     p.flipX(true);
     p.move(-PHYS.MOVE_SPEED, 0);
