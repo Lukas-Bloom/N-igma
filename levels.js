@@ -64,6 +64,17 @@ return [
     "                                                          ",
     "                          =iiiiiiiiiiiiiii                ",
   ],
+  [
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                             L=======R                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "=================ssssssssssss         ====================",
+  ],
   ];
 }
 
@@ -122,6 +133,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LIGHT_BLUE),
       "ice",
+    ],
+    "s": () => [
+      sprite("grass"),
+      area(),
+      solid(),
+      color(COL.LGREEN),
+      "slime",
     ],
   }
   )

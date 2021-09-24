@@ -36,7 +36,7 @@ scene("game", () => {
 
   // add level to scene
   //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-  addLevel(levels()[2], levelConf());
+  addLevel(levels()[3], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
@@ -71,7 +71,7 @@ scene("game", () => {
         PHYS.MOVE_SPEED
       );
     } else {
-      p.move(-PHYS.MOVE_SPEED, 0);
+      p.move(p.isOnSlime ? -PHYS.SLIME_MOVE_SPEED : -PHYS.MOVE_SPEED, 0);
     }
   });
 
@@ -97,7 +97,7 @@ scene("game", () => {
         PHYS.MOVE_SPEED
       );
     } else {
-      p.move(PHYS.MOVE_SPEED, 0);
+      p.move(p.isOnSlime ? PHYS.SLIME_MOVE_SPEED : PHYS.MOVE_SPEED, 0);
     }
   });
 
@@ -112,7 +112,7 @@ scene("game", () => {
 
   keyPress("space", () => {
     if (p.grounded()) {
-      p.jump();
+      p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : null);
     }
   });
 
@@ -169,5 +169,10 @@ scene("game", () => {
     p.isOnIce = null;
     p.slideRight = null;
     p.slideLeft = null;
+    p.isOnSlime = null
   });
+
+  p.collides("slime", () => {
+    p.isOnSlime = true
+  })
 });

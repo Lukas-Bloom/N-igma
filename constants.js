@@ -31,5 +31,7 @@ export const PHYS = {
   MOVE_SPEED: 480,
   FALL_DEATH: 2400,
   GRAVITY: 3200,
-  SLIDE: 6  // any factor of MOVE_SPEED. The smaller the more slippery
+  SLIDE: 6,  // any factor of MOVE_SPEED. The smaller the more slippery
+  SLIME_JUMP: 200,
+  SLIME_MOVE_SPEED: 120,
 };
