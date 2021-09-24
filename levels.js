@@ -132,7 +132,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("doublejump"),
       area(),
       solid(),
-      color(COL.CYAN),
+      color(COL.LIGHT_BLUE),
       "doublejump"
     ],
     "i": () => [
