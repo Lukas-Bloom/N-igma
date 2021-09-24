@@ -7,7 +7,7 @@ socket.on("init", (msg) => {
   console.log(msg);
 });
 
-let playerNumber;
+let playerNumber
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -29,18 +29,19 @@ const start = () => {
 
 start();
 
-// define some constants
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
-
+  
   // add level to scene
-  //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-  addLevel(levels()[3], levelConf());
+  const level = addLevel(levels()[4], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
+  let jumps;
+  let isJumping = false;
 
+// network actions
   action(() => {
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
@@ -48,15 +49,24 @@ scene("game", () => {
     });
   });
 
-  // action() runs every frame
+  //player actions
   p.action(() => {
-    // center camera to player
+
     camPos(p.pos);
     // check fall death
     if (p.pos.y >= PHYS.FALL_DEATH) {
       go("lose");
     }
+    checkIfGrounded()
   });
+
+  pickupPowerup();
+  handleCollision();
+
+
+
+
+  //key events
 
   keyDown("left", () => {
     p.flipX(true);
@@ -76,6 +86,8 @@ scene("game", () => {
   });
 
   keyRelease("left", () => {
+    p.stop();
+    p.play("idle");
     if (p.slideRight > PHYS.SLIDE) {
       return;
     }
@@ -102,6 +114,8 @@ scene("game", () => {
   });
 
   keyRelease("right", () => {
+    p.stop();
+    p.play("idle");
     if (p.slideLeft > PHYS.SLIDE) {
       return;
     }
@@ -111,39 +125,61 @@ scene("game", () => {
   });
 
   keyPress("space", () => {
-    if (p.grounded()) {
+    if (p.jumps > 0 && !p.isJumping) {
       p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : null);
     }
   });
 
-  keyRelease("left", () => {
-    p.stop();
-    p.play("idle");
+  keyRelease("space", () => {
+      p.isJumping = false
+      p.jumps --
   });
 
-  keyRelease("right", () => {
-    p.stop();
-    p.play("idle");
-  });
-  p.collides("ice", () => {
-    if (p.isOnIce) {
-      return;
-    }
-    p.isOnIce = true;
 
-    if (keyIsDown("right")) {
-      p.slideRight = PHYS.MOVE_SPEED;
-      p.slideLeft = PHYS.SLIDE;
-      slideRight();
-    } else if (keyIsDown("left")) {
-      p.slideLeft = PHYS.MOVE_SPEED;
-      p.slideRight = PHYS.SLIDE;
-      slideLeft();
-    } else {
-      p.slideLeft = PHYS.SLIDE
-      p.slideRight = PHYS.SLIDE
-    }
-  });
+
+  //misc funtions
+
+  function handleCollision() {
+    p.collides("ice", () => {
+      if (p.isOnIce) {
+        return;
+      }
+      p.isOnIce = true;
+
+      if (keyIsDown("right")) {
+        p.slideRight = PHYS.MOVE_SPEED;
+        p.slideLeft = PHYS.SLIDE;
+        slideRight();
+      } else if (keyIsDown("left")) {
+        p.slideLeft = PHYS.MOVE_SPEED;
+        p.slideRight = PHYS.SLIDE;
+        slideLeft();
+      } else {
+        p.slideLeft = PHYS.SLIDE
+        p.slideRight = PHYS.SLIDE
+      }
+    });
+
+    p.collides("grass", () => {
+      p.isOnIce = null;
+      p.slideRight = null;
+      p.slideLeft = null;
+      p.isOnSlime = null
+    });
+
+    p.collides("slime", () => {
+      p.isOnSlime = true
+    });
+
+    p.collides("spikes", (s,side) => {
+      if (side !== "bottom") {
+        return
+      }
+      go("lose");
+    });
+
+  }
+
 
   function slideRight() {
     if (p.slideRight > PHYS.SLIDE) {
@@ -165,12 +201,6 @@ scene("game", () => {
     }
   }
 
-  p.collides("grass", () => {
-    p.isOnIce = null;
-    p.slideRight = null;
-    p.slideLeft = null;
-    p.isOnSlime = null
-  });
 
   p.collides("slime", () => {
     p.isOnSlime = true
@@ -192,4 +222,31 @@ scene("game", () => {
       level.spawn("t", tramp.gridPos.sub(0, 0))
     }, 500)
   }
+
+  //reset jumps when landing
+  function checkIfGrounded() {
+    if (p.grounded()) {
+      p.jumps = p.jumpsAmount
+      p.isJumping = false
+    }
+  }
+
+  function pickupPowerup() {
+    p.collides("doublejump", (j) => {
+      destroy(j)
+      p.jumpsAmount = 2
+    });
+  }
+
+
 });
+
+scene("lose", () => {
+  add([
+    text("You lose!"),
+    pos(screen.width/2-200, screen.height/2),
+    scale(1.5)
+  ]);
+  keyPress(() => go("game"));
+});
+
