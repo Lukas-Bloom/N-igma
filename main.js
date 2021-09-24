@@ -58,6 +58,8 @@ scene("game", () => {
     }
   });
 
+  pickupKey();
+  
   keyDown("left", () => {
     p.flipX(true);
     p.move(-PHYS.MOVE_SPEED, 0);
@@ -168,4 +170,10 @@ scene("game", () => {
     p.slideRight = null;
     p.slideLeft = null;
   });
+
+  function pickupKey() {
+    p.collides("bigKey"), (bigKey) => {
+      destroy(bigKey)
+    }
+  }
 });
