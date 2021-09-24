@@ -9,6 +9,8 @@ loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
 loadSprite("bigKey", "sprites/bigKey.png");
 loadSprite("closedDoor", "sprites/closedDoor.png");
+loadSprite("doublejump", "sprites/doublejump.png");
+
 
 function patrol(speed = 60, dir = 1) {
     return {
@@ -29,7 +31,7 @@ return [
     "                             ####           L=============",
     "                                            1             ",
     "                        #            L======              ",
-    "                 k                   1                    ",
+    "                J                    1                    ",
     "              L===R                  1                    ",
     "              1   2                  1                    ",
     "              1   2       ^^^^^      1                    ",
@@ -64,6 +66,17 @@ return [
     "                                                          ",
     "                                                          ",
     "                          =iiiiiiiiiiiiiii                ",
+  ],
+  [
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                             L=======R                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "                             1       2                    ",
+    "=================ssssssssssss         ====================",
   ],
   ];
 }
@@ -108,6 +121,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       color(COL.BLUE),
+      "spikes"
     ],
     "@": () => [
       sprite("beanMonster"),
@@ -116,6 +130,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.GREEN),
       scale(2),
       patrol()
+    ],
+    "J": () => [
+      sprite("doublejump"),
+      area(),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "doublejump"
     ],
     "i": () => [
       sprite("grass"),
@@ -137,6 +158,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.BLUE),
       "closedDoor",
+    ],
+    "s": () => [
+      sprite("grass"),
+      area(),
+      solid(),
+      color(COL.LGREEN),
+      "slime",
     ],
   }
   )
