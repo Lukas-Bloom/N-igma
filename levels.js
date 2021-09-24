@@ -7,7 +7,7 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
-
+loadSprite("nyckel", "sprites/bigKey.png");
 
 function patrol(speed = 60, dir = 1) {
     return {
@@ -24,11 +24,11 @@ function patrol(speed = 60, dir = 1) {
 export const levels =()=>{
 return [
   [
-    "                                                          ",
+    "                                                         ",
     "                             ####           L=============",
     "                                            1             ",
     "                        #            L======              ",
-    "                                     1                    ",
+    "                 k                   1                    ",
     "              L===R                  1                    ",
     "              1   2                  1                    ",
     "              1   2       ^^^^^      1                    ",
@@ -122,6 +122,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LIGHT_BLUE),
       "ice",
+    ],
+    "k": () => [
+      sprite("bigKey"),
+      area(),
+      solid(),
+      color(COL.GREEN),
+      "bigKey",
     ],
   }
   )

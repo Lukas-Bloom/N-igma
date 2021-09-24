@@ -36,7 +36,7 @@ scene("game", () => {
 
   // add level to scene
   //  const level = addLevel(LEVELS[levelId ?? 0], levelConf);
-  addLevel(levels()[1], levelConf());
+  addLevel(levels()[0], levelConf());
 
   const players = [p1(), p2()];
   const p = players[playerNumber - 1];
