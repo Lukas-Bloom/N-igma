@@ -184,6 +184,20 @@ scene("game", () => {
       }
       go("lose");
     });
+
+    p.collides("ghostblock", () => {
+      // const allGhostblocks = get("ghostblock");
+      // allGhostblocks
+      //every(("ghostblock") => { opacity(1) })
+      
+      const ghostblk = get("ghostblock")
+      for (let i = 0; i < ghostblk.length; i++) {
+        console.log('sdfsdf')
+        level.spawn("G", ghostblk.gridPos.sub(0, 0));
+        destroy(ghostblk)
+      }
+      
+    });
   }
 
   function slideRight() {
