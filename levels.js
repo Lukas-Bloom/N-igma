@@ -7,7 +7,7 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
-loadSprite("nyckel", "sprites/bigKey.png");
+loadSprite("bigKey", "sprites/bigKey.png");
 
 function patrol(speed = 60, dir = 1) {
     return {
