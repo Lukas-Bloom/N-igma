@@ -7,6 +7,11 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
+loadSprite("bigKey", "sprites/bigKey.png");
+loadSprite("closedDoor", "sprites/doorClosed.png");
+loadSprite("openedDoor", "sprites/doorOpened.png");
+loadSprite("tramp1", "sprites/tramp1.png");
+loadSprite("tramp2", "sprites/tramp2.png");
 loadSprite("doublejump", "sprites/doublejump.png");
 loadSprite("ghost", "sprites/ghost.png");
 loadSprite("ghostblock", "sprites/ghostblock.png");
@@ -27,6 +32,7 @@ function patrol(speed = 60, dir = 1) {
 export const levels =()=>{
 return [
   [
+    "                                                          ",
     "                                                          ",
     "                             ####           L=============",
     "                                            1             ",
@@ -88,6 +94,36 @@ return [
     "                         ggggg                            ",
     "            G                                             ",
     "=======================                                   ",
+  ],
+  [
+    "                             =============R               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2         O     ",
+    "                                          2               ",
+    "                   t                      2               ",
+    "====================                       =============  ",
+  ],
+  [
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                          ",
+    "                                                    D     ",
+    "                                                          ",
+    "                  K       E       Y                       ",
+    "==========================================================",
   ],
   ];
 }
@@ -155,6 +191,42 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LIGHT_BLUE),
       "ice",
+    ],
+    "K": () => [
+      sprite("bigKey"),
+      area(),
+      solid(),
+      color(COL.GREEN),
+      {name: 'key1'},
+      "bigKey",
+    ],
+    "E": () => [
+      sprite("bigKey"),
+      area(),
+      solid(),
+      color(COL.RED),
+      { name: 'key2' },
+      "bigKey",
+    ],
+    "Y": () => [
+      sprite("bigKey"),
+      area(),
+      solid(),
+      color(COL.BLUE),
+      { name: 'key3' },
+      "bigKey",
+    ],
+    "D": () => [
+      sprite("closedDoor"),
+      area(),
+      scale(3),
+      "closedDoor",
+    ],
+    "O": () => [
+      sprite("openedDoor"),
+      area(),
+      scale(3),
+      "openedDoor",
     ],
     "s": () => [
       sprite("grass"),
