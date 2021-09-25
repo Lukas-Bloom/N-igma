@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 7
+let levelIndex = 9
 
 
 const start = () => {
@@ -20,11 +20,15 @@ const start = () => {
   joinGameBtn.addEventListener("click", joinGame);
 
   function newGame() {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
     playerNumber = 1;
     go("game");
   }
 
   function joinGame() {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
     playerNumber = 2;
     go("game");
   }
