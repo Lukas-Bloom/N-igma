@@ -38,6 +38,6 @@ export const PHYS = {
 };
 
 export const ANSWERS = {
-  5: 'key1key2key3',
-  7: 'key1key2key3',
+  6: 'key1key2key3',
+  8: 'key1key2key3',
 }

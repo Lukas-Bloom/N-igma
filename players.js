@@ -21,12 +21,11 @@ export const p1 = () => {
     pos(P1.POSX, P1.POSY),
     area(),
     scale(),
-    // makes it fall to gravity and jumpable
     body(),
-    // the custom component we defined above
     origin("bot"),
     {
       jumpsAmount: 1,
+      ghost: 0,
     }
   ]);
 };
@@ -42,12 +41,11 @@ export const p2 = () => {
     area(),
     scale(),
     color(COL.RED),
-    // makes it fall to gravity and jumpable
     body(),
-    // the custom component we defined above
     origin("bot"),
     {
       jumpsAmount: 1,
+      ghost: 0,
     }
   ]);
 };

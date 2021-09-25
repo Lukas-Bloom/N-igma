@@ -14,6 +14,8 @@ loadSprite("tramp1", "sprites/tramp1.png");
 loadSprite("tramp2", "sprites/tramp2.png");
 loadSprite("doublejump", "sprites/doublejump.png");
 loadSprite("teleSwap", "sprites/teleSwap.png");
+loadSprite("ghost", "sprites/ghost.png");
+loadSprite("ghostblock", "sprites/ghostblock.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -84,7 +86,17 @@ return [
     "=================ssssssssssss         ====================",
   ],
   [
+    "                                            ==============",
     "                                                          ",
+    "                                    gg                    ",
+    "                                                          ",
+    "                           g                              ",
+    "                                                          ",
+    "                                                          ",
+    "            0                                             ",
+    "==========================================================",
+  ],
+  [
     "                             =============R               ",
     "                                          2               ",
     "                                          2               ",
@@ -259,6 +271,36 @@ export const levelConf =()=>{  return({    // define the size of each block
       color(COL.LGREEN),
       "slime",
     ],
+    "0": () => [
+      sprite("ghost"),
+      area(),
+      opacity(1),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "ghost",
+    ],
+    "g": () => [
+      sprite("ghostblock"),
+      area(),
+      opacity(0),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "invisibleBlock",
+    ],
+    "G": () => [
+      sprite("ghostblock"),
+      area(),
+      opacity(1),
+      solid(),
+      color(COL.LIGHT_BLUE),
+      "ghostblock",
+    ],
+    "U": () => [
+      sprite("teleSwap"),
+      area(),
+      solid(),
+      "teleSwap",
+    ],
     "t": () => [
       sprite("tramp1"),
       area(),
@@ -271,12 +313,8 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       "tramp2",
     ],
-    "U": () => [
-      sprite("teleSwap"),
-      area(),
-      solid(),
-      "teleSwap",
-    ],
+    
+    
   }
   )
 }

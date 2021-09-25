@@ -184,6 +184,11 @@ scene("game", () => {
       }
       go("lose");
     });
+
+    p.collides("ghostblock", () => {
+
+
+    });
   }
 
   function slideRight() {
@@ -257,8 +262,23 @@ scene("game", () => {
     otherPlayer.collides("teleSwap", (ts) => {
       teleSwap(ts)
     });
+    p.collides("ghost", (g) => {
+      pickupGhost(p, g)
+      spawnGhostblocks()
+    });
+    otherPlayer.collides("ghost", (g) => {
+      pickupGhost(otherPlayer, g)
+    });
   }
   
+  function spawnGhostblocks() {
+    const ghostblks = get("invisibleBlock")
+    for (let i = 0; i < ghostblks.length; i++) {
+      destroy(ghostblks[i])
+      level.spawn("G", ghostblks[i].gridPos.sub(0, 0));
+    }
+  }
+
   function doubleJump(onPlayer, obj) {
     destroy(obj)
     onPlayer.jumpsAmount = 2
@@ -273,6 +293,11 @@ scene("game", () => {
       level.spawn("O", door.gridPos.sub(0, 0));
       keys = ''
     }
+  }
+  function pickupGhost(onPlayer, obj) {
+    destroy(obj)
+    onPlayer.ghost = 1
+
   }
 
   function teleSwap(obj) {
