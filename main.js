@@ -273,6 +273,13 @@ scene("game", () => {
     otherPlayer.collides("ghost", (g) => {
       pickupGhost(otherPlayer, g)
     });
+    p.collides("grow", (grow) => {
+      p.changePowerUp("grow", grow)
+    })
+    otherPlayer.collides("grow", (grow) => {
+      otherPlayer.changePowerUp("grow", grow)
+    })
+
   }
   
   function spawnGhostblocks() {

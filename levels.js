@@ -16,6 +16,7 @@ loadSprite("doublejump", "sprites/doublejump.png");
 loadSprite("teleSwap", "sprites/teleSwap.png");
 loadSprite("ghost", "sprites/ghost.png");
 loadSprite("ghostblock", "sprites/ghostblock.png");
+loadSprite("grow", "sprites/grow.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -160,6 +161,21 @@ return [
     "                             1       2                         1        ",
     "                             1       2       K     E     Y     1        ",
     "=================ssssssssssss         =========================         ",
+  ],
+  [
+    "                                                                        ",
+    "                                                                        ",
+    "                                                                        ",
+    "                                                               L======= ",
+    "                                                               1        ",
+    "                                                               1        ",
+    "                             L=======R                         1        ",
+    "                             1       2                         1        ",
+    "                             1       2                         1        ",
+    "                             1       2                         1        ",
+    "                             1       2                         1        ",
+    "               8     J       1       2                         1        ",
+    "=============================         =========================         ",
   ],
   ];
 }
@@ -311,6 +327,12 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       "tramp2",
+    ],
+    "8": () => [
+      sprite("grow"),
+      area(),
+      solid(),
+      "grow",
     ],
     
     

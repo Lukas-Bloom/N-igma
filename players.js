@@ -1,5 +1,6 @@
 import k from "./initKaboom.js";
 import {P1,P2, COL} from "./constants.js"
+import powerUp from "./powerUp.js"
 
 loadSprite('bean', 'sprites/tileMap.png', {
 	sliceX: 20,
@@ -23,9 +24,11 @@ export const p1 = () => {
     scale(),
     body(),
     origin("bot"),
+    powerUp(),
     {
       jumpsAmount: 1,
       ghost: 0,
+      currentPowerUp: '',
     }
   ]);
 };
@@ -43,9 +46,11 @@ export const p2 = () => {
     color(COL.RED),
     body(),
     origin("bot"),
+    powerUp(),
     {
       jumpsAmount: 1,
       ghost: 0,
+      currentPowerUp: '',
     }
   ]);
 };
