@@ -9,7 +9,8 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 4
+let levelIndex = 7
+
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -129,7 +130,7 @@ scene("game", () => {
 
   keyPress("space", () => {
     if (p.jumps > 0 && !p.isJumping && !p.isTeleSwap) {
-      p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : null);
+      p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : PHYS.JUMP_HEIGHT);
     }
   });
 
@@ -319,7 +320,6 @@ scene("game", () => {
 
   function teleSwap(obj) {
     destroy(obj)
-    
     const opDestx = p.pos.x
     const opDesty = p.pos.y
     const pDestx = otherPlayer.pos.x
