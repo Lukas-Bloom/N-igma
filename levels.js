@@ -13,6 +13,7 @@ loadSprite("openedDoor", "sprites/doorOpened.png");
 loadSprite("tramp1", "sprites/tramp1.png");
 loadSprite("tramp2", "sprites/tramp2.png");
 loadSprite("doublejump", "sprites/doublejump.png");
+loadSprite("teleSwap", "sprites/teleSwap.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -112,6 +113,41 @@ return [
     "                                                          ",
     "                  K       E       Y                       ",
     "==========================================================",
+  ],
+  [
+    "                                    U                     ",
+    "                             =============R               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2               ",
+    "                                          2          O    ",
+    "                                          2               ",
+    "                   t                      2               ",
+    "====================                       =============  ",
+  ],
+  [
+    "                                                                   D    ",
+    "                                                                        ",
+    "                                                                        ",
+    "                                                               L======= ",
+    "                                                               1        ",
+    "                                                               1        ",
+    "                                                               1        ",
+    "                              J    U                           1        ",
+    "                             L=======R                         1        ",
+    "                             1       2                         1        ",
+    "                             1       2                         1        ",
+    "                             1       2       K     E     Y     1        ",
+    "=================ssssssssssss         =========================         ",
   ],
   ];
 }
@@ -234,6 +270,12 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       "tramp2",
+    ],
+    "U": () => [
+      sprite("teleSwap"),
+      area(),
+      solid(),
+      "teleSwap",
     ],
   }
   )

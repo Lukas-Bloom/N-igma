@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 4
+let levelIndex = 6
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -71,7 +71,7 @@ scene("game", () => {
       p.flipX(true);
       p.play("run");
     }
-    if (p.slideRight > PHYS.SLIDE) {
+    if (p.slideRight > PHYS.SLIDE || p.isTeleSwap) {
       return;
     }
     if (p.slideLeft) {
@@ -100,7 +100,7 @@ scene("game", () => {
       p.flipX(false);
       p.play("run");
     }
-    if (p.slideLeft > PHYS.SLIDE) {
+    if (p.slideLeft > PHYS.SLIDE || p.isTeleSwap) {
       return;
     }
     if (p.slideRight) {
@@ -125,7 +125,7 @@ scene("game", () => {
   });
 
   keyPress("space", () => {
-    if (p.jumps > 0 && !p.isJumping) {
+    if (p.jumps > 0 && !p.isJumping && !p.isTeleSwap) {
       p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : null);
     }
   });
@@ -243,11 +243,19 @@ scene("game", () => {
     otherPlayer.collides("doublejump", (j) => {
       doubleJump(otherPlayer, j)
     });
+
     p.collides("bigKey", (key) => {
       pickUpKey(key)
     });
     otherPlayer.collides("bigKey", (key) => {
       pickUpKey(key)
+    });
+
+    p.collides("teleSwap", (ts) => {
+      teleSwap(ts)
+    });
+    otherPlayer.collides("teleSwap", (ts) => {
+      teleSwap(ts)
     });
   }
   
@@ -255,6 +263,7 @@ scene("game", () => {
     destroy(obj)
     onPlayer.jumpsAmount = 2
   }
+
   function pickUpKey(obj) {
     keys += obj.name
     destroy(obj)
@@ -263,6 +272,65 @@ scene("game", () => {
       destroy(door)
       level.spawn("O", door.gridPos.sub(0, 0));
       keys = ''
+    }
+  }
+
+  function teleSwap(obj) {
+    destroy(obj)
+    
+    const opDestx = p.pos.x
+    const opDesty = p.pos.y
+    const pDestx = otherPlayer.pos.x
+    const pDesty = otherPlayer.pos.y
+
+    setTimeout(function() {
+      p.isTeleSwap = true
+      otherPlayer.isTeleSwap = true
+      swapPlayers(opDestx, opDesty, pDestx, pDesty)
+    },50)
+  }
+
+  function swapPlayers(opDestx, opDesty, pDestx, pDesty) {
+    gravity(0)
+    let px = p.pos.x
+    let py = p.pos.y
+    let opx = otherPlayer.pos.x
+    let opy = otherPlayer.pos.y
+    if (!(px === pDestx && py === pDesty && opx === opDestx && opy === opDesty)) {
+
+      const pk = (px - pDestx) === 0 ? 1 : Math.abs((py - pDesty) / (px - pDestx))
+      const opk = (opx - opDestx) === 0 ? 1 : Math.abs((opy - opDesty) / (opx - opDestx))
+      
+      if(px > pDestx) {
+        px = Math.max(px - PHYS.SWAP, pDestx)
+      } else {
+        px = Math.min(px + PHYS.SWAP, pDestx)
+      }
+      if(py < pDesty) {
+        py = Math.min(py + pk * PHYS.SWAP, pDesty)
+      } else {
+        py = Math.max(py - pk * PHYS.SWAP, pDesty)
+      }
+      if (opx > opDestx) {
+        opx = Math.max(opx - PHYS.SWAP, opDestx)
+      } else {
+        opx = Math.min(opx + PHYS.SWAP, opDestx)
+      }
+      if (opy < opDesty) {
+        opy = Math.min(opy + opk * PHYS.SWAP, opDesty)
+      } else {
+        opy = Math.max(opy - opk * PHYS.SWAP, opDesty)
+      }
+
+      setTimeout(function () {
+        p.moveTo(px, py);
+        otherPlayer.moveTo(opx, opy)
+        swapPlayers(opDestx, opDesty, pDestx, pDesty);
+      }, 1000 / 60);
+    } else {
+      gravity(PHYS.GRAVITY)
+      p.isTeleSwap = false
+      otherPlayer.isTeleSwap = false
     }
   }
 
