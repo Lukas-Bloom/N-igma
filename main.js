@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 6
+let levelIndex = 4
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -59,6 +59,9 @@ scene("game", () => {
       go("lose");
     }
     checkIfGrounded();
+    if(!p.ghost) {
+      destroyAllGhostBlocks()
+    }
   });
 
   pickupPowerup();
@@ -185,9 +188,10 @@ scene("game", () => {
       go("lose");
     });
 
-    p.collides("ghostblock", () => {
-
-
+    otherPlayer.collides("invisibleBlock", (block) => {
+      if(otherPlayer.ghost) {
+        swapGhostBlocks(block)
+      }
     });
   }
 
@@ -276,6 +280,19 @@ scene("game", () => {
     for (let i = 0; i < ghostblks.length; i++) {
       destroy(ghostblks[i])
       level.spawn("G", ghostblks[i].gridPos.sub(0, 0));
+    }
+  }
+  function swapGhostBlocks(block) {
+    level.spawn("G", block.gridPos.sub(0, 0));
+  }
+  function destroyAllGhostBlocks() {
+    const ghostblks = get("ghostblock")
+    for (let i = 0; i < ghostblks.length; i++) {
+     setTimeout(function() {
+       if (!otherPlayer.isTouching(ghostblks[i])) {
+         destroy(ghostblks[i])
+       }
+     }, 50)
     }
   }
 

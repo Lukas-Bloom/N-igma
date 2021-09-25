@@ -283,7 +283,6 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("ghostblock"),
       area(),
       opacity(0),
-      solid(),
       color(COL.LIGHT_BLUE),
       "invisibleBlock",
     ],
