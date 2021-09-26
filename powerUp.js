@@ -1,3 +1,4 @@
+import { PLAYER } from './constants.js'
 export default function powerUp() {
 
   return {
@@ -18,6 +19,8 @@ export default function powerUp() {
       switch (powerUp) {
         case "grow": {
           this.scale = vec2(2)
+          this.width = PLAYER.WIDTH
+          this.height = PLAYER.HEIGHT
           break
         }
         case "doublejump": {

@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 4
+let levelIndex = 10
 
 
 const start = () => {
@@ -228,6 +228,14 @@ scene("game", () => {
 
   p.on("ground", (obj) => {
     if (obj.is("tramp1")) trampHandler(obj, p)
+    if(!obj.is("ice")) {
+      p.isOnIce = null;
+      p.slideRight = null;
+      p.slideLeft = null;
+    }
+    if(!obj.is("slime")) {
+      p.isOnSlime = null;
+    }
   })
   otherPlayer.on("ground", (obj) => {
     if (obj.is("tramp1")) trampHandler(obj, players[playerNumber == 1 ? 1 : 0])
@@ -252,31 +260,35 @@ scene("game", () => {
   }
 
   function pickupPowerup() {
-    collides("player", "doublejump", (player, doublejump) => {
-      if (doublejump.is("player")) return
-      player.changePowerUp("doublejump", doublejump)
-    })
-    collides("player", "key", (player, key) => {
-      if (key.is("player")) return
-      pickUpKey(key)
-    });
-    collides("player", "teleSwap", (player, teleSwap) => {
-      if (teleSwap.is("player")) return
-      doTeleSwap(teleSwap)
-    });
-    
-    collides("player", "ghost", (player, ghost) => {
-      if (ghost.is("player")) return
-      player.changePowerUp("ghost", ghost)
-      if(player === p) {
-        spawnGhostblocks()
+    function isCorrectCollision(player, obj) {
+      if (obj.is("player") || player.isTeleSwap) return false
+      return true
+    }
+
+    collides("player", "powerUp", (player, obj) => {
+      if (!isCorrectCollision(player, obj)) return
+      let powerUp = ''
+
+      if (obj.is("doublejump")) powerUp = "doublejump"
+      else if (obj.is("grow")) powerUp = "grow"
+      else if (obj.is("ghost")) {
+        powerUp = "ghost"
+        if(player === p) {
+          spawnGhostblocks()
+        }
       }
-    });
-    
-    collides("player", "grow", (player, grow) => {
-      if (grow.is("player")) return
-      player.changePowerUp("grow", grow)
+
+      player.changePowerUp(powerUp, obj)
     })
+
+    collides("player", "key", (player, obj) => {
+      if (!isCorrectCollision(player, obj)) return
+      pickUpKey(obj)
+    });
+    collides("player", "teleSwap", (player, obj) => {
+      if (!isCorrectCollision(player, obj)) return
+      doTeleSwap(obj)
+    });
   
   }
   

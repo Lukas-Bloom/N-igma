@@ -7,6 +7,11 @@ export const P2 = {
   POSY: 0,
 };
 
+export const PLAYER = {
+  WIDTH: 12,
+  HEIGHT: 11.4,
+}
+
 export const COL = {
   BLACK: [0, 0, 0],
   WHITE: [255, 255, 255],
@@ -30,8 +35,8 @@ export const PHYS = {
   MOVE_SPEED: 280,
   FALL_DEATH: 2400,
   GRAVITY: 3200,
-  SLIDE: 6,  // any factor of MOVE_SPEED. The smaller the more slippery
-  JUMP_HEIGHT: 600,
+  SLIDE: 12,  // any factor of MOVE_SPEED. The smaller the more slippery
+  JUMP_HEIGHT: 400,
   SLIME_JUMP: 200,
   SLIME_MOVE_SPEED: 120,
   TRAMP_JUMP_HEIGHT: 1500,
@@ -41,4 +46,5 @@ export const PHYS = {
 export const ANSWERS = {
   6: 'key1key2key3',
   8: 'key1key2key3',
+  10: 'key1key2key3',
 }

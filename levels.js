@@ -187,7 +187,47 @@ export const levels =()=>{
     "               8     J       1       2                         1        ",
     "=============================         =========================         ",
   ],
-  
+  //10
+  [
+    "                 key                           ",
+    "                                  E            ",
+    "        Y                       ggg            ",
+    "        #####                 ggg              ",
+    "            #               ggg                ",
+    "            #  U          ggg                  ",
+    "            #######     ggg             D      ",
+    "           g#     #g                           ",
+    "           g 0     gK          J               ",
+    "===============================================",
+  ],
+  //11
+  [
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                   #            ",
+    "                   #            ",
+    "           #   8   #     JU     ",
+    "================================",
+  ],
+  //12
+  [
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "                                ",
+    "        JJ     00    88         ",
+    "================================",
+  ],
   ];
 }
 
@@ -248,7 +288,8 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       color(COL.LIGHT_BLUE),
-      "doublejump"
+      "doublejump",
+      "powerUp"
     ],
     "i": () => [
       sprite("grass"),
@@ -260,7 +301,6 @@ export const levelConf =()=>{  return({    // define the size of each block
     "K": () => [
       sprite("key"),
       area(),
-      solid(),
       color(COL.GREEN),
       {name: 'key1'},
       "key",
@@ -268,7 +308,6 @@ export const levelConf =()=>{  return({    // define the size of each block
     "E": () => [
       sprite("key"),
       area(),
-      solid(),
       color(COL.RED),
       { name: 'key2' },
       "key",
@@ -276,10 +315,27 @@ export const levelConf =()=>{  return({    // define the size of each block
     "Y": () => [
       sprite("key"),
       area(),
-      solid(),
       color(COL.BLUE),
       { name: 'key3' },
       "key",
+    ],
+    "k": () => [
+      sprite("key"),
+      color(COL.GREEN),
+      fixed(),
+      "answerKey",
+    ],
+    "e": () => [
+      sprite("key"),
+      color(COL.RED),
+      fixed(),
+      "answerKey",
+    ],
+    "y": () => [
+      sprite("key"),
+      color(COL.BLUE),
+      fixed(),
+      "answerKey",
     ],
     "D": () => [
       sprite("closedDoor"),
@@ -307,6 +363,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       solid(),
       color(COL.LIGHT_BLUE),
       "ghost",
+      "powerUp"
     ],
     "g": () => [
       sprite("ghostblock"),
@@ -346,6 +403,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       solid(),
       "grow",
+      "powerUp"
     ],
     
     
