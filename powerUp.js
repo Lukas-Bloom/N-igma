@@ -49,7 +49,7 @@ export default function powerUp() {
     clearPowerUps() {
       this.currentPowerUp = ''
       this.scale = vec2(1)
-      this.jumpAmount = 1
+      this.jumpsAmount = 1
     }
   }
 }

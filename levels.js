@@ -18,6 +18,9 @@ loadSprite("ghost", "sprites/ghost.png");
 loadSprite("ghostblock", "sprites/ghostblock.png");
 loadSprite("grow", "sprites/grow.png");
 loadSprite("halfBlock", "sprites/halfBlock.png");
+loadSprite("blackBox", "sprites/blackBox.png");
+loadSprite("ice", "sprites/ice.png");
+loadSprite("slime", "sprites/slime.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -228,6 +231,22 @@ export const levels =()=>{
     "         o£E Y£                 ",
     "================================",
   ],
+  //13
+  [
+    "         Y       key                              ",
+    "   D                                              ",
+    "                                                  ",
+    "         E      U                                 ",
+    "gggggggggggggggggg                                ",
+    "                                     K            ",
+    "                                   ^^iiii         ",
+    "                                   ######  #      ",
+    "           g                       ££££££ ##      ",
+    "       J  0g      t                #=========     ",
+    "           g      £     o          #              ",
+    "#####################^####sssssssss###############",
+    "##################################################",
+  ],
   ];
 }
 
@@ -270,7 +289,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "^": () => [
       sprite("spikes"),
-      area(),
+      area({offset: 6}),
       solid(),
       color(COL.BLUE),
       "spikes"
@@ -291,7 +310,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       "powerUp"
     ],
     "i": () => [
-      sprite("grass"),
+      sprite("ice"),
       area(),
       solid(),
       color(COL.LIGHT_BLUE),
@@ -349,8 +368,8 @@ export const levelConf =()=>{  return({    // define the size of each block
       "openedDoor",
     ],
     "s": () => [
-      sprite("grass"),
-      area(),
+      sprite("slime", {flipY: true}),
+      area({offset: 6}),
       solid(),
       color(COL.LGREEN),
       "slime",

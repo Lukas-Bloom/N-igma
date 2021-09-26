@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 10
+let levelIndex = 13
 
 
 const start = () => {
@@ -248,7 +248,7 @@ scene("game", () => {
     setTimeout(function () {
       destroy(tramp)
       level.spawn("t", tramp.gridPos.sub(0, 0))
-    }, 500)
+    }, 250)
   }
 
   //reset jumps when landing
