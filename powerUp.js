@@ -3,7 +3,7 @@ export default function powerUp() {
   return {
 
     update() {
-      
+     
     },
     changePowerUp(powerUp, obj) {
       
@@ -18,7 +18,16 @@ export default function powerUp() {
       switch (powerUp) {
         case "grow": {
           this.scale = vec2(2)
+          break
         }
+        case "doublejump": {
+          this.jumpsAmount = 2
+          break
+        }
+        case "ghost": {
+          break
+        }
+    
 
 
         default: {
@@ -32,7 +41,6 @@ export default function powerUp() {
       this.currentPowerUp = ''
       this.scale = vec2(1)
       this.jumpAmount = 1
-      this.ghost = 0
     }
   }
 }

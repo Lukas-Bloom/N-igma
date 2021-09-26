@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 9
+let levelIndex = 4
 
 
 const start = () => {
@@ -64,7 +64,7 @@ scene("game", () => {
       go("lose");
     }
     checkIfGrounded();
-    if(!p.ghost) {
+    if(p.currentPowerUp !== "ghost") {
       destroyAllGhostBlocks()
     }
   });
@@ -193,9 +193,10 @@ scene("game", () => {
       go("lose");
     });
 
-    otherPlayer.collides("invisibleBlock", (block) => {
-      if(otherPlayer.ghost) {
-        swapGhostBlocks(block)
+    collides("player", "invisibleBlock", (player, invisibleBlock) => {
+      if(invisibleBlock.is("player")) return
+      if(player.currentPowerUp === "ghost") {
+        swapGhostBlocks(invisibleBlock)
       }
     });
   }
@@ -251,40 +252,32 @@ scene("game", () => {
   }
 
   function pickupPowerup() {
-    p.collides("doublejump", (j) => {
-      doubleJump(p, j)
-    });
-    otherPlayer.collides("doublejump", (j) => {
-      doubleJump(otherPlayer, j)
-    });
-
-    p.collides("bigKey", (key) => {
+    collides("player", "doublejump", (player, doublejump) => {
+      if (doublejump.is("player")) return
+      player.changePowerUp("doublejump", doublejump)
+    })
+    collides("player", "key", (player, key) => {
+      if (key.is("player")) return
       pickUpKey(key)
     });
-    otherPlayer.collides("bigKey", (key) => {
-      pickUpKey(key)
+    collides("player", "teleSwap", (player, teleSwap) => {
+      if (teleSwap.is("player")) return
+      doTeleSwap(teleSwap)
     });
-
-    p.collides("teleSwap", (ts) => {
-      teleSwap(ts)
+    
+    collides("player", "ghost", (player, ghost) => {
+      if (ghost.is("player")) return
+      player.changePowerUp("ghost", ghost)
+      if(player === p) {
+        spawnGhostblocks()
+      }
     });
-    otherPlayer.collides("teleSwap", (ts) => {
-      teleSwap(ts)
-    });
-    p.collides("ghost", (g) => {
-      pickupGhost(p, g)
-      spawnGhostblocks()
-    });
-    otherPlayer.collides("ghost", (g) => {
-      pickupGhost(otherPlayer, g)
-    });
-    p.collides("grow", (grow) => {
-      p.changePowerUp("grow", grow)
+    
+    collides("player", "grow", (player, grow) => {
+      if (grow.is("player")) return
+      player.changePowerUp("grow", grow)
     })
-    otherPlayer.collides("grow", (grow) => {
-      otherPlayer.changePowerUp("grow", grow)
-    })
-
+  
   }
   
   function spawnGhostblocks() {
@@ -308,11 +301,6 @@ scene("game", () => {
     }
   }
 
-  function doubleJump(onPlayer, obj) {
-    destroy(obj)
-    onPlayer.jumpsAmount = 2
-  }
-
   function pickUpKey(obj) {
     keys += obj.name
     destroy(obj)
@@ -323,13 +311,8 @@ scene("game", () => {
       keys = ''
     }
   }
-  function pickupGhost(onPlayer, obj) {
-    destroy(obj)
-    onPlayer.ghost = 1
 
-  }
-
-  function teleSwap(obj) {
+  function doTeleSwap(obj) {
     destroy(obj)
     const opDestx = p.pos.x
     const opDesty = p.pos.y

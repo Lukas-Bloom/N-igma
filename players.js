@@ -27,9 +27,9 @@ export const p1 = () => {
     powerUp(),
     {
       jumpsAmount: 1,
-      ghost: 0,
       currentPowerUp: '',
-    }
+    },
+    "player"
   ]);
 };
 
@@ -49,8 +49,8 @@ export const p2 = () => {
     powerUp(),
     {
       jumpsAmount: 1,
-      ghost: 0,
       currentPowerUp: '',
-    }
+    },
+    "player"
   ]);
 };

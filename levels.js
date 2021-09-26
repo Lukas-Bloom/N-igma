@@ -7,7 +7,7 @@ loadSprite("grass_r", "sprites/grass_r.png");
 loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
-loadSprite("bigKey", "sprites/bigKey.png");
+loadSprite("key", "sprites/key.png");
 loadSprite("closedDoor", "sprites/doorClosed.png");
 loadSprite("openedDoor", "sprites/doorOpened.png");
 loadSprite("tramp1", "sprites/tramp1.png");
@@ -258,28 +258,28 @@ export const levelConf =()=>{  return({    // define the size of each block
       "ice",
     ],
     "K": () => [
-      sprite("bigKey"),
+      sprite("key"),
       area(),
       solid(),
       color(COL.GREEN),
       {name: 'key1'},
-      "bigKey",
+      "key",
     ],
     "E": () => [
-      sprite("bigKey"),
+      sprite("key"),
       area(),
       solid(),
       color(COL.RED),
       { name: 'key2' },
-      "bigKey",
+      "key",
     ],
     "Y": () => [
-      sprite("bigKey"),
+      sprite("key"),
       area(),
       solid(),
       color(COL.BLUE),
       { name: 'key3' },
-      "bigKey",
+      "key",
     ],
     "D": () => [
       sprite("closedDoor"),
