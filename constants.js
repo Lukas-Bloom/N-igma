@@ -32,7 +32,7 @@ export const COL = {
 
 export const PHYS = {
   WORLD_SCALE:2,
-  MOVE_SPEED: 280,
+  MOVE_SPEED: 140,
   FALL_DEATH: 2400,
   GRAVITY: 3200,
   SLIDE: 12,  // any factor of MOVE_SPEED. The smaller the more slippery

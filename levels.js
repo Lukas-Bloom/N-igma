@@ -17,6 +17,7 @@ loadSprite("teleSwap", "sprites/teleSwap.png");
 loadSprite("ghost", "sprites/ghost.png");
 loadSprite("ghostblock", "sprites/ghostblock.png");
 loadSprite("grow", "sprites/grow.png");
+loadSprite("halfBlock", "sprites/halfBlock.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -408,9 +409,8 @@ export const levelConf =()=>{  return({    // define the size of each block
       "powerUp"
     ],
     "£": () => [
-      sprite("box"),
+      sprite("halfBlock"),
       area({width: 12, height: 6}),
-      color(COL.LIGHT_BLUE),
       solid(),
     ],
     
