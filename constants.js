@@ -47,4 +47,5 @@ export const ANSWERS = {
   6: 'key1key2key3',
   8: 'key1key2key3',
   10: 'key1key2key3',
+  12: 'key1key2key3',
 }

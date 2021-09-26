@@ -190,14 +190,14 @@ export const levels =()=>{
   //10
   [
     "                 key                           ",
-    "                                  E            ",
-    "        Y                       ggg            ",
-    "        #####                 ggg              ",
+    "        Y                         E            ",
+    "        #####                   ggg            ",
+    "            #                 ggg              ",
     "            #               ggg                ",
-    "            #  U          ggg                  ",
+    "            #             ggg                  ",
     "            #######     ggg             D      ",
-    "           g#     #g                           ",
-    "           g 0     gK          J               ",
+    "           g#U    #g                           ",
+    "           g     0 gK    J                     ",
     "===============================================",
   ],
   //11
@@ -216,16 +216,15 @@ export const levels =()=>{
   ],
   //12
   [
+    "                 key            ",
     "                                ",
     "                                ",
     "                                ",
     "                                ",
     "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "        JJ     00    88         ",
+    "            K          D        ",
+    "          #####                 ",
+    "         o£E Y£                 ",
     "================================",
   ],
   ];
@@ -286,7 +285,6 @@ export const levelConf =()=>{  return({    // define the size of each block
     "J": () => [
       sprite("doublejump"),
       area(),
-      solid(),
       color(COL.LIGHT_BLUE),
       "doublejump",
       "powerUp"
@@ -360,7 +358,6 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("ghost"),
       area(),
       opacity(1),
-      solid(),
       color(COL.LIGHT_BLUE),
       "ghost",
       "powerUp"
@@ -383,7 +380,6 @@ export const levelConf =()=>{  return({    // define the size of each block
     "U": () => [
       sprite("teleSwap"),
       area(),
-      solid(),
       "teleSwap",
     ],
     "t": () => [
@@ -401,9 +397,21 @@ export const levelConf =()=>{  return({    // define the size of each block
     "8": () => [
       sprite("grow"),
       area(),
-      solid(),
       "grow",
       "powerUp"
+    ],
+    "o": () => [
+      sprite("grow"),
+      area(),
+      color(COL.LIGHT_BLUE),
+      "shrink",
+      "powerUp"
+    ],
+    "£": () => [
+      sprite("box"),
+      area({width: 12, height: 6}),
+      color(COL.LIGHT_BLUE),
+      solid(),
     ],
     
     

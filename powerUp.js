@@ -30,6 +30,12 @@ export default function powerUp() {
         case "ghost": {
           break
         }
+        case "shrink": {
+          this.scale = vec2(0.5)
+          this.width = PLAYER.WIDTH
+          this.height = PLAYER.HEIGHT
+          break
+        }
     
 
 

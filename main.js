@@ -271,6 +271,7 @@ scene("game", () => {
 
       if (obj.is("doublejump")) powerUp = "doublejump"
       else if (obj.is("grow")) powerUp = "grow"
+      else if(obj.is("shrink")) powerUp = "shrink"
       else if (obj.is("ghost")) {
         powerUp = "ghost"
         if(player === p) {
