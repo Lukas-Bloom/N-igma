@@ -2,7 +2,7 @@ const app = require("express")();
 const gameServer = require("http").createServer(app);
 const io = require("socket.io")(gameServer, {
   cors: {
-    origin: ["http://127.0.0.1:8080"],
+    origin: "*",
     methods: ["GET", "POST"]
   },
 });

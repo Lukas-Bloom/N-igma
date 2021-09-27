@@ -2,7 +2,7 @@ import { PHYS, ANSWERS } from "./constants.js";
 import { p1, p2 } from "./players.js";
 import { levels, levelConf } from "./levels.js";
 
-const socket = io("ws://localhost:3000");
+const socket = io("ws://localhost:3000"); //change the address to the ip server in the LAN. 
 socket.on("init", (msg) => {
   console.log(msg);
 });
