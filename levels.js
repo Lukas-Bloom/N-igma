@@ -22,6 +22,9 @@ loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("ice", "sprites/ice.png");
 loadSprite("slime", "sprites/slime.png");
+loadSound("sound-powerup", "sounds/sound-powerup.wav");
+loadSound("sound-jump", "sounds/sound-jump.wav");
+loadSound("sound-door", "sounds/sound-door.wav");
 
 
 function patrol(speed = 60, dir = 1) {
