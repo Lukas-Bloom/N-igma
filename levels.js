@@ -17,6 +17,7 @@ loadSprite("teleSwap", "sprites/teleSwap.png");
 loadSprite("ghost", "sprites/ghost.png");
 loadSprite("ghostblock", "sprites/ghostblock.png");
 loadSprite("grow", "sprites/grow.png");
+loadSprite("shrink", "sprites/shrink.png");
 loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("ice", "sprites/ice.png");
@@ -305,7 +306,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     "J": () => [
       sprite("doublejump"),
       area(),
-      color(COL.LIGHT_BLUE),
+      color(COL.PURPLE),
       "doublejump",
       "powerUp"
     ],
@@ -378,7 +379,7 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("ghost"),
       area(),
       opacity(1),
-      color(COL.LIGHT_BLUE),
+      color(COL.PURPLE),
       "ghost",
       "powerUp"
     ],
@@ -394,12 +395,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       area(),
       opacity(1),
       solid(),
-      color(COL.LIGHT_BLUE),
+      color(COL.PURPLE),
       "ghostblock",
     ],
     "U": () => [
       sprite("teleSwap"),
       area(),
+      color(COL.PURPLE),
       "teleSwap",
     ],
     "t": () => [
@@ -417,13 +419,14 @@ export const levelConf =()=>{  return({    // define the size of each block
     "8": () => [
       sprite("grow"),
       area(),
+      color(COL.MAGENTA),
       "grow",
       "powerUp"
     ],
     "o": () => [
-      sprite("grow"),
+      sprite("shrink"),
       area(),
-      color(COL.LIGHT_BLUE),
+      color(COL.PURPLE),
       "shrink",
       "powerUp"
     ],

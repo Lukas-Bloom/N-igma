@@ -23,7 +23,7 @@ export const COL = {
   LGREY: [215, 215, 215],
   DGREY: [75, 75, 75],
   MAGENTA: [255, 0, 255],
-  PURPLE: [128, 0, 128],
+  PURPLE: [180, 0, 180],
   SKYBLUE: [0, 190, 255],
   LGREEN: [0 , 255, 128],
   LIGHT_BLUE: [0, 255, 255],
