@@ -292,6 +292,7 @@ scene("game", () => {
     collides("player", "teleSwap", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return
       doTeleSwap(obj)
+      play("sound-teleswap");
     });
   
   }

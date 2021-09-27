@@ -25,6 +25,7 @@ loadSprite("slime", "sprites/slime.png");
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
 loadSound("sound-door", "sounds/sound-door.wav");
+loadSound("sound-teleswap", "sounds/sound-teleswap.wav");
 
 
 function patrol(speed = 60, dir = 1) {
