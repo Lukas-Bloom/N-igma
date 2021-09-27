@@ -245,6 +245,7 @@ scene("game", () => {
 
   function trampHandler(obj, onPlayer) {
     onPlayer.jump(PHYS.TRAMP_JUMP_HEIGHT)
+    play("sound-jump");
     destroy(obj)
     const tramp = level.spawn("T", obj.gridPos.sub(0, 0))
     setTimeout(function () {
