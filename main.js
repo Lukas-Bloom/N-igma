@@ -135,6 +135,7 @@ scene("game", () => {
   keyPress("space", () => {
     if (p.jumps > 0 && !p.isJumping && !p.isTeleSwap) {
       p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : PHYS.JUMP_HEIGHT);
+      play("sound-jump");
     }
   });
 
@@ -174,6 +175,7 @@ scene("game", () => {
     });
 
     p.collides("openedDoor", () => {
+      play("sound-door");
       levelIndex++
       go("win")
     });
@@ -268,6 +270,7 @@ scene("game", () => {
     collides("player", "powerUp", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return
       let powerUp = ''
+      play("sound-powerup");
 
       if (obj.is("doublejump")) powerUp = "doublejump"
       else if (obj.is("grow")) powerUp = "grow"
