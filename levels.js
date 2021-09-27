@@ -23,6 +23,7 @@ loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("ice", "sprites/ice.png");
 loadSprite("slime", "sprites/slime.png");
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
+loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
 loadSound("sound-door", "sounds/sound-door.wav");
 loadSound("sound-teleswap", "sounds/sound-teleswap.wav");
