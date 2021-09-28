@@ -19,7 +19,7 @@ const start = () => {
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
 
-  function newGame() {
+   function newGame() {
     document.getElementById("newGameButton").remove();
     document.getElementById("joinGameButton").remove();
     playerNumber = 1;
@@ -32,6 +32,7 @@ const start = () => {
     playerNumber = 2;
     go("game");
   }
+  //newGame();
 };
 
 start();
@@ -50,6 +51,11 @@ scene("game", () => {
 
   // network actions
   action(() => {
+    socket.once("gameover", () => {
+      otherPlayer.go("lose");
+    });
+    
+      
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => {
       otherPlayer.moveTo(x, y);
@@ -192,7 +198,7 @@ scene("game", () => {
       if (side !== "bottom") {
         return;
       }
-      go("lose");
+      lose();
     });
 
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
@@ -391,18 +397,26 @@ scene("game", () => {
 
 });
 
-scene("lose", () => {
+function lose() {
+//scene("lose", () => {
   add([
     text("You lose!"),
-    pos(screen.width / 2 - 200, screen.height / 2),
+    pos(0, 0),
     scale(1.5),
   ]);
-  keyPress(() => go("game"));
-});
+  setTimeout(function () {
+    socket.emit("gameover");
+    go("game");
+  }, 2000);
+   
+};
+
   scene("win", () => {
     add([
       text("You Win!"),
     ]);
     keyPress(() => go("game"));
 
-});
+  });
+
+//go("game");
