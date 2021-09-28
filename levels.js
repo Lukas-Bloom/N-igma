@@ -386,18 +386,21 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("key"),
       color(COL.GREEN),
       fixed(),
+      z(1),
       "answerKey",
     ],
     "e": () => [
       sprite("key"),
       color(COL.RED),
       fixed(),
+      z(1),
       "answerKey",
     ],
     "y": () => [
       sprite("key"),
       color(COL.BLUE),
       fixed(),
+      z(1),
       "answerKey",
     ],
     "D": () => [
