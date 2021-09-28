@@ -51,8 +51,8 @@ scene("game", () => {
 
   // network actions
   action(() => {
-    socket.once("gameover", () => {
-      otherPlayer.go("lose");
+    socket.on("gameover", () => {
+      gameover();
     });
     
       
@@ -198,7 +198,8 @@ scene("game", () => {
       if (side !== "bottom") {
         return;
       }
-      lose();
+      socket.emit("gameover");
+      gameover();
     });
 
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
@@ -397,17 +398,16 @@ scene("game", () => {
 
 });
 
-function lose() {
+function gameover() {
 //scene("lose", () => {
   add([
     text("You lose!"),
     pos(0, 0),
     scale(1.5),
   ]);
-  setTimeout(function () {
-    socket.emit("gameover");
+  setTimeout(function () {    
     go("game");
-  }, 2000);
+  }, 3000);
    
 };
 
