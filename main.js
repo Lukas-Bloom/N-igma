@@ -11,6 +11,23 @@ let playerNumber;
 let keys = ''
 let levelIndex = 0
 
+function newGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 1;
+    go("game");
+}
+
+function joinGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 2;
+    go("game");
+}
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -19,25 +36,14 @@ const start = () => {
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
 
-   function newGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 1;
-    go("game");
-  }
 
-  function joinGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 2;
-    go("game");
-  }
-  //newGame();
 };
+
 
 start();
 
 scene("game", () => {
+  //console.log('plr:' +playerNumber)
   gravity(PHYS.GRAVITY);
 
   // add level to scene
@@ -49,11 +55,13 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
+  socket.on("gameover", () => {
+    gameover()
+  });
+
   // network actions
   action(() => {
-    socket.on("gameover", () => {
-      gameover();
-    });
+
     
       
     socket.emit("pos", p.pos.x, p.pos.y);
@@ -194,10 +202,11 @@ scene("game", () => {
       p.isOnSlime = true;
     });
 
-    p.collides("spikes", (s, side) => {
-      if (side !== "bottom") {
-        return;
-      }
+    collides("player", "spikes", (player, spike) => {
+      // if (spike !== "bottom") {
+      //   return;
+      // }
+      if (!isCorrectCollision(player, spike)) return
       socket.emit("gameover");
       gameover();
     });
@@ -268,12 +277,12 @@ scene("game", () => {
       p.isJumping = false;
     }
   }
-
+  
+  function isCorrectCollision(player, obj) {
+    if (obj.is("player") || player.isTeleSwap) return false
+    return true
+  }
   function pickupPowerup() {
-    function isCorrectCollision(player, obj) {
-      if (obj.is("player") || player.isTeleSwap) return false
-      return true
-    }
 
     collides("player", "powerUp", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return
@@ -399,15 +408,20 @@ scene("game", () => {
 });
 
 function gameover() {
-//scene("lose", () => {
   add([
     text("You lose!"),
     pos(0, 0),
     scale(1.5),
   ]);
-  setTimeout(function () {    
-    go("game");
-  }, 3000);
+  setTimeout(function () {
+    if (playerNumber == 1) {
+      newGame();
+    }
+    else {
+      joinGame();
+    }
+
+  }, 2000);
    
 };
 
