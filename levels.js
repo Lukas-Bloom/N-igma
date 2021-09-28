@@ -63,7 +63,8 @@ export const levels =()=>{
     "##                                      J                  ",
     "##                      t             L===                    ",
     "##          ^           L=R            1                    ",
-    "=======================   ============                     ",
+      "=======================   ============                     ",
+    "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
   ],
   //1
   [
@@ -304,10 +305,11 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "^": () => [
       sprite("spikes"),
-      area({offset: 6}),
+      area(),
       solid(),
       color(COL.BLUE),
-      "spikes"
+      //"spikes",
+      "enemy",
     ],
     "@": () => [
       sprite("beanMonster"),
@@ -449,6 +451,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       area({width: 12, height: 6}),
       solid(),
     ],
+  "|": () => [
+    sprite("halfBlock"),
+    area(),
+    solid(),
+    opacity(0),
+    "enemy",
+  ],
     
     
   }

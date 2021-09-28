@@ -39,11 +39,31 @@ const start = () => {
 
 };
 
+function onDeath() {
+  // socket.emit("gameover");
+  gameover();
+}
+
+function gameover() {
+  add([
+    text("You lose!"),
+    pos(0, 0),
+    scale(1.5),
+  ]);
+  setTimeout(function () {
+    if (playerNumber == 1) {
+      newGame();
+    }
+    else {
+      joinGame();
+    }
+  }, 2000);
+};
 
 start();
 
+
 scene("game", () => {
-  //console.log('plr:' +playerNumber)
   gravity(PHYS.GRAVITY);
 
   // add level to scene
@@ -60,23 +80,23 @@ scene("game", () => {
   });
 
   // network actions
-  action(() => {
-
-    
-      
-    socket.emit("pos", p.pos.x, p.pos.y);
+  action(() => {  
+    socket.emit("pos", p.pos.x, p.pos.y)
     socket.on("moveOtherPlayer", (x, y) => {
       otherPlayer.moveTo(x, y);
+      if (otherPlayer.pos.y >= PHYS.FALL_DEATH || p.pos.y >= PHYS.FALL_DEATH) {
+        console.log('hej')
+        onDeath(); 
+      }
     });
   });
 
   //player actions
   p.action(() => {
     camPos(p.pos);
-    // check fall death
-    if (p.pos.y >= PHYS.FALL_DEATH) {
-      go("lose");
-    }
+    // if (p.pos.y >= PHYS.FALL_DEATH) {
+    //   onDeath();
+    // }
     checkIfGrounded();
     if(p.currentPowerUp !== "ghost") {
       destroyAllGhostBlocks()
@@ -202,13 +222,12 @@ scene("game", () => {
       p.isOnSlime = true;
     });
 
-    collides("player", "spikes", (player, spike) => {
-      // if (spike !== "bottom") {
-      //   return;
-      // }
-      if (!isCorrectCollision(player, spike)) return
-      socket.emit("gameover");
-      gameover();
+    collides("player", "enemy", (player, enemy) => {
+
+      if (!isCorrectCollision(player, enemy)) return
+      destroy(enemy);
+      //level.spawn("^",enemy.gridPos.sub(0,0))
+      onDeath();
     });
 
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
@@ -407,23 +426,7 @@ scene("game", () => {
 
 });
 
-function gameover() {
-  add([
-    text("You lose!"),
-    pos(0, 0),
-    scale(1.5),
-  ]);
-  setTimeout(function () {
-    if (playerNumber == 1) {
-      newGame();
-    }
-    else {
-      joinGame();
-    }
 
-  }, 2000);
-   
-};
 
   scene("win", () => {
     add([
