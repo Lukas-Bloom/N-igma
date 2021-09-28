@@ -26,7 +26,13 @@ loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
 loadSound("sound-door", "sounds/sound-door.wav");
+loadSound("sound-door2", "sounds/sound-door.wav");
 loadSound("sound-teleswap", "sounds/sound-teleswap.wav");
+loadSound("sound-lose", "sounds/sound-lose.mp3");
+loadSound("sound-win", "sounds/sound-win.mp3");
+loadSound("sound-pickupKey", "sounds/sound-pickupKey.wav");
+loadSound("sound-error", "sounds/sound-error.wav");
+loadSound("sound-hit", "sounds/sound-hit.wav");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -252,6 +258,39 @@ export const levels =()=>{
     "           g      £     o          #              ",
     "#####################^####sssssssss###############",
     "##################################################",
+  ],
+  //14
+  [
+    "                J      key              ",
+    "                                        ",
+    "###########################            #",
+    "# K                                    #",
+    "####    ###############                #",
+    "#                     #                #",
+    "####ssss############# #                #",
+    "# o                   #                #",
+    "# #         #    #    #                #",
+    "# #iiiiiiiii#iiii#iiii#                #",
+    "#                     #t               #",
+    "#                     ##               #",
+    "######£ ###### £##### ##iiiiiiiiiiiiiii#",
+    "#   #Y #0     # E#    ##################",
+    "#   ####   U J####    #                #",
+    "#   g  ###g###        #                #",
+    "#   g                 #                #",
+    "#   g                 #                #",
+    "#   g           8     #                #",
+    "#   g    ###          #                #",
+    "# #####################                #",
+    "#                     #                #",
+    "#                     #                #",
+    "#                  #  #                #",
+    "#    #   g   #   g #  #   #            #",
+    "#   g   g   g   g  #  #   #     D      #",
+    "#                  #      #            #",
+    "###ssssssssssssssss#      #            #",
+    "########################################",
+    "########################################",
   ],
   ];
 }

@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 13
+let levelIndex = 14
 
 
 const start = () => {
@@ -175,7 +175,7 @@ scene("game", () => {
     });
 
     p.collides("openedDoor", () => {
-      play("sound-door");
+      play("sound-door2");
       levelIndex++
       go("win")
     });
@@ -322,11 +322,15 @@ scene("game", () => {
   function pickUpKey(obj) {
     keys += obj.name
     destroy(obj)
+    play("sound-pickupKey");
+    if (keys.length === 12 && keys !== ANSWERS[levelIndex])
+      play("sound-error");
     if(keys === ANSWERS[levelIndex]) {
       const door = get("closedDoor")[0]
       destroy(door)
       level.spawn("O", door.gridPos.sub(0, 0));
       keys = ''
+      play("sound-door2");
     }
   }
 
@@ -397,12 +401,14 @@ scene("lose", () => {
     pos(screen.width / 2 - 200, screen.height / 2),
     scale(1.5),
   ]);
+  play("sound-lose");
   keyPress(() => go("game"));
 });
   scene("win", () => {
     add([
       text("You Win!"),
     ]);
+    play("win");
     keyPress(() => go("game"));
 
 });
