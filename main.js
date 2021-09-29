@@ -11,6 +11,23 @@ let playerNumber;
 let keys = ''
 let levelIndex = 14
 
+function newGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 1;
+    go("game");
+}
+
+function joinGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 2;
+    go("game");
+}
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -19,22 +36,33 @@ const start = () => {
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
 
-  function newGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 1;
-    go("game");
-  }
 
-  function joinGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 2;
-    go("game");
-  }
+};
+
+function onDeath() {
+  // socket.emit("gameover");
+  gameover();
+}
+
+function gameover() {
+  play("sound-lose");
+  add([
+    text("You lose!"),
+    pos(0, 0),
+    scale(1.5),
+  ]);
+  setTimeout(function () {
+    if (playerNumber == 1) {
+      newGame();
+    }
+    else {
+      joinGame();
+    }
+  }, 2000);
 };
 
 start();
+
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
@@ -48,17 +76,33 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
+  socket.on("gameover", () => {
+    gameover()
+  });
+
   // network actions
-  action(() => {
-    socket.emit("pos", p.pos.x, p.pos.y);
+  action(() => {  
+    socket.emit("pos", p.pos.x, p.pos.y)
     socket.on("moveOtherPlayer", (x, y) => {
       otherPlayer.moveTo(x, y);
+      if (otherPlayer.pos.y >= PHYS.FALL_DEATH || p.pos.y >= PHYS.FALL_DEATH) {
+        console.log('hej')
+        onDeath(); 
+      }
     });
   });
 
   //player actions
   p.action(() => {
-    camPos(p.pos);
+    let campos = camPos(width()/2, height()/2)
+  
+    if(p.pos.x <= campos.x){
+      campos = camPos(width()/2, height()/2)
+    } else if(p.pos.x >= LEVEL_LENGTH[levelIndex]) {
+      campos = camPos(LEVEL_LENGTH[levelIndex], height()/2)
+    } else {
+      campos = camPos(p.pos.x, height()/2)
+    }
     // check fall death
     if (p.pos.y >= PHYS.FALL_DEATH) {
       go("lose");
@@ -144,6 +188,35 @@ scene("game", () => {
     p.jumps--;
   });
 
+  keyPress("shift", () => {
+    if(p.currentPowerUp !== "dash") return
+
+    if (keyIsDown("right") || keyIsDown("left")) {
+      const dir = keyIsDown("left") ? -1 : 1
+      p.currentPowerUp = "dashCooldown"
+      const xStart = p.pos.x
+      p.move(4000 * dir, 0)
+      const xEnd = p.pos.x
+      
+      let ii = 0
+      for(let i = xStart * dir; i < xEnd * dir - 22; i += 22) {
+        ii++
+        add([
+          pos(p.pos.x - 22*ii*dir, p.pos.y - 17),
+          sprite("beanDash" ,{flipX: (dir === -1 ? true : false)}),
+          color(p.color),
+          opacity(0.5),
+          lifespan(0.45 - 0.1*ii),
+        ]);
+      }
+      setTimeout(function () {
+        if (p.currentPowerUp === "dashCooldown") {
+          p.currentPowerUp = "dash"
+        }
+      }, 3000)
+    } 
+  });
+
   //misc funtions
 
   function handleCollision() {
@@ -188,11 +261,12 @@ scene("game", () => {
       p.isOnSlime = true;
     });
 
-    p.collides("spikes", (s, side) => {
-      if (side !== "bottom") {
-        return;
-      }
-      go("lose");
+    collides("player", "enemy", (player, enemy) => {
+
+      if (!isCorrectCollision(player, enemy)) return
+      destroy(enemy);
+      //level.spawn("^",enemy.gridPos.sub(0,0))
+      onDeath();
     });
 
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
@@ -261,12 +335,12 @@ scene("game", () => {
       p.isJumping = false;
     }
   }
-
+  
+  function isCorrectCollision(player, obj) {
+    if (obj.is("player") || player.isTeleSwap) return false
+    return true
+  }
   function pickupPowerup() {
-    function isCorrectCollision(player, obj) {
-      if (obj.is("player") || player.isTeleSwap) return false
-      return true
-    }
 
     collides("player", "powerUp", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return
@@ -276,6 +350,7 @@ scene("game", () => {
       if (obj.is("doublejump")) powerUp = "doublejump"
       else if (obj.is("grow")) powerUp = "grow"
       else if(obj.is("shrink")) powerUp = "shrink"
+      else if(obj.is("dash")) powerUp = "dash"
       else if (obj.is("ghost")) {
         powerUp = "ghost"
         if(player === p) {
@@ -395,19 +470,12 @@ scene("game", () => {
 
 });
 
-scene("lose", () => {
-  add([
-    text("You lose!"),
-    pos(screen.width / 2 - 200, screen.height / 2),
-    scale(1.5),
-  ]);
-  play("sound-lose");
-  keyPress(() => go("game"));
-});
   scene("win", () => {
     add([
       text("You Win!"),
     ]);
     keyPress(() => go("game"));
 
-});
+  });
+
+//go("game");

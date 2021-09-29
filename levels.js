@@ -33,6 +33,7 @@ loadSound("sound-win", "sounds/sound-win.mp3");
 loadSound("sound-pickupKey", "sounds/sound-pickupKey.wav");
 loadSound("sound-error", "sounds/sound-error.wav");
 loadSound("sound-hit", "sounds/sound-hit.wav");
+loadSprite("beanDash", "sprites/beanDash.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -47,20 +48,30 @@ function patrol(speed = 60, dir = 1) {
                 dir = vel > 0 ? -1 : 1;
             }}}}
 
+  //Map legend:
+  //
+  // =:Grass 1:Grass_l 2:Grass_r L:Grass_l_top R:Grass_r_top #:Box g:Ghostblock £:Halfblock
+  //
+  // @:Monster D:Door i:Ice s:Slime K:Key(green) E:Key(red) Y:Key(blue) ^:Spikes t:Trampoline
+
+  // J:doublejump U:teleswap 0:Ghost 8:Grow o:Shrink
+
 export const levels =()=>{
   return [
+
   //0
   [
-    "                                                          ",
-    "                                                          ",
-    "                             ####           L=============",
-    "                                            1             ",
-    "                        #            L======              ",
-    "                J                    1                    ",
-    "              L===R                  1                    ",
-    "              1   2                  1                    ",
-    "              1   2       ^^^^^      1                    ",
-    "==============     ==================                     ",
+    "                                             L=============            ",
+    "                                t                       ",
+    "                                =    ###     ",
+    "##                                                        ",
+    "##                          t                              ",
+    "##                          =                                     ",
+    "##                                      J                  ",
+    "##                      t             L===                    ",
+    "##          ^           L=R            1                    ",
+      "=======================   ============                     ",
+    "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
   ],
   //1
   [
@@ -218,17 +229,28 @@ export const levels =()=>{
   ],
   //11
   [
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                   #            ",
-    "                   #            ",
-    "           #   8   #     JU     ",
-    "================================",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "###################################################################",
   ],
   //12
   [
@@ -334,10 +356,11 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "^": () => [
       sprite("spikes"),
-      area({offset: 6}),
+      area({ offset: [0, 6] }),
       solid(),
       color(COL.BLUE),
-      "spikes"
+      "spikes",
+      "enemy"
     ],
     "@": () => [
       sprite("beanMonster"),
@@ -482,6 +505,20 @@ export const levelConf =()=>{  return({    // define the size of each block
       area({width: 12, height: 6}),
       solid(),
     ],
+    "d": () => [
+      sprite("shrink"),
+      area(),
+      color(COL.PURPLE),
+      "dash",
+      "powerUp"
+    ],
+  "|": () => [
+    sprite("halfBlock"),
+    area(),
+    solid(),
+    opacity(0),
+    "enemy",
+  ],
     
     
   }
