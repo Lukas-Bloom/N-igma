@@ -44,10 +44,12 @@ export const PHYS = {
 };
 
 export const ANSWERS = {
-  6: 'key1key2key3',
-  8: 'key1key2key3',
-  10: 'key1key2key3',
-  12: 'key1key2key3',
-  13: 'key1key2key3',
-  14: 'key1key2key3'
-}
+  1: "key1key2key3",
+  2: "key1key2key3",
+  3: "key1key2key3",
+  4: "key1key2key3",
+  5: "key1key2key3",
+  6: "key1key2key3",
+  7: "key1key2key3",
+  8: "key1key2key3",
+};
