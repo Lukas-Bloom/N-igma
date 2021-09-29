@@ -58,7 +58,15 @@ scene("game", () => {
 
   //player actions
   p.action(() => {
-    camPos(p.pos);
+    let campos = camPos(width()/2, height()/2)
+  
+    if(p.pos.x <= campos.x){
+      campos = camPos(width()/2, height()/2)
+    } else if(p.pos.x >= LEVEL_LENGTH[levelIndex]) {
+      campos = camPos(LEVEL_LENGTH[levelIndex], height()/2)
+    } else {
+      campos = camPos(p.pos.x, height()/2)
+    }
     // check fall death
     if (p.pos.y >= PHYS.FALL_DEATH) {
       go("lose");
@@ -142,6 +150,35 @@ scene("game", () => {
   keyRelease("space", () => {
     p.isJumping = false;
     p.jumps--;
+  });
+
+  keyPress("shift", () => {
+    if(p.currentPowerUp !== "dash") return
+
+    if (keyIsDown("right") || keyIsDown("left")) {
+      const dir = keyIsDown("left") ? -1 : 1
+      p.currentPowerUp = "dashCooldown"
+      const xStart = p.pos.x
+      p.move(4000 * dir, 0)
+      const xEnd = p.pos.x
+      
+      let ii = 0
+      for(let i = xStart * dir; i < xEnd * dir - 22; i += 22) {
+        ii++
+        add([
+          pos(p.pos.x - 22*ii*dir, p.pos.y - 17),
+          sprite("beanDash" ,{flipX: (dir === -1 ? true : false)}),
+          color(p.color),
+          opacity(0.5),
+          lifespan(0.45 - 0.1*ii),
+        ]);
+      }
+      setTimeout(function () {
+        if (p.currentPowerUp === "dashCooldown") {
+          p.currentPowerUp = "dash"
+        }
+      }, 3000)
+    } 
   });
 
   //misc funtions
@@ -276,6 +313,7 @@ scene("game", () => {
       if (obj.is("doublejump")) powerUp = "doublejump"
       else if (obj.is("grow")) powerUp = "grow"
       else if(obj.is("shrink")) powerUp = "shrink"
+      else if(obj.is("dash")) powerUp = "dash"
       else if (obj.is("ghost")) {
         powerUp = "ghost"
         if(player === p) {

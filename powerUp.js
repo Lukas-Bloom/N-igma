@@ -36,6 +36,9 @@ export default function powerUp() {
           this.height = PLAYER.HEIGHT
           break
         }
+        case "dash": {
+          break
+        }
     
 
 

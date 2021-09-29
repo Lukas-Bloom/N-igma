@@ -21,6 +21,7 @@ export const p1 = () => {
     }),
     pos(P1.POSX, P1.POSY),
     area({ width: PLAYER.WIDTH, height: PLAYER.HEIGHT }),
+    color(COL.WHITE),
     body(),
     origin("bot"),
     powerUp(),

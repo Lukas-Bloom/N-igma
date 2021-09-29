@@ -27,6 +27,7 @@ loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
 loadSound("sound-door", "sounds/sound-door.wav");
 loadSound("sound-teleswap", "sounds/sound-teleswap.wav");
+loadSprite("beanDash", "sprites/beanDash.png");
 
 
 function patrol(speed = 60, dir = 1) {
@@ -212,17 +213,28 @@ export const levels =()=>{
   ],
   //11
   [
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                                ",
-    "                   #            ",
-    "                   #            ",
-    "           #   8   #     JU     ",
-    "================================",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "1                                                                 2",
+    "###################################################################",
   ],
   //12
   [
@@ -251,6 +263,22 @@ export const levels =()=>{
     "       J  0g      t                #=========     ",
     "           g      £     o          #              ",
     "#####################^####sssssssss###############",
+    "##################################################",
+  ],
+  //14
+  [
+    "            J   d                                 ",
+    "                                                  ",
+    "#####################                             ",
+    "# K                                               ",
+    "####  ###############                             ",
+    "#                                                 ",
+    "#                                                 ",
+    "#                                                 ",
+    "#                                                 ",
+    "#                    t                            ",
+    "#                    #                            ",
+    "##################################################",
     "##################################################",
   ],
   ];
@@ -295,10 +323,11 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "^": () => [
       sprite("spikes"),
-      area({offset: 6}),
+      area({ offset: [0, 6] }),
       solid(),
       color(COL.BLUE),
-      "spikes"
+      "spikes",
+      "enemy"
     ],
     "@": () => [
       sprite("beanMonster"),
@@ -439,6 +468,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("halfBlock"),
       area({width: 12, height: 6}),
       solid(),
+    ],
+    "d": () => [
+      sprite("shrink"),
+      area(),
+      color(COL.PURPLE),
+      "dash",
+      "powerUp"
     ],
     
     
