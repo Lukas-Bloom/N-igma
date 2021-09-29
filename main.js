@@ -9,8 +9,25 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 13
+let levelIndex = 0
 
+function newGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 1;
+    go("game");
+}
+
+function joinGame() {
+  if (document.getElementById("newGameButton")) {
+    document.getElementById("newGameButton").remove();
+    document.getElementById("joinGameButton").remove();
+  }
+    playerNumber = 2;
+    go("game");
+}
 
 const start = () => {
   const newGameBtn = document.getElementById("newGameButton");
@@ -19,22 +36,32 @@ const start = () => {
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
 
-  function newGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 1;
-    go("game");
-  }
 
-  function joinGame() {
-    document.getElementById("newGameButton").remove();
-    document.getElementById("joinGameButton").remove();
-    playerNumber = 2;
-    go("game");
-  }
+};
+
+function onDeath() {
+  // socket.emit("gameover");
+  gameover();
+}
+
+function gameover() {
+  add([
+    text("You lose!"),
+    pos(0, 0),
+    scale(1.5),
+  ]);
+  setTimeout(function () {
+    if (playerNumber == 1) {
+      newGame();
+    }
+    else {
+      joinGame();
+    }
+  }, 2000);
 };
 
 start();
+
 
 scene("game", () => {
   gravity(PHYS.GRAVITY);
@@ -48,11 +75,19 @@ scene("game", () => {
   let jumps;
   let isJumping = false;
 
+  socket.on("gameover", () => {
+    gameover()
+  });
+
   // network actions
-  action(() => {
-    socket.emit("pos", p.pos.x, p.pos.y);
+  action(() => {  
+    socket.emit("pos", p.pos.x, p.pos.y)
     socket.on("moveOtherPlayer", (x, y) => {
       otherPlayer.moveTo(x, y);
+      if (otherPlayer.pos.y >= PHYS.FALL_DEATH || p.pos.y >= PHYS.FALL_DEATH) {
+        console.log('hej')
+        onDeath(); 
+      }
     });
   });
 
@@ -225,11 +260,12 @@ scene("game", () => {
       p.isOnSlime = true;
     });
 
-    p.collides("spikes", (s, side) => {
-      if (side !== "bottom") {
-        return;
-      }
-      go("lose");
+    collides("player", "enemy", (player, enemy) => {
+
+      if (!isCorrectCollision(player, enemy)) return
+      destroy(enemy);
+      //level.spawn("^",enemy.gridPos.sub(0,0))
+      onDeath();
     });
 
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
@@ -298,12 +334,12 @@ scene("game", () => {
       p.isJumping = false;
     }
   }
-
+  
+  function isCorrectCollision(player, obj) {
+    if (obj.is("player") || player.isTeleSwap) return false
+    return true
+  }
   function pickupPowerup() {
-    function isCorrectCollision(player, obj) {
-      if (obj.is("player") || player.isTeleSwap) return false
-      return true
-    }
 
     collides("player", "powerUp", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return
@@ -429,18 +465,14 @@ scene("game", () => {
 
 });
 
-scene("lose", () => {
-  add([
-    text("You lose!"),
-    pos(screen.width / 2 - 200, screen.height / 2),
-    scale(1.5),
-  ]);
-  keyPress(() => go("game"));
-});
+
+
   scene("win", () => {
     add([
       text("You Win!"),
     ]);
     keyPress(() => go("game"));
 
-});
+  });
+
+//go("game");

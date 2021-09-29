@@ -13,6 +13,10 @@ io.on("connection", (client) => {
     console.log(key)
   })
 
+  client.on("gameover", () => {
+    client.broadcast.emit("gameover")
+  })
+
   client.on("pos", (posX, posY) => {
     client.broadcast.emit("moveOtherPlayer", posX, posY)
   })

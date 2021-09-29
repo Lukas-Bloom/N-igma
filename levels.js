@@ -42,20 +42,30 @@ function patrol(speed = 60, dir = 1) {
                 dir = vel > 0 ? -1 : 1;
             }}}}
 
+  //Map legend:
+  //
+  // =:Grass 1:Grass_l 2:Grass_r L:Grass_l_top R:Grass_r_top #:Box g:Ghostblock £:Halfblock
+  //
+  // @:Monster D:Door i:Ice s:Slime K:Key(green) E:Key(red) Y:Key(blue) ^:Spikes t:Trampoline
+
+  // J:doublejump U:teleswap 0:Ghost 8:Grow o:Shrink
+
 export const levels =()=>{
   return [
+
   //0
   [
-    "                                                          ",
-    "                                                          ",
-    "                             ####           L=============",
-    "                                            1             ",
-    "                        #            L======              ",
-    "                J                    1                    ",
-    "              L===R                  1                    ",
-    "              1   2                  1                    ",
-    "              1   2       ^^^^^      1                    ",
-    "==============     ==================                     ",
+    "                                             L=============            ",
+    "                                t                       ",
+    "                                =    ###     ",
+    "##                                                        ",
+    "##                          t                              ",
+    "##                          =                                     ",
+    "##                                      J                  ",
+    "##                      t             L===                    ",
+    "##          ^           L=R            1                    ",
+      "=======================   ============                     ",
+    "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
   ],
   //1
   [
@@ -476,6 +486,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       "dash",
       "powerUp"
     ],
+  "|": () => [
+    sprite("halfBlock"),
+    area(),
+    solid(),
+    opacity(0),
+    "enemy",
+  ],
     
     
   }
