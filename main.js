@@ -175,7 +175,7 @@ scene("game", () => {
     });
 
     p.collides("openedDoor", () => {
-      play("sound-door2");
+      play("sound-win");
       levelIndex++
       go("win")
     });
@@ -408,7 +408,6 @@ scene("lose", () => {
     add([
       text("You Win!"),
     ]);
-    play("win");
     keyPress(() => go("game"));
 
 });
