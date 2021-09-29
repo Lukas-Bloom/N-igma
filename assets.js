@@ -241,13 +241,13 @@ export const levelConf =()=>{  return({    // define the size of each block
       "dash",
       "powerUp"
     ],
-  "|": () => [
+   "|": () => [
     sprite("halfBlock"),
     area(),
     solid(),
     opacity(0),
     "enemy",
-  ],
+    ],
     
     
   }

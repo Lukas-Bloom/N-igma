@@ -1,4 +1,5 @@
 import { PHYS } from "./constants.js";
+import { slideLeft, slideRight } from "./collisionEvents/collisionEvents.js";
 
 export const handleKeyEvents = (p) => {
   return (
@@ -26,7 +27,7 @@ export const handleKeyEvents = (p) => {
         return;
       }
       if (p.isOnIce) {
-        slideLeft();
+        slideLeft(p);
       }
     }),
     keyDown("right", () => {
@@ -53,7 +54,7 @@ export const handleKeyEvents = (p) => {
         return;
       }
       if (p.isOnIce) {
-        slideRight();
+        slideRight(p);
       }
     }),
     keyPress("space", () => {

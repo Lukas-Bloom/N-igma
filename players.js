@@ -1,20 +1,17 @@
 import k from "./initKaboom.js";
-import {P1,P2, PLAYER, COL} from "./constants.js"
-import powerUp from "./powerUp.js"
+import { P1, P2, PLAYER, COL } from "./constants.js";
+import powerUp from "./powerUp.js";
 
-loadSprite('bean', 'sprites/tileMap.png', {
-	sliceX: 20,
-	sliceY: 20,
-	anims: {
-		idle: 300,
-		run: { from: 302, to: 303 ,loop:true }
-	}
-})
-
-
+loadSprite("bean", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+  anims: {
+    idle: 300,
+    run: { from: 302, to: 303, loop: true },
+  },
+});
 
 export const p1 = () => {
-  
   return add([
     sprite("bean", {
       anim: "idle",
@@ -26,15 +23,15 @@ export const p1 = () => {
     origin("bot"),
     powerUp(),
     {
+      playerNumber: 1,
       jumpsAmount: 1,
-      currentPowerUp: '',
+      currentPowerUp: "",
     },
-    "player"
+    "player",
   ]);
 };
 
 export const p2 = () => {
-
   return add([
     sprite("bean", {
       animSpeed: 0.2,
@@ -47,9 +44,10 @@ export const p2 = () => {
     origin("bot"),
     powerUp(),
     {
+      playerNumber: 2,
       jumpsAmount: 1,
-      currentPowerUp: '',
+      currentPowerUp: "",
     },
-    "player"
+    "player",
   ]);
 };
