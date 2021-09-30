@@ -27,6 +27,8 @@ export const COL = {
   SKYBLUE: [0, 190, 255],
   LGREEN: [0 , 255, 128],
   LIGHT_BLUE: [0, 255, 255],
+  P1: [254, 216, 0],
+  P2: [253, 47, 36]
   //ADD MORE COLORS AS WE NEED THEM
 };
 

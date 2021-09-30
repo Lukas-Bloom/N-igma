@@ -9,7 +9,7 @@ socket.on("init", (msg) => {
 
 let playerNumber;
 let keys = ''
-let levelIndex = 14
+let levelIndex = 8
 
 function newGame() {
   if (document.getElementById("newGameButton")) {
@@ -98,8 +98,8 @@ scene("game", () => {
   
     if(p.pos.x <= campos.x){
       campos = camPos(width()/2, height()/2)
-    } else if(p.pos.x >= LEVEL_LENGTH[levelIndex]) {
-      campos = camPos(LEVEL_LENGTH[levelIndex], height()/2)
+    } else if(p.pos.x >= 800) {
+      campos = camPos(800, height()/2)
     } else {
       campos = camPos(p.pos.x, height()/2)
     }

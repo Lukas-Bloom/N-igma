@@ -1,10 +1,10 @@
 import {COL} from "./constants.js"
 loadSprite("beanMonster", "sprites/bean.png");
-loadSprite("grass", "sprites/grass.png");
-loadSprite("grass_l", "sprites/grass_l.png");
-loadSprite("grass_l_top", "sprites/grass_l_top.png");
-loadSprite("grass_r", "sprites/grass_r.png");
-loadSprite("grass_r_top", "sprites/grass_r_top.png");
+//loadSprite("grass", "sprites/grass.png");
+//loadSprite("grass_l", "sprites/grass_l.png");
+//loadSprite("grass_l_top", "sprites/grass_l_top.png");
+//loadSprite("grass_r", "sprites/grass_r.png");
+//loadSprite("grass_r_top", "sprites/grass_r_top.png");
 loadSprite("box", "sprites/box.png");
 loadSprite("spikes", "sprites/spikes.png");
 loadSprite("key", "sprites/key.png");
@@ -22,7 +22,7 @@ loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("ice", "sprites/ice.png");
 loadSprite("slime", "sprites/slime.png");
-loadSound("sound-powerup", "sounds/sound-powerup.wav");
+//loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
 loadSound("sound-door", "sounds/sound-door.wav");
@@ -34,6 +34,17 @@ loadSound("sound-pickupKey", "sounds/sound-pickupKey.wav");
 loadSound("sound-error", "sounds/sound-error.wav");
 loadSound("sound-hit", "sounds/sound-hit.wav");
 loadSprite("beanDash", "sprites/beanDash.png");
+loadSprite("ground", "newSprites/ground.png");
+loadSprite("slime", "newSprites/slime.png");
+loadSprite("left-ground", "newSprites/left-ground.png");
+loadSprite("left", "newSprites/left.png");
+loadSprite("top-left", "newSprites/top-left.png");
+loadSprite("right-ground", "newSprites/right-ground.png");
+loadSprite("right", "newSprites/right.png");
+loadSprite("top-right", "newSprites/top-right.png");
+loadSprite("testChar", "newSprites/testChar.png");
+loadSprite("background", "newSprites/background.png");
+
 
 
 function patrol(speed = 60, dir = 1) {
@@ -188,15 +199,15 @@ export const levels =()=>{
     "                                                                        ",
     "                                                                        ",
     "                                                               L======= ",
-    "                                                               1        ",
-    "                                                               1        ",
-    "                                                               1        ",
-    "                              J    U                           1        ",
-    "                             L=======R                         1        ",
-    "                             1       2                         1        ",
-    "                             1       2                         1        ",
-    "                             1       2       K     E     Y     1        ",
-    "=================ssssssssssss         =========================         ",
+    "                                                               1''''''''",
+    "                                                               1''''''''",
+    "                                                               1''''''''",
+    "                              J    U                           1''''''''",
+    "                             L=======R                         1''''''''",
+    "                             1'''''''2                         1''''''''",
+    "                             1'''''''2                         1''''''''",
+    "                             1'''''''2       K     E     Y     1''''''''",
+    "=================ssssssssssss.''''''',=========================.''''''''",
   ],
   //9
   [
@@ -322,7 +333,7 @@ export const levelConf =()=>{  return({    // define the size of each block
   height: 16,
   // define what each symbol means
     "=": () => [
-      sprite("grass"),
+      sprite("ground"),
       area(),
       solid(),
       opacity(1),
@@ -330,22 +341,31 @@ export const levelConf =()=>{  return({    // define the size of each block
       "grass"
     ],
     "1": () => [
-      sprite("grass_l"),
+      sprite("left"),
       area(),
       solid(),
+    ],
+    ".": () => [
+      sprite("top-left"),
     ],
     "2": () => [
-      sprite("grass_r"),
+      sprite("right"),
       area(),
       solid(),
     ],
+    ",": () => [
+      sprite("top-right"),
+    ],
+    " ": () => [
+      sprite("background"),
+    ],
     "L": () => [
-      sprite("grass_l_top"),
+      sprite("left-ground"),
       area(),
       solid(),
     ],
     "R": () => [
-      sprite("grass_r_top"),
+      sprite("right-ground"),
       area(),
       solid(),
     ],
@@ -439,10 +459,10 @@ export const levelConf =()=>{  return({    // define the size of each block
       "openedDoor",
     ],
     "s": () => [
-      sprite("slime", {flipY: true}),
-      area({offset: 6}),
+      sprite("slime"),
+      area(),
       solid(),
-      color(COL.LGREEN),
+      color(),
       "slime",
     ],
     "0": () => [
@@ -519,6 +539,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     opacity(0),
     "enemy",
   ],
+  
     
     
   }
