@@ -1,4 +1,7 @@
-import { COL } from "./constants.js";
+import { COL,OBJECT } from "./constants.js";
+import * as mo from "./movingObjectsEvents.js";
+
+
 loadSprite("beanMonster", "sprites/bean.png");
 loadSprite("grass", "sprites/grass.png");
 loadSprite("grass_l", "sprites/grass_l.png");
@@ -34,6 +37,26 @@ loadSound("sound-pickupKey", "sounds/sound-pickupKey.wav");
 loadSound("sound-error", "sounds/sound-error.wav");
 loadSound("sound-hit", "sounds/sound-hit.wav");
 loadSprite("beanDash", "sprites/beanDash.png");
+
+loadSprite("monster", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+  anims: {
+    walk: { from: 341, to: 342, loop: true },
+  },
+});
+loadSprite("bat", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+  anims: {
+    fly: { from: 383, to: 384, loop: true },
+  },
+});
+loadSprite("platform", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+});
+
 
 
   //Map legend:
@@ -92,12 +115,16 @@ export const levelConf =()=>{  return({    // define the size of each block
       "enemy"
     ],
     "@": () => [
-      sprite("beanMonster"),
+      sprite("monster",{
+        animSpeed:0.3,
+        frame:340
+      }),
       area(),
       body(),
       color(COL.GREEN),
       scale(),
-      patrol()
+      mo.patrol(),
+      "enemy"
     ],
     "J": () => [
       sprite("doublejump"),
@@ -248,26 +275,52 @@ export const levelConf =()=>{  return({    // define the size of each block
     opacity(0),
     "enemy",
     ],
-    
-    
+    "B": () => [
+      sprite("bat",{
+        animSpeed:0.3,
+        frame:385
+      }),
+        area(),
+        solid(),
+        color(COL.PURPLE),
+        mo.batVertical(OBJECT.SLOW,OBJECT.UP,OBJECT.SHORT),
+        "enemy",
+    ],
+    //medimum plat
+   "-": () => [
+      sprite("platform",{
+        frame:143
+      }),
+        area(),
+        solid(),
+        color(COL.ORANGE),
+        mo.platformHorizontal(OBJECT.MEDIUM,OBJECT.LEFT,OBJECT.LONG),
+        "platform"
+      
+    ],
+    //slow platform
+      "~": () => [
+      sprite("platform",{
+        frame:143
+      }),
+        area(),
+        solid(),
+        color(COL.ORANGE),
+        mo.platformHorizontal(OBJECT.SLOW,OBJECT.LEFT,OBJECT.SHORT),
+        "platform"
+      
+    ],
+   "P": () => [,
+      sprite("platform",{
+        frame:143
+      }),
+        area(),
+        solid(),
+        color(COL.ORANGE),
+       mo.platformVertical(),
+       "platform"
+      
+    ],   
   }
   )
-}
-
-
-
-
-function patrol(speed = 60, dir = 1) {
-  return {
-    id: "patrol",
-    require: ["pos", "area"],
-    update() {
-      const vel = speed * dir;
-      // if collides with something when it's moving, turn around
-      const colliding = this.move(vel, 0);
-      if (colliding) {
-        dir = vel > 0 ? -1 : 1;
-      }
-    },
-  };
 }

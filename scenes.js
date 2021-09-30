@@ -1,13 +1,11 @@
 import k from "./initKaboom.js";
 import { p1, p2 } from "./players.js";
-
 import { PHYS } from "./constants.js";
 import { levels } from "./levels.js";
 import { levelConf } from "./assets.js";
 import { handleKeyEvents } from "./keyEvents.js";
 import { handleCollisionEvents } from "./collisionEvents/collisionEvents.js";
 import { handleActionEvents } from "./actions.js";
-import { socket } from "./socket.js";
 
 scene("game", (p, otherPlayer, levelIndex) => {
   gravity(PHYS.GRAVITY);
@@ -23,6 +21,8 @@ scene("game", (p, otherPlayer, levelIndex) => {
   handleActionEvents(p, otherPlayer);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
+ 
+
 });
 
 
