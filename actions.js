@@ -2,6 +2,10 @@ import { PHYS } from "./constants.js";
 import { socket } from "./socket.js";
 
 export const handleActionEvents = (p, otherPlayer) => {
+  const movObjList = get("platform");
+  const movObjList2 = movObjList;
+
+  //console.log(x[1].pos.y);
   //reset jumps when landing
   function checkIfGrounded() {
     if (p.grounded()) {
@@ -24,6 +28,18 @@ export const handleActionEvents = (p, otherPlayer) => {
   return (
     // network actions
     action(() => {
+
+ /*      socket.emit("movObjPos", movObjList2);
+      socket.on("syncObj", (stuff) => {
+        console.log("holaaa");
+        for (let i = 0; i < stuff.length; i++) {
+          movObjList2[i].moveTo(
+            Math.floor(stuff[i].pos.x),
+            Math.floor(stuff[i].pos.y)
+          );
+        }
+      }); */
+
       socket.emit("pos", p.pos.x, p.pos.y);
       socket.on("moveOtherPlayer", (x, y) => {
         otherPlayer.moveTo(x, y);

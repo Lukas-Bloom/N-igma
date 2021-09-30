@@ -8,18 +8,19 @@ const io = require("socket.io")(gameServer, {
 });
 
 io.on("connection", (client) => {
-  client.emit("init", mama(client.id));
+  client.emit("init", getClientId(client.id));
   client.on("keyPressedNow", (key) => {
     console.log(key)
   })
-
-
   client.on("pos", (posX, posY) => {
     client.broadcast.emit("moveOtherPlayer", posX, posY)
   })
+  client.on("movObjPos", (objArray) => {
+    client.broadcast.emit("syncObj", objArray);
+  });
 });
 
-function mama(id) {
+const getClientId=(id) =>{
   let x = { clientId: id };
   return x;
 }

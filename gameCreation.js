@@ -1,6 +1,6 @@
 import { game } from "./scenes.js";
 
-let levelIndex = 2;
+let levelIndex = 4;
 
 export const createGame = () => {
   const newGameBtn = document.getElementById("newGameButton");

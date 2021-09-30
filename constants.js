@@ -43,6 +43,21 @@ export const PHYS = {
   SWAP: 5,
 };
 
+export const OBJECT = {
+  FAST: 120,
+  MEDIUM: 60,
+  SLOW: 30,
+  LEFT: -1,
+  RIGHT: 1,
+  UP: -1,
+  DOWN: 1,
+  LONG: 100,
+  SHORT: 25,
+  LAGOM: 50,
+
+  MOVE_SPEED: 140,
+};
+
 export const ANSWERS = {
   1: "key1key2key3",
   2: "key1key2key3",
