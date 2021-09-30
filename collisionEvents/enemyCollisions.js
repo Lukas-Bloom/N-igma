@@ -1,8 +1,10 @@
 import { isCorrectCollision } from "./collisionEvents.js";
 import { game } from "../scenes.js";
+import { loseBarrier } from "../powerUp.js";
 
 function gameover(p,otherPlayer, levelIndex) {
-  //play("sound-lose");
+  play("sound-lose");
+  p.isDead = true
   add([text("You lose!"), pos(0, 0), scale(1.5)]);
   setTimeout(function () {
  
@@ -12,8 +14,12 @@ function gameover(p,otherPlayer, levelIndex) {
 
 export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
   return collides("player", "enemy", (player, enemy) => {
-    if (!isCorrectCollision(player, enemy)) return;
-    //level.spawn("^",enemy.gridPos.sub(0,0))
-    gameover(p,otherPlayer, levelIndex);
+    if (!isCorrectCollision(player, enemy) || player.currentPowerUp === "loseBarrier") return;
+    if(player.currentPowerUp === "barrier") {
+      player.currentPowerUp === "loseBarrier"
+      loseBarrier(1, player)
+    } else {
+      gameover(p, otherPlayer, levelIndex);
+    }
   });
 };

@@ -4,6 +4,7 @@ import { slideLeft, slideRight } from "./collisionEvents/collisionEvents.js";
 export const handleKeyEvents = (p) => {
   return (
     keyDown("left", () => {
+      if(p.isDead) return
       if (keyIsPressed("left")) {
         p.flipX(true);
         p.play("run");
@@ -22,6 +23,7 @@ export const handleKeyEvents = (p) => {
       }
     }),
     keyRelease("left", () => {
+      if (p.isDead) return
       p.play("idle");
       if (p.slideRight > PHYS.SLIDE) {
         return;
@@ -31,6 +33,7 @@ export const handleKeyEvents = (p) => {
       }
     }),
     keyDown("right", () => {
+      if (p.isDead) return
       if (keyIsPressed("right")) {
         p.flipX(false);
         p.play("run");
@@ -49,6 +52,7 @@ export const handleKeyEvents = (p) => {
       }
     }),
     keyRelease("right", () => {
+      if (p.isDead) return
       p.play("idle");
       if (p.slideLeft > PHYS.SLIDE) {
         return;
@@ -58,16 +62,19 @@ export const handleKeyEvents = (p) => {
       }
     }),
     keyPress("space", () => {
+      if (p.isDead) return
       if (p.jumps > 0 && !p.isJumping && !p.isTeleSwap) {
         p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : PHYS.JUMP_HEIGHT);
         play("sound-jump");
       }
     }),
     keyRelease("space", () => {
+      if (p.isDead) return
       p.isJumping = false;
       p.jumps--;
     }),
     keyPress("shift", () => {
+      if (p.isDead) return
       if (p.currentPowerUp !== "dash") return;
 
       if (keyIsDown("right") || keyIsDown("left")) {

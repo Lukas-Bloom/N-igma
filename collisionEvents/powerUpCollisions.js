@@ -93,6 +93,7 @@ export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
       else if (obj.is("grow")) powerUp = "grow";
       else if (obj.is("shrink")) powerUp = "shrink";
       else if (obj.is("dash")) powerUp = "dash";
+      else if(obj.is("barrier")) powerUp = "barrier"
       else if (obj.is("ghost")) {
         powerUp = "ghost";
         if (player === p) {
