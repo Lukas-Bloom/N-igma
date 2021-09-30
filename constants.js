@@ -34,20 +34,22 @@ export const PHYS = {
   WORLD_SCALE:2,
   MOVE_SPEED: 140,
   FALL_DEATH: 2400,
-  GRAVITY: 3200,
+  GRAVITY: 2000,
   SLIDE: 6,  // any factor of MOVE_SPEED. The smaller the more slippery
-  JUMP_HEIGHT: 400,
+  JUMP_HEIGHT: 300,
   SLIME_JUMP: 200,
   SLIME_MOVE_SPEED: 70,
-  TRAMP_JUMP_HEIGHT: 800,
+  TRAMP_JUMP_HEIGHT: 600,
   SWAP: 5,
 };
 
 export const ANSWERS = {
-  6: 'key1key2key3',
-  8: 'key1key2key3',
-  10: 'key1key2key3',
-  12: 'key1key2key3',
-  13: 'key1key2key3',
-  14: 'key1key2key3'
-}
+  1: "key1key2key3",
+  2: "key1key2key3",
+  3: "key1key2key3",
+  4: "key1key2key3",
+  5: "key1key2key3",
+  6: "key1key2key3",
+  7: "key1key2key3",
+  8: "key1key2key3",
+};
