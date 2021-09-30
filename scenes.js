@@ -8,6 +8,7 @@ import { handleKeyEvents } from "./keyEvents.js";
 import { handleCollisionEvents } from "./collisionEvents/collisionEvents.js";
 import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
+import { spawnPlayers } from "./gameCreation.js"
 
 scene("game", (p, otherPlayer, levelIndex) => {
   gravity(PHYS.GRAVITY);
@@ -15,10 +16,12 @@ scene("game", (p, otherPlayer, levelIndex) => {
   if (p == 1) {
     p = p1();
     otherPlayer = p2();
+    spawnPlayers(p, otherPlayer);
   }
   if (p== 2) {
     p = p2();
     otherPlayer = p1();
+    spawnPlayers(otherPlayer, p);
   }
   handleActionEvents(p, otherPlayer);
   handleKeyEvents(p);

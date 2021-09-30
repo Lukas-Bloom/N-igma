@@ -58,6 +58,9 @@ export const levelConf =()=>{  return({    // define the size of each block
       scale(1),
       "grass"
     ],
+    "P": () => [
+      "startPlayer",
+    ],
     "1": () => [
       sprite("grass_l"),
       area(),

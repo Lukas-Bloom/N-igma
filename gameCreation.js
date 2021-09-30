@@ -1,6 +1,14 @@
 import { game } from "./scenes.js";
 
-let levelIndex = 2;
+let levelIndex = 4;
+
+export const spawnPlayers = (p1, p2) => {
+  let startPlayers = get("startPlayer")
+  if (startPlayers.length === 2) {
+    p1.moveTo(startPlayers[0].pos)
+    p2.moveTo(startPlayers[1].pos)
+  }
+}
 
 export const createGame = () => {
   const newGameBtn = document.getElementById("newGameButton");
