@@ -256,10 +256,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     sprite("particle"),
     area(),
     opacity(1),
-    color(COL.MAGENTA),
-    "particle"
-    
-    
+    color(COL.MAGENTA),  
   ],
     
     
