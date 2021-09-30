@@ -1,5 +1,6 @@
-import { ANSWERS, PHYS } from "../constants.js";
+import { ANSWERS, PHYS, COL } from "../constants.js";
 import { isCorrectCollision } from "./collisionEvents.js";
+
 
 let keys = "";
 
@@ -24,6 +25,55 @@ function spawnGhostblocks(level) {
     level.spawn("G", ghostblks[i].gridPos.sub(0, 0));
   }
 }
+// let op=1
+// let temp=0
+// function fadeOpacity() {
+//   //for (let i = 0; i < 10; i = temp) {
+//   setTimeout(function () {
+//       op=Math.round((op-0.1)*10)/10
+//       //opacity({ opacity: op });
+//       console.log("op " + op);
+//       //console.log("temp" +temp);
+//       if (temp < 8) { fadeOpacity(); temp++ }
+//     }, 200);
+//     //}
+// }
+
+function spawnParticles(player) {
+  let particles = []
+  let part;
+  for (let i = 0; i <= 25; i++) {
+    part =
+      add([
+      sprite("particle"),
+      pos(player.pos.x, player.pos.y),
+      origin("center"),
+      scale(rand(0.25, 1)),
+      opacity(1),
+      color(COL.PURPLE),
+      rotate(rand(360)),
+      move(rand(360), rand(100, 170)),
+      ]);
+      
+    particles.push(part)
+    console.log("particles " +particles)
+  }
+    for (let i = 0; i < 600; i++) {
+
+      setTimeout(function () {
+        for (let b = 0; b < particles.length; b++) {
+          particles[b].opacity = particles[b].opacity - 0.8/600
+          
+          console.log(particles[b].opacity)
+          if (i === 599) {
+            destroy(particles[b])
+          }
+        }
+      }, 8000 / 60)
+    }
+  }
+  
+  
 
 function swapPlayers(p, otherPlayer, opDestx, opDesty, pDestx, pDesty) {
   gravity(0);
@@ -88,7 +138,9 @@ export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
       if (!isCorrectCollision(player, obj)) return;
       let powerUp = "";
       play("sound-powerup2");
+      spawnParticles(player);
 
+      
       if (obj.is("doublejump")) powerUp = "doublejump";
       else if (obj.is("grow")) powerUp = "grow";
       else if (obj.is("shrink")) powerUp = "shrink";

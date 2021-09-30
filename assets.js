@@ -22,6 +22,7 @@ loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("ice", "sprites/ice.png");
 loadSprite("slime", "sprites/slime.png");
+loadSprite("particle", "sprites/particle.png");
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
 loadSound("sound-jump", "sounds/sound-jump.wav");
@@ -250,7 +251,16 @@ export const levelConf =()=>{  return({    // define the size of each block
     solid(),
     opacity(0),
     "enemy",
-    ],
+  ],
+  ".": () => [
+    sprite("particle"),
+    area(),
+    opacity(1),
+    color(COL.MAGENTA),
+    "particle"
+    
+    
+  ],
     
     
   }
