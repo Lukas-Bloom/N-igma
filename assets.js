@@ -258,8 +258,13 @@ export const levelConf =()=>{  return({    // define the size of each block
     opacity(1),
     color(COL.MAGENTA),  
   ],
-    
-    
+    "B": () => [
+    sprite("shrink"),
+    color(COL.LIGHT_BLUE),
+    area(),
+    "barrier",
+    "powerUp"
+    ], 
   }
   )
 }
