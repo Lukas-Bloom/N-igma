@@ -1,8 +1,21 @@
-//all levels , we can put the size of levels here and mre info maybe(??)
+  //Map legend:
+  //
+  // =:Grass 1:Grass_l 2:Grass_r L:Grass_l_top R:Grass_r_top #:Box g:Ghostblock £:Halfblock
+  //
+  // @:Monster D:Door i:Ice s:Slime K:Key(green) E:Key(red) Y:Key(blue) ^:Spikes t:Trampoline
+
+  // J:doublejump U:teleswap 0:Ghost 8:Grow o:Shrink
+
+
 export const levels =()=>{
   return [
     //0 in progress
     [
+      "                                                       ",
+      "                                                       ",
+      "                                                       ",
+      "                                                       ",
+      "                                                       ",
       "                                             L=============            ",
       "                                t                       ",
       "                                =    ###     ",
@@ -11,7 +24,7 @@ export const levels =()=>{
       "##                          =                                     ",
       "##                                      J                  ",
       "##                      t             L===                    ",
-      "##          ^           L=R            1                    ",
+      "##      b          c      L=R            1                    ",
       "=======================   ============                     ",
       "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
     ],
@@ -80,14 +93,7 @@ export const levels =()=>{
     ],
     //4 camera and size tests
     [
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
-      "1                                                                 2",
+      
       "1                                                                 2",
       "1                                                                 2",
       "1                                                                 2",
@@ -100,7 +106,7 @@ export const levels =()=>{
       "1     P                                                           2",
       "1                                                       O         2",
       "1                                                                 2",
-      "1         J                                                        2",
+      "1         J                                                       2",
       "1                                                                 2",
       "1            B                                                    2",
       "1                    ^^                                           2",

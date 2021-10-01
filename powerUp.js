@@ -1,5 +1,5 @@
 import { PLAYER } from "./constants.js";
-export const powerUp = () => {
+export default function powerUp()  {
   return {
     update() {},
     changePowerUp(powerUp, obj) {

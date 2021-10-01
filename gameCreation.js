@@ -1,6 +1,6 @@
 import { game } from "./scenes.js";
 
-let levelIndex = 4;
+let levelIndex = 0;
 
 export const spawnPlayers = (p1, p2) => {
   let startPlayers = get("startPlayer")
