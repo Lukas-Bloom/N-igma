@@ -173,7 +173,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "s": () => [
       sprite("slime", {flipY: true}),
-      area({offset: 6}),
+      area({ offset: [0, 6] }),
       solid(),
       color(COL.LGREEN),
       "slime",
