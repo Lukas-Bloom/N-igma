@@ -31,31 +31,31 @@ function spawnParticles(player, clr, spr) {
   if (spr == null) { spr = "particle" }
   let particles = []
   let part;
-  for (let i = 0; i <= 25; i++) {
+  for (let i = 0; i <= 30; i++) {
     part =
       add([
       sprite(spr),
-      pos(player.pos.x, player.pos.y+8),
+      pos(player.pos.x-8, player.pos.y+8),
       origin("center"),
-      scale(rand(0.1, 1)),
+      scale(rand(0.1, 0.75)),
       opacity(1),
       color(clr),
       rotate(rand(360)),
       layer(10),
-      move(rand(360), rand(70, 150)),
+      move(rand(360), rand(90, 190)),
       ]);
       
     particles.push(part)
     // console.log("particles " +particles)
   }
-    for (let p = 0; p < 600; p++) {
+    for (let p = 0; p < 500; p++) {
 
       setTimeout(function () {
         for (let b = 0; b < particles.length; b++) {
-          particles[b].opacity = particles[b].opacity - 1.1/600
+          particles[b].opacity = particles[b].opacity - 1.7/400
           
-          // console.log(particles[b].opacity)
-          if (p === 599) {
+           console.log(particles[b].opacity)
+          if (p === 399) {
             destroy(particles[b])
           }
         }
@@ -128,7 +128,7 @@ export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
       if (!isCorrectCollision(player, obj)) return;
       let powerUp = "";
       play("sound-powerup2");
-      spawnParticles(player, COL.PURPLE);
+      spawnParticles(player, COL.BLUE);
 
       
       if (obj.is("doublejump")) powerUp = "doublejump";

@@ -54,12 +54,13 @@ export const levelConf = () => {
     "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(),], //sand top
     "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(),], //sand top left
     "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(),], //sand top right
+    "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(),], //sand, stone
     "L": () => [sprite("grass_l_top"), area(), solid(),],
     "R": () => [sprite("grass_r_top"), area(), solid(),],
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],
     "^": () => [sprite("spikes"), area({ offset: [0, 6] }), solid(), color(COL.BLUE), "spikes", "enemy"],
     "@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],
-    "J": () => [sprite("doublejump"), area(), color(COL.PURPLE), "doublejump", "powerUp"],
+    "J": () => [sprite("beachTiles", { frame: 48 }), area(), "doublejump", "powerUp"], //double jump color(COL.PURPLE)
     "i": () => [sprite("ice"), area(), solid(), color(COL.LIGHT_BLUE), "ice",],
     "K": () => [sprite("key"), area(), color(COL.GREEN), { name: 'key1' }, "key",],
     "E": () => [sprite("key"), area(), color(COL.RED), { name: 'key2' },"key",],
@@ -81,10 +82,11 @@ export const levelConf = () => {
     "£": () => [sprite("halfBlock"), area({ width: 12, height: 6 }), solid(),],
     "d": () => [sprite("shrink"), area(), color(COL.PURPLE), "dash", "powerUp"],
     "|": () => [sprite("halfBlock"), area(), solid(), opacity(0), "enemy",],
-    ".": () => [sprite("particle"), area(), opacity(1), color(COL.MAGENTA),],
+    ".": () => [sprite("particle"), area(), opacity(0.5),], //particle
     "B": () => [sprite("shrink"), color(COL.LIGHT_BLUE), area(), "barrier", "powerUp"],
-    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), "barrel",],
-    "c": () => [sprite("beachTiles", { frame: 59 }), area(), solid(), "chest",],
+    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),], //barrel
+    "c": () => [sprite("beachTiles", { frame: 59 }), area(), solid(),], //chest
+    "w": () => [sprite("beachTiles", { frame: 16 }), area(), z(5), opacity(0.5)], //water
     "z": () => [sprite("sky"), area(), layer(-10)],
     "x": () => [sprite("cloud1"), area(), layer(-9)],
     "<": () => [sprite("cloud2"), area(), layer(-9)],
