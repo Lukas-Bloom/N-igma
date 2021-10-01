@@ -26,6 +26,9 @@ loadSprite("ice", "sprites/ice.png");
 loadSprite("slime", "sprites/slime.png");
 loadSprite("particle", "sprites/particle.png");
 loadSprite("beanDash", "sprites/beanDash.png");
+loadSprite("sky", "sprites/sky.png");
+loadSprite("cloud1", "sprites/cloud1.png");
+loadSprite("cloud2", "sprites/cloud2.png");
 loadSprite('beachTiles', 'sprites/beachTiles.png', { sliceX: 8, sliceY: 8 });
 //sounds
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
@@ -47,9 +50,10 @@ export const levelConf = () => {
     height: 16,
     
     "P": () => ["startPlayer",],
-    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), opacity(1), scale(1), "sand"],
-    "1": () => [sprite("grass_l"), area(), solid(),],
-    "2": () => [sprite("grass_r"), area(), solid(),],
+    "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(),], //sand
+    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(),], //sand top
+    "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(),], //sand top left
+    "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(),], //sand top right
     "L": () => [sprite("grass_l_top"), area(), solid(),],
     "R": () => [sprite("grass_r_top"), area(), solid(),],
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],
@@ -81,6 +85,11 @@ export const levelConf = () => {
     "B": () => [sprite("shrink"), color(COL.LIGHT_BLUE), area(), "barrier", "powerUp"],
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), "barrel",],
     "c": () => [sprite("beachTiles", { frame: 59 }), area(), solid(), "chest",],
+    "z": () => [sprite("sky"), area(), layer(-10)],
+    "x": () => [sprite("cloud1"), area(), layer(-9)],
+    "<": () => [sprite("cloud2"), area(), layer(-9)],
+    ">": () => [sprite("cloud2", { flipX: true }) , area(), layer(-9)],
+
   }
   )
 }

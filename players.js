@@ -6,16 +6,16 @@ loadSprite('crab-green', 'sprites/beachTiles.png', {
   sliceX: 8,
   sliceY: 8,
   anims: {
-    idle: 0,
-    run: { from: 1, to: 2, loop: true }
+    idle: { from: 0, to: 1, loop: true, },
+    run: { from: 2, to: 3, loop: true },
   }
 })
 loadSprite('crab-red', 'sprites/beachTiles.png', {
   sliceX: 8,
   sliceY: 8,
   anims: {
-    idle: 8,
-    run: { from: 9, to: 10, loop: true }
+    idle: { from: 8, to: 9, loop: true },
+    run: { from: 10, to: 11, loop: true }
   }
 })
 
@@ -23,6 +23,7 @@ export const p1 = () => {
   return add([
     sprite("crab-green", {
       anim: "idle",
+      animSpeed: 0.25,
     }),
     pos(P1.POSX, P1.POSY),
     area({ width: PLAYER.WIDTH, height: PLAYER.HEIGHT }),
@@ -42,8 +43,8 @@ export const p1 = () => {
 export const p2 = () => {
   return add([
     sprite("crab-red", {
+      anim: "idle",
       animSpeed: 0.2,
-      frame: 9,
     }),
     pos(P2.POSX, P2.POSY),
     area({ width: PLAYER.WIDTH, height: PLAYER.HEIGHT }),
