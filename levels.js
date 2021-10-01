@@ -43,7 +43,13 @@ loadSprite("right-ground", "newSprites/right-ground.png");
 loadSprite("right", "newSprites/right.png");
 loadSprite("top-right", "newSprites/top-right.png");
 loadSprite("testChar", "newSprites/testChar.png");
-loadSprite("background", "newSprites/background.png");
+//loadSprite("background", "newSprites/water.png");
+
+loadSprite("beach", "newSprites/beach.png", {
+  sliceX: 3,
+  sliceY: 3,
+});
+
 
 
 
@@ -198,16 +204,18 @@ export const levels =()=>{
     "                                                                   D    ",
     "                                                                        ",
     "                                                                        ",
-    "                                                               L======= ",
+    "                                                               =========",
     "                                                               1''''''''",
     "                                                               1''''''''",
     "                                                               1''''''''",
     "                              J    U                           1''''''''",
-    "                             L=======R                         1''''''''",
-    "                             1'''''''2                         1''''''''",
-    "                             1'''''''2                         1''''''''",
-    "                             1'''''''2       K     E     Y     1''''''''",
-    "=================ssssssssssss.''''''',=========================.''''''''",
+    "                             =========                         1''''''''",
+    "                             1'''''''1                         1''''''''",
+    "                             1'''''''1                         1''''''''",
+    "          J                  1'''''''1       K     E     Y     1''''''''",
+    "============================='''''''''========================='''''''''",
+    "                                                                        ",
+    "                                                                        ",
   ],
   //9
   [
@@ -333,7 +341,9 @@ export const levelConf =()=>{  return({    // define the size of each block
   height: 16,
   // define what each symbol means
     "=": () => [
-      sprite("ground"),
+      sprite("beach", {
+        frame: 8
+      }),
       area(),
       solid(),
       opacity(1),
@@ -341,7 +351,9 @@ export const levelConf =()=>{  return({    // define the size of each block
       "grass"
     ],
     "1": () => [
-      sprite("left"),
+      sprite("beach", {
+        frame: 7
+      }),
       area(),
       solid(),
     ],
@@ -357,7 +369,9 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("top-right"),
     ],
     " ": () => [
-      sprite("background"),
+      sprite("beach", {
+        frame:6
+      }),
     ],
     "L": () => [
       sprite("left-ground"),
