@@ -62,7 +62,10 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
     collides("player", "openedDoor", (player, obj) => {
       if (!isCorrectCollision(player, obj)) return;
       play("sound-win");
-      nextLevel(p, otherPlayer, ++levelIndex, obj);
+      let lvlInd = getData("lvlInd")
+      lvlInd++
+      setData("lvlInd", lvlInd)
+      nextLevel(p, otherPlayer, ++levelIndex, obj, lvlInd);
     }),
     p.collides("slime", () => {
       p.isOnSlime = true;

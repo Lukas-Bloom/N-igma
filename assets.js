@@ -50,11 +50,13 @@ export const levelConf = () => {
     height: 16,
     
     "P": () => ["startPlayer",],
-    "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(),], //sand
-    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(),], //sand top
-    "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(),], //sand top left
-    "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(),], //sand top right
-    "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(),], //sand, stone
+    "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)], //sand
+    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1)], //sand top
+    "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)], //sand top left
+    "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)], //sand top right
+    "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(), layer(1), z(1)], //sand, stone
+    "4": () => [sprite("beachTiles", { frame: 26 }), area(), layer(-1), z(-1)], //dark sand
+    "5": () => [sprite("beachTiles", { frame: 27 }), area(), layer(-1), z(-1)], //dark sand, shadow
     "L": () => [sprite("grass_l_top"), area(), solid(),],
     "R": () => [sprite("grass_r_top"), area(), solid(),],
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],
@@ -69,7 +71,7 @@ export const levelConf = () => {
     "e": () => [sprite("key"), color(COL.RED), fixed(), z(1), "answerKey",],
     "y": () => [sprite("key"), color(COL.BLUE), fixed(), z(1),"answerKey",],
     "D": () => [sprite("closedDoor"), area(), scale(3), "closedDoor",],
-    "O": () => [sprite("openedDoor"), area(), scale(3), "openedDoor",],
+    "O": () => [sprite("openedDoor"), area(), scale(2), "openedDoor",],
     "s": () => [sprite("slime", { flipY: true }), area({ offset: 6 }),solid(), color(COL.LGREEN), "slime",],
     "0": () => [sprite("ghost"), area(), opacity(1), color(COL.PURPLE), "ghost", "powerUp"],
     "g": () => [sprite("ghostblock"), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",],
@@ -87,10 +89,10 @@ export const levelConf = () => {
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),], //barrel
     "c": () => [sprite("beachTiles", { frame: 59 }), area(), solid(),], //chest
     "w": () => [sprite("beachTiles", { frame: 16 }), area(), z(5), opacity(0.5)], //water
-    "z": () => [sprite("sky"), area(), layer(-10)],
-    "x": () => [sprite("cloud1"), area(), layer(-9)],
-    "<": () => [sprite("cloud2"), area(), layer(-9)],
-    ">": () => [sprite("cloud2", { flipX: true }) , area(), layer(-9)],
+    "z": () => [sprite("sky"), area(), layer(-100), z(-100)], //sky
+    "x": () => [sprite("cloud1"), area(), layer(-9)], //cloud1
+    "<": () => [sprite("cloud2"), area(), layer(-9)], //cloud2
+    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)], //cloud2 flipped
 
   }
   )
