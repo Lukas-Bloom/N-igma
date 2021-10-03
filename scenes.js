@@ -23,7 +23,7 @@ scene("game", (p, otherPlayer, levelIndex) => {
     otherPlayer = p1();
     spawnPlayers(otherPlayer, p);
   }
-  handleActionEvents(p, otherPlayer);
+  handleActionEvents(p, otherPlayer, levelIndex);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
 });

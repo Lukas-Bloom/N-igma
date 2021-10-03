@@ -28,6 +28,17 @@ function nextLevel(p, otherPlayer, nextLevel) {
 
 export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
   return (
+    p.collides("box", (box, side) => {
+    
+      if (p.curPlatform()?.is("player")) {
+        if(!side) p.moveTo(otherPlayer.pos.x, otherPlayer.pos.y - 12)
+      }
+    }),
+    otherPlayer.collides("box", (box, side) => {
+      if (otherPlayer.curPlatform()?.is("player")) {
+        if(!side) otherPlayer.moveTo(p.pos.x, p.pos.y - 12)
+      }
+    }),
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
       if (!isCorrectCollision(player, invisibleBlock)) return;
       if (player.currentPowerUp === "ghost") {

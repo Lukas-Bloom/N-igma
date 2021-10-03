@@ -13,9 +13,12 @@ io.on("connection", (client) => {
     console.log(key)
   })
 
-
   client.on("pos", (posX, posY) => {
     client.broadcast.emit("moveOtherPlayer", posX, posY)
+  })
+
+  client.on("gameOver", () => {
+    client.broadcast.emit("gameOver")
   })
 });
 

@@ -46,15 +46,12 @@ function spawnParticles(player, clr, spr) {
       ]);
       
     particles.push(part)
-    console.log("particles " +particles)
   }
     for (let p = 0; p < 600; p++) {
 
       setTimeout(function () {
         for (let b = 0; b < particles.length; b++) {
           particles[b].opacity = particles[b].opacity - 1.1/600
-          
-          console.log(particles[b].opacity)
           if (p === 599) {
             destroy(particles[b])
           }

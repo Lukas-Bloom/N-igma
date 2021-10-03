@@ -35,6 +35,11 @@ loadSound("sound-pickupKey", "sounds/sound-pickupKey.wav");
 loadSound("sound-error", "sounds/sound-error.wav");
 loadSound("sound-hit", "sounds/sound-hit.wav");
 loadSprite("beanDash", "sprites/beanDash.png");
+loadSprite("tileMap", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20
+});
+
 
 
   //Map legend:
@@ -86,6 +91,34 @@ export const levelConf =()=>{  return({    // define the size of each block
       sprite("box"),
       area(),
       solid(),
+      "box"
+    ],
+    "_": () => [
+      sprite("tileMap", {
+        frame: 63,
+        flipY: true
+      }),
+      area({ offset: [0, 8] }),
+      solid(),
+      "btn"
+    ],
+    "¤": () => [
+      sprite("box"),
+      area(),
+      solid(),
+      z(1),
+      "blockDown"
+    ],
+    "%": () => [
+      sprite("box"),
+      area(),
+      solid(),
+      z(1),
+      "blockUp"
+    ],
+    "$": () => [
+      sprite("box"),
+      color(COL.DGREY),
     ],
     "^": () => [
       sprite("spikes"),
@@ -235,7 +268,7 @@ export const levelConf =()=>{  return({    // define the size of each block
     ],
     "£": () => [
       sprite("halfBlock"),
-      area({width: 12, height: 6}),
+      area({width: 16, height: 6}),
       solid(),
     ],
     "d": () => [
