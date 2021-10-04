@@ -57,15 +57,14 @@ export const levelConf = () => {
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"], //box
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),], //barrel
     "c": () => [sprite("chest"), area(), solid(),], //chest
-    //"L": () => [sprite("grass_l_top"), area(), solid(),],
-    //"R": () => [sprite("grass_r_top"), area(), solid(),],
-    //"i": () => [sprite("ice"), area(), solid(), color(COL.LIGHT_BLUE), "ice",],
+
     "J": () => [sprite("beachTiles", { frame: 48 }), area(), "doublejump", "powerUp"], //doublejump 
     "d": () => [sprite("beachTiles", { frame: 49 }), area(), "dash", "powerUp"], //dash
     "o": () => [sprite("beachTiles", { frame: 50 }), area(), "shrink", "powerUp"], //shrink
     "B": () => [sprite("beachTiles", { frame: 51 }), area(), "barrier", "powerUp"], //barrier
     "8": () => [sprite("beachTiles", { frame: 52 }), area(), "grow", "powerUp"], //grow
-    "@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],
+    "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"], //ghost
+
     "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",], //key bronze
     "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",], //key silver
     "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'key3' }, "key",], //key gold
@@ -74,8 +73,8 @@ export const levelConf = () => {
     "y": () => [sprite("key"), color(COL.BLUE), fixed(), z(1), "answerKey",],
     "D": () => [sprite("closedDoor"), area(), scale(3), "closedDoor",],
     "O": () => [sprite("openedDoor"), area(), scale(2), "openedDoor",],
-    "s": () => [sprite("slime", { flipY: true }), area({ offset: 6 }), solid(), color(COL.LGREEN), "slime",],
-    "0": () => [sprite("ghost"), area(), opacity(1), color(COL.PURPLE), "ghost", "powerUp"],
+    "@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],
+    
     "g": () => [sprite("ghostblock"), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",],
     "G": () => [sprite("ghostblock"), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],
     "U": () => [sprite("teleSwap"), area(), color(COL.PURPLE), "teleSwap",],
