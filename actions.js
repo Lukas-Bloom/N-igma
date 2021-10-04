@@ -4,7 +4,7 @@ import { handleMovement, gameOver, pickUpKey, doTeleSwap } from "./collisionEven
 
 let isDead = 0
 
-export const handleActionEvents = (p, otherPlayer, levelIndex, allObjs) => {
+export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) => {
   //reset jumps when landing
   function checkIfGrounded() {
     if (p.grounded()) {

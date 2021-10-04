@@ -24,7 +24,7 @@ scene("game", (p, otherPlayer, levelIndex) => {
     spawnPlayers(otherPlayer, p);
   }
   const allObjs = get()
-  handleActionEvents(p, otherPlayer, levelIndex, allObjs);
+  handleActionEvents(p, otherPlayer, levelIndex, level, allObjs);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
 });
