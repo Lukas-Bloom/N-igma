@@ -22,6 +22,7 @@ loadSprite("sky", "sprites/sky.png");
 loadSprite("cloud1", "sprites/cloud1.png");
 loadSprite("cloud2", "sprites/cloud2.png");
 loadSprite('beachTiles', 'sprites/beachTiles.png', { sliceX: 8, sliceY: 8 });
+loadSprite('jellyfish', 'sprites/jellyfish.png', { sliceX: 3, sliceY: 0 });
 //sounds
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
@@ -42,52 +43,53 @@ export const levelConf = () => {
     height: 16,
 
     "P": () => ["startPlayer",],
-    "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)], //sand
-    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1)], //sand top
-    "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)], //sand top left
-    "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)], //sand top right
-    "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(), layer(1), z(1)], //sand, stone
-    "¤": () => [sprite("beachTiles", { frame: 25 }), area(), solid(), layer(1), z(1)], //sand, star
-    "4": () => [sprite("beachTiles", { frame: 26 }), area(), layer(-1), z(-1)], //dark sand
-    "5": () => [sprite("beachTiles", { frame: 27 }), area(), layer(-1), z(-1)], //dark sand, shadow
-    "6": () => [sprite("beachTiles", { frame: 32 }), area(), solid(), layer(1), z(1)], //oil left
-    "7": () => [sprite("beachTiles", { frame: 33 }), area(), solid(), layer(1), z(1)], //oil
-    "/": () => [sprite("beachTiles", { frame: 34 }), area(), solid(), layer(1), z(1)], //oil right
-    "^": () => [sprite("beachTiles", { frame: 35 }), area(), solid(), "spikes", "enemy"], //spikes
-    "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"], //box
-    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),], //barrel
-    "c": () => [sprite("chest"), area(), solid(),], //chest
+    "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)],                        //sand
+    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1)],                        //sand top
+    "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)],                        //sand top left
+    "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)],                        //sand top right
+    "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(), layer(1), z(1)],                        //sand, stone
+    ":": () => [sprite("beachTiles", { frame: 21 }), area(), solid(), layer(1), z(1)],                        //sand, stone2
+    "¤": () => [sprite("beachTiles", { frame: 25 }), area(), solid(), layer(1), z(1)],                        //sand, star
+    "4": () => [sprite("beachTiles", { frame: 26 }), area(), layer(-1), z(-1)],                               //dark sand
+    "5": () => [sprite("beachTiles", { frame: 27 }), area(), layer(-1), z(-1)],                               //dark sand, shadow
+    "6": () => [sprite("beachTiles", { frame: 32 }), area(), solid(), layer(1), z(1)],                        //oil left
+    "7": () => [sprite("beachTiles", { frame: 33 }), area(), solid(), layer(1), z(1)],                        //oil
+    "/": () => [sprite("beachTiles", { frame: 34 }), area(), solid(), layer(1), z(1)],                        //oil right
+    "£": () => [sprite("beachTiles", { frame: 22 }), area({ width: 12, height: 6 }), solid(),],               //halfblock sand top
+    "$": () => [sprite("beachTiles", { frame: 23 }), area({ width: 12, height: 6 }), solid(),],               //halfblock sand
+    "w": () => [sprite("beachTiles", { frame: 16 }), area(), z(5), opacity(0.5)],                             //water
+    "^": () => [sprite("beachTiles", { frame: 35 }), area(), solid(), "spikes", "enemy"],                     //spikes
+    "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                 //box
+    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                       //barrel
+    "c": () => [sprite("chest"), area(), solid(),],                                                           //chest
 
-    "J": () => [sprite("beachTiles", { frame: 48 }), area(), "doublejump", "powerUp"], //doublejump 
-    "d": () => [sprite("beachTiles", { frame: 49 }), area(), "dash", "powerUp"], //dash
-    "o": () => [sprite("beachTiles", { frame: 50 }), area(), "shrink", "powerUp"], //shrink
-    "B": () => [sprite("beachTiles", { frame: 51 }), area(), "barrier", "powerUp"], //barrier
-    "8": () => [sprite("beachTiles", { frame: 52 }), area(), "grow", "powerUp"], //grow
-    "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"], //ghost
+    "J": () => [sprite("beachTiles", { frame: 48 }), area(), "doublejump", "powerUp"],                        //doublejump 
+    "d": () => [sprite("beachTiles", { frame: 49 }), area(), "dash", "powerUp"],                              //dash
+    "o": () => [sprite("beachTiles", { frame: 50 }), area(), "shrink", "powerUp"],                            //shrink
+    "B": () => [sprite("beachTiles", { frame: 51 }), area(), "barrier", "powerUp"],                           //barrier
+    "8": () => [sprite("beachTiles", { frame: 52 }), area(), "grow", "powerUp"],                              //grow
+    "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"],                 //ghost
+    "U": () => [sprite("beachTiles", { frame: 54 }), area(), "teleSwap",],
 
-    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",], //key bronze
-    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",], //key silver
-    "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'key3' }, "key",], //key gold
-    "k": () => [sprite("key"), color(COL.GREEN), fixed(), z(1), "answerKey",],
-    "e": () => [sprite("key"), color(COL.RED), fixed(), z(1), "answerKey",],
-    "y": () => [sprite("key"), color(COL.BLUE), fixed(), z(1), "answerKey",],
-    "D": () => [sprite("closedDoor"), area(), scale(3), "closedDoor",],
-    "O": () => [sprite("openedDoor"), area(), scale(2), "openedDoor",],
-    "@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],
+    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",],    //key bronze
+    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",],    //key silver
+    "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'key3' }, "key",],      //key gold
+    "k": () => [sprite("key"), color(COL.BRONZE), fixed(), z(1), "answerKey",],                               //key bronze (answer)
+    "e": () => [sprite("key"), color(COL.SILVER), fixed(), z(1), "answerKey",],                               //key silver (answer)
+    "y": () => [sprite("key"), color(COL.GOLD), fixed(), z(1), "answerKey",],                                 //key gold (answer)
+    "@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],                  //monster
+    "t": () => [sprite("jellyfish", { frame: 0 }), area(), solid(), layer(2), opacity(0.7), z(3), "tramp1",], //trampoline1
+    "T": () => [sprite("jellyfish", { frame: 1 }), area(), solid(), layer(2), opacity(0.7), z(3), "tramp2",], //trampoline2
     
     "g": () => [sprite("ghostblock"), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",],
     "G": () => [sprite("ghostblock"), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],
-    "U": () => [sprite("teleSwap"), area(), color(COL.PURPLE), "teleSwap",],
-    "t": () => [sprite("tramp1"), area(), solid(), "tramp1",],
-    "T": () => [sprite("tramp2"), area(), solid(), "tramp2",],
-    "£": () => [sprite("halfBlock"), area({ width: 12, height: 6 }), solid(),],
-    "|": () => [sprite("halfBlock"), area(), solid(), opacity(0), "enemy",],
-    ".": () => [sprite("particle"), area(), opacity(0.5),], //particle
-    "w": () => [sprite("beachTiles", { frame: 16 }), area(), z(5), opacity(0.5)], //water
-    "z": () => [sprite("sky"), area(), layer(-100), z(-100)], //sky
-    "x": () => [sprite("cloud1"), area(), layer(-9)], //cloud1
-    "<": () => [sprite("cloud2"), area(), layer(-9)], //cloud2
-    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)], //cloud2 flipped
+    "|": () => [sprite("halfBlock"), area(), solid(), opacity(0), "enemy",],                                  //level bottom (death)
+
+    ".": () => [sprite("particle"), area(), opacity(0.5),],                                                   //particle
+    "z": () => [sprite("sky"), area(), layer(-100), z(-100)],                                                 //sky
+    "x": () => [sprite("cloud1"), area(), layer(-9)],                                                         //cloud1
+    "<": () => [sprite("cloud2"), area(), layer(-9)],                                                         //cloud2
+    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)],                                        //cloud2 flipped
 
   }
   )

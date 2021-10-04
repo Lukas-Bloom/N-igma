@@ -24,13 +24,13 @@ import { spawnPlayers } from "./gameCreation.js"
 //     "===============================================",
 //   ],
 // )
-//setData("lvlInd", 0);
+//setData("lvlInd", 2);
 
 
 scene("game", (p, otherPlayer, levelIndex) => {
   let lvlInd = getData("lvlInd");
   console.log("lvlInd1 " + lvlInd)
-  if (lvlInd === undefined) { lvlInd = 0; setData("lvlInd", lvlInd); console.log("lvlInd2 " +lvlInd)}
+  if (lvlInd === undefined || lvlInd === null ) { lvlInd = 0; setData("lvlInd", lvlInd); console.log("lvlInd2 " +lvlInd)}
   gravity(PHYS.GRAVITY);
   //const level = addLevel(levels()[levelIndex], levelConf());
   const level = addLevel(levels()[getData("lvlInd")], levelConf());
