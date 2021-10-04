@@ -23,7 +23,8 @@ scene("game", (p, otherPlayer, levelIndex) => {
     otherPlayer = p1();
     spawnPlayers(otherPlayer, p);
   }
-  handleActionEvents(p, otherPlayer, levelIndex);
+  const allObjs = get()
+  handleActionEvents(p, otherPlayer, levelIndex, allObjs);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
 });

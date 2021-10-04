@@ -1,5 +1,5 @@
 //all levels , we can put the size of levels here and mre info maybe(??)
-export const levels =()=>{
+export const levels = () => {
   return [
     //0 in progress
     [
@@ -120,11 +120,11 @@ export const levels =()=>{
       "2     ##                                             ",
       "2                                                    ",
       "2           J                                        ",
-      "2         ^^^      PP                                ",
+      "2         ^^^    U  P                                ",
       "2  ^iiiiii#############                              ",
       "2  #                  ##              D              ",
       "2  #Y      ¤          #$$                            ",
-      "2  #E      ¤    d   _  %%                            ",
+      "2  #E   P  ¤    dd  _  %%                            ",
       "2  ########$#########################################",
       "2                                                    ",
       "2||||||||||||||||||||||||||||||||||||||||||||||||||||",

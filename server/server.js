@@ -20,6 +20,18 @@ io.on("connection", (client) => {
   client.on("gameOver", () => {
     client.broadcast.emit("gameOver")
   })
+
+  client.on("powerUp", (powerUp, obj) => {
+    client.broadcast.emit("powerUp", powerUp, obj)
+  })
+
+  client.on("key", (obj) => {
+    client.broadcast.emit("key", obj)
+  })
+
+  client.on("teleSwap", (obj) => {
+    client.broadcast.emit("teleSwap", obj)
+  })
 });
 
 function mama(id) {

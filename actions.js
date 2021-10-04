@@ -1,10 +1,10 @@
 import { PHYS } from "./constants.js";
 import { socket } from "./socket.js";
-import { handleMovement, gameOver } from "./collisionEvents/collisionEvents.js";
+import { handleMovement, gameOver, pickUpKey, doTeleSwap } from "./collisionEvents/collisionEvents.js";
 
 let isDead = 0
 
-export const handleActionEvents = (p, otherPlayer, levelIndex) => {
+export const handleActionEvents = (p, otherPlayer, levelIndex, allObjs) => {
   //reset jumps when landing
   function checkIfGrounded() {
     if (p.grounded()) {
@@ -36,6 +36,26 @@ export const handleActionEvents = (p, otherPlayer, levelIndex) => {
         }
       })
       isDead = 0
+
+      socket.on("powerUp", (powerUp, obj) => {
+        allObjs.forEach(o => {
+          if(o._id === obj._id) otherPlayer.changePowerUp(powerUp, o)
+        })
+      }) 
+
+      socket.on("key", (obj) => {
+        allObjs.forEach(o => {
+          if (o._id === obj._id) pickUpKey(o, levelIndex, level)
+        })
+      })
+
+      socket.on("teleSwap", (obj) => {
+        allObjs.forEach(o => {
+          if (o._id === obj._id) doTeleSwap(o, p, otherPlayer)
+        })
+      })
+
+      
       
       camPos((p.pos.x > 320 ? p.pos.x : 320), 125);
       handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
