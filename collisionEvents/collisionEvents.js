@@ -65,7 +65,7 @@ function moveBlock(block, counter, dir, bool) {
 
 export const nextLevel = (p) => {
   if (getData("lvlIndex") > MAX_LEVEL) {
-    win(p);
+    win();
     setData("lvlIndex", 0)
     return
   }

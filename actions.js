@@ -6,7 +6,7 @@ let isDead = 0
 let isPowerUp = 0
 let nextL = 0;
 
-export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) => {
+export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   //reset jumps when landing
   function checkIfGrounded() {
     if (p.grounded()) {
@@ -67,7 +67,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) =
         if (nextL === 1) {
 
           setData("lvlIndex", nextLvl)
-          nextLevel(p);
+          nextLevel(p, otherPlayer);
         }
       })
       nextL = 0;

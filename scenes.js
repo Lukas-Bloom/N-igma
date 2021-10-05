@@ -10,10 +10,10 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js"
 
-setData("lvlIndex", 0);
+//setData("lvlIndex", 3);
 
 
-scene("game", (p, otherPlayer, ) => {
+scene("game", (p, otherPlayer) => {
   let levelIndex = getData("lvlIndex");
   gravity(PHYS.GRAVITY);
   const level = addLevel(levels()[getData("lvlIndex")], levelConf());
@@ -27,8 +27,8 @@ scene("game", (p, otherPlayer, ) => {
     otherPlayer = p1();
     spawnPlayers(otherPlayer, p);
   }
-  const allObjs = get()
-  handleActionEvents(p, otherPlayer, levelIndex, level, allObjs);
+  
+  handleActionEvents(p, otherPlayer, levelIndex, level);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
   keyDown("0", () => {
@@ -43,15 +43,15 @@ scene("game", (p, otherPlayer, ) => {
 
 
 
-scene("win", (p) => {
-  add([text("You completed the game!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
-  keyPress(() => go("game"));
+scene("win", () => {
+  add([text("You completed the game!"), pos(center()), scale(0.2)]);
+  //keyPress(() => go("game", p.playerNumber,otherPlayer.playerNumber));
 });
 
 export const game = (p, otherPlayer) => {
   go("game", p, otherPlayer);
 };
 
-export const win = (p) => {
-  go("win",p);
+export const win = () => {
+  go("win");
 };
