@@ -11,54 +11,38 @@ io.on("connection", (client) => {
   client.emit("ini", getClientId(client.id));
 
   client.on("startGame", () => {
-    client.broadcast.emit("joinCode", client.id);
-    client.join("testRoom");
+    codeToSend = client.id;
+    codeToSend = codeToSend.substring(0, 4);
+    client.emit("joinCode", codeToSend);
+    client.join(codeToSend);
     client.playerNumber = 1;
     client.emit("init", client.playerNumber);
   });
 
-  client.on("joinGame", (code) => {
-    console.log("the joing game client", client.id);
-    console.log("the code", code);
-    console.log("client rooms before", client.rooms);
-    if (code === "123" && io.sockets.adapter.rooms.get("testRoom").size < 2) {
-      client.join("testRoom");
-      console.log("TRUE");
-      client.playerNumber = 2;
-      client.emit("init2", client.playerNumber);
+  client.on("joinGame", (roomCode) => {
+    async function x() {
+      let checkRooms, arrayRooms;
+      if (roomCode.length !== 4) {
+        console.log("baaaaaaaaaaad");
+        return;
+      }
+      try {
+        checkRooms = await io.in(roomCode).fetchSockets();
+        arrayRooms = Array.from(checkRooms[0].rooms);
+      } catch {
+        console.log("baaad2");
+        return;
+      }
+
+      if (io.sockets.adapter.rooms.get(roomCode).size < 2) {
+        client.join(roomCode);
+        client.playerNumber = 2;
+        client.emit("init2", client.playerNumber);
+      } else console.log("too many playaer ");
     }
-    else console.log("wrong code or too many playaer ");
+    x();
 
-    console.log(
-      "how many now ?",
-      io.sockets.adapter.rooms.get("testRoom").size
-    );
-
-    //console.log("client rooms after", client.rooms);
-
-    //console.log(io.sockets.adapter.rooms.get("myRoom" ).size)
-    // const room=code
-    //console.log("30", room);
-
-    // let allUsers;
-    // if (room) {
-    //   allUsers = room;
-    //   console.log("28",allUsers)
-    // }
-
-    // let numClients = 0;
-    // if (allUsers) {
-    //   numClients = Object.keys(allUsers).length;
-    //   console.log("34",numClients)
-    // }
-
-    // if (numClients === 0 || numClients > 1) {
-    //   client.emit("nope");
-    //   console.log("nope")
-    //   return;
-    // }
-
-    // const foo = async () => {
+    // const mauro = async () => {
     //   const sockets = await io.fetchSockets();
     //   console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
@@ -70,7 +54,7 @@ io.on("connection", (client) => {
     //   }
     // };
 
-    // foo();
+    // mauro();
   });
 
   client.on("keyPressedNow", (key) => {

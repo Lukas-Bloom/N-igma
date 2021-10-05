@@ -1,4 +1,3 @@
-import k from "./initKaboom.js";
 import { p1, p2 } from "./players.js";
 import { PHYS } from "./constants.js";
 import { levels } from "./levels.js";
