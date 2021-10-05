@@ -1,7 +1,7 @@
 import { COL } from "./constants.js";
 
 //gfx
-// loadSprite("beanMonster", "sprites/bean.png");
+//loadSprite("beanMonster", "sprites/bean.png");
 // loadSprite("box", "sprites/box.png");
 // loadSprite("spikes", "sprites/spikes.png");
 // loadSprite("key", "sprites/key.png");
@@ -15,8 +15,8 @@ import { COL } from "./constants.js";
 // loadSprite("ghostblock", "sprites/ghostblock.png");
 // loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
-// loadSprite("particle", "sprites/particle.png");
-// loadSprite("beanDash", "sprites/beanDash.png");
+loadSprite("particle", "sprites/particle.png");
+loadSprite("beanDash", "sprites/beanDash.png");
 loadSprite("chest", "sprites/chest.png");
 loadSprite("sky", "sprites/sky.png");
 loadSprite("cloud1", "sprites/cloud1.png");
@@ -84,7 +84,7 @@ export const levelConf = () => {
     "y": () => [sprite("beachTiles", { frame: 40 }), color(COL.GOLD), fixed(), z(1), "answerKey",],                 //key gold (answer)
     "|": () => [sprite("beachTiles", { frame: 23 }), area(), solid(), opacity(0), "enemy",],                        //level bottom (death)
     
-    ".": () => [sprite("beachTiles", { frame: 38 }), area(), opacity(0.5),],                                        //particle
+    ".": () => [sprite("beachTiles", { frame: 38 }), area(), opacity(0.5), "particle",],                                        //particle
     "z": () => [sprite("sky"), area(), layer(-100), z(-100)],                                                       //sky
     "x": () => [sprite("cloud1"), area(), layer(-9)],                                                               //cloud1
     "<": () => [sprite("cloud2"), area(), layer(-9)],                                                               //cloud2

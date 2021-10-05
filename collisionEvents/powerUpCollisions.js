@@ -27,8 +27,8 @@ function spawnGhostblocks(level) {
 }
 
 function spawnParticles(player, clr, spr) {
-  if (clr == null) { clr = COL.WHITE }
-  if (spr == null) { spr = "particle" }
+  if (!clr) { clr = COL.WHITE }
+  if (!spr) { spr="particle"}
   let particles = []
   let part;
   for (let i = 0; i <= 30; i++) {

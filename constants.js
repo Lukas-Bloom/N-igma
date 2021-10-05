@@ -42,7 +42,7 @@ export const PHYS = {
   SLIME_JUMP: 200,
   SLIME_MOVE_SPEED: 70,
   TRAMP_JUMP_HEIGHT: 600,
-  SWAP: 5,
+  SWAP: 15,
 };
 
 export const ANSWERS = {
