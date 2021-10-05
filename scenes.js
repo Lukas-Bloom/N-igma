@@ -10,20 +10,6 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js"
 
-// setData("level0",
-//   [
-//     "                 key                           ",
-//     "                                  E            ",
-//     "        #####                   ggg            ",
-//     "            #                 ggg              ",
-//     "            #               ggg                ",
-//     "            #  t           ggg                 ",
-//     "            #######     ggg             D      ",
-//     "            g#U    #g                          ",
-//     "^   J   Y  g     0 gK t   J                    ",
-//     "===============================================",
-//   ],
-// )
 //setData("lvlInd", 2);
 
 
@@ -35,8 +21,6 @@ scene("game", (p, otherPlayer, levelIndex) => {
   gravity(PHYS.GRAVITY);
   //const level = addLevel(levels()[levelIndex], levelConf());
   const level = addLevel(levels()[getData("lvlInd")], levelConf());
-  
-  //const level = addLevel(getData("level0"), levelConf());
   if (p == 1) {
     p = p1();
     otherPlayer = p2();
