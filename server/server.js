@@ -60,6 +60,10 @@ io.on("connection", (client) => {
     xpectacularFunction();
   });
 
+  client.on("disconnect", () => {
+    client.to(currentRoom).emit("reLoad");
+  });
+
   client.on("pos", (posX, posY) => {
     client.to(currentRoom).emit("moveOtherPlayer", posX, posY);
   });
@@ -72,19 +76,19 @@ io.on("connection", (client) => {
   });
 
   client.on("powerUp", (powerUp, obj) => {
-   client.to(currentRoom).emit("powerUp", powerUp, obj);
+    client.to(currentRoom).emit("powerUp", powerUp, obj);
   });
 
   client.on("key", (obj) => {
-   client.to(currentRoom).emit("key", obj);
+    client.to(currentRoom).emit("key", obj);
   });
 
   client.on("teleSwap", (obj) => {
-   client.to(currentRoom).emit("teleSwap", obj);
+    client.to(currentRoom).emit("teleSwap", obj);
   });
 
   client.on("nextLevel", (nextLevel) => {
-  io.to(currentRoom).emit("nextLevel", nextLevel);
+    io.to(currentRoom).emit("nextLevel", nextLevel);
   });
 });
 

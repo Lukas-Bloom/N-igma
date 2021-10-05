@@ -1,6 +1,11 @@
 import { game } from "./scenes.js";
 import { socket } from "./socket.js";
 
+socket.on("reLoad", () => {
+  location.reload();
+  console.log("reloadinggg");
+});
+
 export const spawnPlayers = (p1, p2) => {
   let startPlayers = get("startPlayer");
   if (startPlayers.length === 2) {
