@@ -1,6 +1,7 @@
-import { isCorrectCollision,slideLeft,slideRight } from "./collisionEvents.js";
+import { isCorrectCollision,slideLeft,slideRight, nextLevel } from "./collisionEvents.js";
 import { PHYS } from "../constants.js";
 import { game } from "../scenes.js";
+import { socket } from "../socket.js";
 
 function swapGhostBlocks(level, block) {
   level.spawn("G", block.gridPos.sub(0, 0));
@@ -18,16 +19,19 @@ function trampHandler(level, obj, onPlayer) {
 }
 
 
-function nextLevel(p, otherPlayer, nextLevel) {
-  //play("sound-lose");
-  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
-  setTimeout(function () {
-    game(p.playerNumber, otherPlayer.playerNumber, nextLevel);
-  }, 2000);
-}
-
 export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
   return (
+    p.collides("box", (box, side) => {
+    
+      if (p.curPlatform()?.is("player")) {
+        if(!side) p.moveTo(otherPlayer.pos.x, otherPlayer.pos.y - 12)
+      }
+    }),
+    otherPlayer.collides("box", (box, side) => {
+      if (otherPlayer.curPlatform()?.is("player")) {
+        if(!side) otherPlayer.moveTo(p.pos.x, p.pos.y - 12)
+      }
+    }),
     collides("player", "invisibleBlock", (player, invisibleBlock) => {
       if (!isCorrectCollision(player, invisibleBlock)) return;
       if (player.currentPowerUp === "ghost") {
@@ -59,14 +63,22 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
       p.slideLeft = null;
       p.isOnSlime = null;
     }),
-    collides("player", "openedDoor", (player, obj) => {
-      if (!isCorrectCollision(player, obj)) return;
+    p.collides("openedDoor", (obj) => {
+
+      if (p.nextLevel) return;
+      p.nextLevel = true;
       play("sound-win");
-      nextLevel(p, otherPlayer, ++levelIndex, obj);
+      let lvlIndex = getData("lvlIndex")
+      lvlIndex++
+      setData("lvlIndex", lvlIndex)
+      socket.emit("nextLevel", lvlIndex)
+      nextLevel(p);
     }),
+
     p.collides("slime", () => {
       p.isOnSlime = true;
     }),
+    
     p.on("ground", (obj) => {
       if (obj.is("tramp1")) trampHandler(level, obj, p);
       if (!obj.is("ice")) {

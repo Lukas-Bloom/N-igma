@@ -2,19 +2,28 @@ import k from "./initKaboom.js";
 import { P1, P2, PLAYER, COL } from "./constants.js";
 import powerUp from "./powerUp.js";
 
-loadSprite("bean", "sprites/tileMap.png", {
-  sliceX: 20,
-  sliceY: 20,
+loadSprite('crab-green', 'sprites/beachTiles.png', {
+  sliceX: 8,
+  sliceY: 8,
   anims: {
-    idle: 300,
-    run: { from: 302, to: 303, loop: true },
-  },
-});
+    idle: { from: 0, to: 1, loop: true, },
+    run: { from: 2, to: 3, loop: true },
+  }
+})
+loadSprite('crab-red', 'sprites/beachTiles.png', {
+  sliceX: 8,
+  sliceY: 8,
+  anims: {
+    idle: { from: 8, to: 9, loop: true },
+    run: { from: 10, to: 11, loop: true }
+  }
+})
 
 export const p1 = () => {
   return add([
-    sprite("bean", {
+    sprite("crab-green", {
       anim: "idle",
+      animSpeed: 0.25,
     }),
     pos(P1.POSX, P1.POSY),
     area({ width: PLAYER.WIDTH, height: PLAYER.HEIGHT }),
@@ -33,13 +42,13 @@ export const p1 = () => {
 
 export const p2 = () => {
   return add([
-    sprite("bean", {
+    sprite("crab-red", {
+      anim: "idle",
       animSpeed: 0.2,
-      frame: 300,
     }),
     pos(P2.POSX, P2.POSY),
     area({ width: PLAYER.WIDTH, height: PLAYER.HEIGHT }),
-    color(COL.RED),
+    color(COL.WHITE),
     body(),
     origin("bot"),
     powerUp(),
