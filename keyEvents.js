@@ -91,7 +91,7 @@ export const handleKeyEvents = (p) => {
           ii++;
           add([
             pos(p.pos.x - 22 * ii * dir, p.pos.y - 17),
-            sprite("beanDash", { flipX: dir === -1 ? true : false }),
+            sprite("beachTiles", { flipX: dir === -1 ? true : false, frame: (getData("playerNumber") === 1 ? 0 : 8) }),
             color(p.color),
             opacity(0.5),
             lifespan(0.45 - 0.1 * ii),
