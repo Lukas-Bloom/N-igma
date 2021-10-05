@@ -17,7 +17,7 @@ import { COL } from "./constants.js";
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("particle", "sprites/particle.png");
 loadSprite("beanDash", "sprites/beanDash.png");
-loadSprite("chest", "sprites/chest.png");
+loadSprite("chest", "sprites/chest.png", { sliceX: 2, sliceY: 0 });
 loadSprite("sky", "sprites/sky.png");
 loadSprite("cloud1", "sprites/cloud1.png");
 loadSprite("cloud2", "sprites/cloud2.png");
@@ -82,7 +82,8 @@ export const levelConf = () => {
     "8": () => [sprite("beachTiles", { frame: 52 }), area(), "grow", "powerUp"],                                    //grow
     "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"],                       //ghost
     "U": () => [sprite("beachTiles", { frame: 54 }), area(), "teleSwap",],                                          //teleswap
-    "O": () => [sprite("chest"), body(), area(), "openedDoor",],                                                    //chest
+    "O": () => [sprite("chest", { frame: 1 }), body(), area(), "openedDoor",],                                      //chest open
+    "D": () => [sprite("chest", { frame: 0 }), body(), area(), "closedDoor",],                                      //chest open
 
     "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",],          //key bronze
     "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",],          //key silver

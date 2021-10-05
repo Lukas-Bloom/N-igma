@@ -4,7 +4,7 @@
 //
 // @:Monster D:Door i:Ice s:Slime K:Key(green) E:Key(red) Y:Key(blue) ^:Spikes t:Trampoline
 
-// J:doublejump U:teleswap 0:Ghost 8:Grow o:Shrink
+// J:doublejump U:teleswap 0:Ghost 8:Grow o:Shrink B:Barrier
 
 
 export const levels = () => {
@@ -18,7 +18,7 @@ export const levels = () => {
       "                                               ",
       "                                               ",
       "                                               ",
-      "^                      O                       ",
+      "^             B       8     o     d    D   O   ",
       "===============================================",
     ],
     [
