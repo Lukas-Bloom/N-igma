@@ -14,7 +14,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex) => {
   }
 
   function destroyAllGhostBlocks() {
-    if(p.currentPowerUp !== "ghost") return
+    if(p.currentPowerUp === "ghost") return
     const ghostblks = get("ghostblock");
     for (let i = 0; i < ghostblks.length; i++) {
       setTimeout(function () {
