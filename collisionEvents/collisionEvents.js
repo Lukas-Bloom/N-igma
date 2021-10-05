@@ -64,7 +64,12 @@ function moveBlock(block, counter, dir, bool) {
 }
 
 export const nextLevel = (p) => {
-  if (getData("lvlIndex") > MAX_LEVEL) { win(p); return}
+  if (getData("lvlIndex") > MAX_LEVEL) {
+    win(p);
+    setData("lvlIndex", 0)
+    return
+  }
+  console.log("win?")
   add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   setTimeout(function () {
     location.reload();

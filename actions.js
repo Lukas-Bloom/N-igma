@@ -1,6 +1,6 @@
 import { PHYS } from "./constants.js";
 import { socket } from "./socket.js";
-import { handleMovement, gameover, pickUpKey, doTeleSwap } from "./collisionEvents/collisionEvents.js";
+import { handleMovement, gameover, pickUpKey, doTeleSwap, nextLevel } from "./collisionEvents/collisionEvents.js";
 
 let isDead = 0
 let isPowerUp = 0
@@ -62,15 +62,12 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) =
         })
       })
 
-      socket.on("nextLevel", (nextLevel) => {
+      socket.on("nextLevel", (nextLvl) => {
         nextL++
         if (nextL === 1) {
 
-          setData("lvlIndex", nextLevel)
-          add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
-          setTimeout(function () {
-            location.reload();
-          }, 2000);
+          setData("lvlIndex", nextLvl)
+          nextLevel(p);
         }
       })
       nextL = 0;

@@ -72,7 +72,7 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
       lvlIndex++
       setData("lvlIndex", lvlIndex)
       socket.emit("nextLevel", lvlIndex)
-      nextLevel(p, otherPlayer);
+      nextLevel(p);
     }),
 
     p.collides("slime", () => {

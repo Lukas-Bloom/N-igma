@@ -10,7 +10,7 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js"
 
-//setData("lvlIndex", 0);
+setData("lvlIndex", 0);
 
 
 scene("game", (p, otherPlayer, ) => {
@@ -53,5 +53,5 @@ export const game = (p, otherPlayer) => {
 };
 
 export const win = (p) => {
-  go("win");
+  go("win",p);
 };
