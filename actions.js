@@ -4,6 +4,7 @@ import { handleMovement, gameOver, pickUpKey, doTeleSwap } from "./collisionEven
 
 let isDead = 0
 let isPowerUp = 0
+let nextL = 0;
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) => {
   //reset jumps when landing
@@ -61,8 +62,19 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) =
         })
       })
 
-      
-      
+      socket.on("nextLevel", (nextLevel) => {
+        nextL++
+        if (nextL === 1) {
+
+          setData("lvlIndex", nextLevel)
+          add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
+        }
+      })
+      nextL = 0;
+  
       camPos((p.pos.x > 320 ? p.pos.x : 320), 125);
       handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
       checkIfGrounded();

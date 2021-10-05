@@ -63,16 +63,13 @@ function moveBlock(block, counter, dir, bool) {
   }, 1000 / 30)
 }
 
-export function gameOver(p, otherPlayer, levelIndex) {
-  //play("sound-lose");
+export const gameover = (p) => {
+  play("sound-lose");
   p.isDead = true
   add([text("You lose!"), pos(0, 0), scale(1.5)]);
   setTimeout(function () {
-    p.isDead = false
-    get().forEach(obj => {
-      destroy(obj)
-    })
-    game(p.playerNumber, otherPlayer.playerNumber, levelIndex);
+    p.isDead = false;
+    location.reload();
   }, 2000);
 }
 

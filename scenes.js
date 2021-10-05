@@ -10,9 +10,13 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js"
 
-scene("game", (p, otherPlayer, levelIndex) => {
+//setData("lvlIndex", 0);
+
+
+scene("game", (p, otherPlayer, ) => {
+  let levelIndex = getData("lvlIndex");
   gravity(PHYS.GRAVITY);
-  const level = addLevel(levels()[levelIndex], levelConf());
+  const level = addLevel(levels()[getData("lvlIndex")], levelConf());
   if (p == 1) {
     p = p1();
     otherPlayer = p2();
@@ -27,6 +31,13 @@ scene("game", (p, otherPlayer, levelIndex) => {
   handleActionEvents(p, otherPlayer, levelIndex, level, allObjs);
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
+  keyDown("0", () => {
+    let lvlIndex = getData("lvlIndex")
+    setData("lvlIndex", 0)
+    setData("playerNumber", 0)
+    console.log("lvlIndex "+ lvlIndex)
+    
+  });
 });
 
 
@@ -37,13 +48,15 @@ scene("win", () => {
   keyPress(() => go("game"));
 });
 
-export const game = (p, otherPlayer, levelIndex) => {
-  go("game", p, otherPlayer, levelIndex);
+export const game = (p, otherPlayer) => {
+  go("game", p, otherPlayer);
 };
 
-export const nextLevel=()=>{
-  go("game",p,otherplayer,levelIndex++)
-}
+// export const nextLevel = () => {
+//   setData("lvlInd", lvlInd)
+//   //console.log("lvlInd3 " + lvlInd)
+//   go("game",p,otherplayer,lvlInd)
+// }
 
 export const win = () => {
   go("win");

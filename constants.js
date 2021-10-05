@@ -27,7 +27,9 @@ export const COL = {
   SKYBLUE: [0, 190, 255],
   LGREEN: [0 , 255, 128],
   LIGHT_BLUE: [0, 255, 255],
-  //ADD MORE COLORS AS WE NEED THEM
+  BRONZE: [205, 127, 50],
+  SILVER: [211, 211, 211],
+  GOLD: [255, 215, 0],
 };
 
 export const PHYS = {
@@ -40,7 +42,7 @@ export const PHYS = {
   SLIME_JUMP: 150,
   SLIME_MOVE_SPEED: 70,
   TRAMP_JUMP_HEIGHT: 600,
-  SWAP: 5,
+  SWAP: 15,
 };
 
 export const ANSWERS = {

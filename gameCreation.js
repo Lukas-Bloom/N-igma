@@ -1,6 +1,6 @@
 import { game } from "./scenes.js";
 
-let levelIndex = 5;
+let levelIndex = 0;
 
 export const spawnPlayers = (p1, p2) => {
   let startPlayers = get("startPlayer")
@@ -11,27 +11,41 @@ export const spawnPlayers = (p1, p2) => {
 }
 
 export const createGame = () => {
-  const newGameBtn = document.getElementById("newGameButton");
-  const joinGameBtn = document.getElementById("joinGameButton");
-  newGameBtn.addEventListener("click", newGame);
-  joinGameBtn.addEventListener("click", joinGame);
+  let playerNumber = getData("playerNumber");
+  if (!getData("lvlIndex")) { setData("lvlIndex", 0); }
+
+  if (!playerNumber) {
+    const newGameBtn = document.getElementById("newGameButton");
+    const joinGameBtn = document.getElementById("joinGameButton");
+    newGameBtn.addEventListener("click", newGame);
+    joinGameBtn.addEventListener("click", joinGame);
+    
+  }
+  
+  if (playerNumber === 1) { newGame(); console.log("player1") }
+  if (playerNumber === 2) { joinGame(); console.log("player2") }
 
   function newGame() {
     if (document.getElementById("newGameButton")) {
       document.getElementById("newGameButton").remove();
       document.getElementById("joinGameButton").remove();
     }
+    
     const p = 1;
     const otherPlayer = 2;
-    game(p, otherPlayer, levelIndex);
+    let playerNumber = 1; setData("playerNumber", playerNumber); 
+    game(p, otherPlayer);
   }
+  
   function joinGame() {
     if (document.getElementById("newGameButton")) {
       document.getElementById("newGameButton").remove();
       document.getElementById("joinGameButton").remove();
+
     }
     const p = 2;
     const otherPlayer = 1;
-    game(p, otherPlayer, levelIndex);
+    let playerNumber = 2; setData("playerNumber", playerNumber);
+    game(p, otherPlayer);
   }
 };

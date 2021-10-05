@@ -25,6 +25,7 @@ export const handleKeyEvents = (p) => {
     keyRelease("left", () => {
       if (p.isDead) return
       p.play("idle");
+      p.flipX(false);
       if (p.slideRight > PHYS.SLIDE) {
         return;
       }
@@ -54,6 +55,7 @@ export const handleKeyEvents = (p) => {
     keyRelease("right", () => {
       if (p.isDead) return
       p.play("idle");
+      p.flipX(false);
       if (p.slideLeft > PHYS.SLIDE) {
         return;
       }

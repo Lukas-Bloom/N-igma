@@ -32,6 +32,10 @@ io.on("connection", (client) => {
   client.on("teleSwap", (obj) => {
     client.broadcast.emit("teleSwap", obj)
   })
+
+  client.on("nextLevel", (nextLevel) => {
+    client.broadcast.emit("nextLevel", nextLevel)
+  })
 });
 
 function mama(id) {

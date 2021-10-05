@@ -1,6 +1,7 @@
 import { loseBarrier } from "../powerUp.js";
-import { gameOver } from "./collisionEvents.js";
 import { socket } from "../socket.js";
+import { gameover } from "./collisionEvents.js";
+
 
 export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
   return p.collides("enemy", () => {
@@ -10,7 +11,7 @@ export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
       loseBarrier(1, p)
     } else {
       socket.emit("gameOver")
-      gameOver(p, otherPlayer, levelIndex)
+      gameover(p)
     }
   });
 };
