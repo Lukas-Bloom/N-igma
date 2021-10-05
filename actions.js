@@ -3,6 +3,7 @@ import { socket } from "./socket.js";
 import { handleMovement, gameOver, pickUpKey, doTeleSwap } from "./collisionEvents/collisionEvents.js";
 
 let isDead = 0
+let isPowerUp = 0
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) => {
   //reset jumps when landing
@@ -38,19 +39,24 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) =
       isDead = 0
 
       socket.on("powerUp", (powerUp, obj) => {
-        allObjs.forEach(o => {
-          if(o._id === obj._id) otherPlayer.changePowerUp(powerUp, o)
-        })
+        isPowerUp++
+        if(isPowerUp === 1) {
+          console.log(get("powerUp"), obj._id)
+          get("powerUp").forEach(o => {
+            if (o._id === obj._id) otherPlayer.changePowerUp(powerUp, o)
+          })
+        }
       }) 
+      isPowerUp = 0
 
       socket.on("key", (obj) => {
-        allObjs.forEach(o => {
+        get("key").forEach(o => {
           if (o._id === obj._id) pickUpKey(o, levelIndex, level)
         })
       })
 
       socket.on("teleSwap", (obj) => {
-        allObjs.forEach(o => {
+        get("teleSwap").forEach(o => {
           if (o._id === obj._id) doTeleSwap(o, p, otherPlayer)
         })
       })

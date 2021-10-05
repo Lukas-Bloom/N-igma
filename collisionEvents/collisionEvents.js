@@ -64,14 +64,14 @@ function moveBlock(block, counter, dir, bool) {
 }
 
 export function gameOver(p, otherPlayer, levelIndex) {
-  socket.emit("gameOver")
   //play("sound-lose");
-  console.log(p.isDead)
   p.isDead = true
-  console.log(p.isDead)
   add([text("You lose!"), pos(0, 0), scale(1.5)]);
   setTimeout(function () {
     p.isDead = false
+    get().forEach(obj => {
+      destroy(obj)
+    })
     game(p.playerNumber, otherPlayer.playerNumber, levelIndex);
   }, 2000);
 }
@@ -150,5 +150,5 @@ export function doTeleSwap(obj, p, otherPlayer) {
 export const handleCollisionEvents = (p, otherPlayer, level, levelIndex) => {
   handlePowerUpCollisions(level, p, otherPlayer, levelIndex);
   handleEnvCollisions(level, levelIndex, p, otherPlayer);
-  handleEnemyCollisions(p, otherPlayer, levelIndex);
+  handleEnemyCollisions(p, otherPlayer, levelIndex, level);
 };

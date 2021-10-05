@@ -9,6 +9,7 @@ export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
       p.currentPowerUp === "loseBarrier"
       loseBarrier(1, p)
     } else {
+      socket.emit("gameOver")
       gameOver(p, otherPlayer, levelIndex)
     }
   });
