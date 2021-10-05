@@ -43,7 +43,7 @@ scene("game", (p, otherPlayer, ) => {
 
 
 
-scene("win", () => {
+scene("win", (p) => {
   add([text("You completed the game!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   keyPress(() => go("game"));
 });
@@ -52,6 +52,6 @@ export const game = (p, otherPlayer) => {
   go("game", p, otherPlayer);
 };
 
-export const win = () => {
+export const win = (p) => {
   go("win");
 };
