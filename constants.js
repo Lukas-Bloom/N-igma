@@ -45,6 +45,8 @@ export const PHYS = {
   SWAP: 15,
 };
 
+export const MAX_LEVEL = 3;
+
 export const ANSWERS = {
   1: "key1key2key3",
   2: "key1key2key3",

@@ -1,4 +1,4 @@
-import { isCorrectCollision,slideLeft,slideRight } from "./collisionEvents.js";
+import { isCorrectCollision,slideLeft,slideRight, nextLevel } from "./collisionEvents.js";
 import { PHYS } from "../constants.js";
 import { game } from "../scenes.js";
 import { socket } from "../socket.js";
@@ -18,15 +18,6 @@ function trampHandler(level, obj, onPlayer) {
   }, 250);
 }
 
-
-function nextLevel(p, otherPlayer) {
-  
-  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
-  setTimeout(function () {
-    location.reload();
-    // game(p.playerNumber, otherPlayer.playerNumber);
-  }, 2000);
-}
 
 export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
   return (

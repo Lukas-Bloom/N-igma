@@ -1,6 +1,6 @@
 import { PHYS } from "./constants.js";
 import { socket } from "./socket.js";
-import { handleMovement, gameOver, pickUpKey, doTeleSwap } from "./collisionEvents/collisionEvents.js";
+import { handleMovement, gameover, pickUpKey, doTeleSwap } from "./collisionEvents/collisionEvents.js";
 
 let isDead = 0
 let isPowerUp = 0
@@ -34,7 +34,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level, allObjs) =
       socket.on("gameOver", () => {
         isDead++
         if (isDead === 1) {
-          gameOver(p, otherPlayer, levelIndex)
+          gameover(p)
         }
       })
       isDead = 0

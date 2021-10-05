@@ -10,7 +10,7 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js"
 
-//setData("lvlIndex", 0);
+setData("lvlIndex", 0);
 
 
 scene("game", (p, otherPlayer, ) => {
@@ -44,19 +44,13 @@ scene("game", (p, otherPlayer, ) => {
 
 
 scene("win", () => {
-  add([text("You Win!")]);
+  add([text("You completed the game!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   keyPress(() => go("game"));
 });
 
 export const game = (p, otherPlayer) => {
   go("game", p, otherPlayer);
 };
-
-// export const nextLevel = () => {
-//   setData("lvlInd", lvlInd)
-//   //console.log("lvlInd3 " + lvlInd)
-//   go("game",p,otherplayer,lvlInd)
-// }
 
 export const win = () => {
   go("win");

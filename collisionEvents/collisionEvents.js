@@ -1,4 +1,4 @@
-import { PHYS, ANSWERS } from "../constants.js";
+import { PHYS, ANSWERS, MAX_LEVEL } from "../constants.js";
 import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";
@@ -63,10 +63,19 @@ function moveBlock(block, counter, dir, bool) {
   }, 1000 / 30)
 }
 
+export const nextLevel = (p) => {
+  if (getData("lvlIndex") > MAX_LEVEL) { win(); return}
+  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+  setTimeout(function () {
+    location.reload();
+
+  }, 2000);
+}
+
 export const gameover = (p) => {
   play("sound-lose");
   p.isDead = true
-  add([text("You lose!"), pos(0, 0), scale(1.5)]);
+  add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   setTimeout(function () {
     p.isDead = false;
     location.reload();
