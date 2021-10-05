@@ -34,9 +34,7 @@ scene("game", (p, otherPlayer) => {
   keyDown("0", () => {
     let lvlIndex = getData("lvlIndex")
     setData("lvlIndex", 0)
-    setData("playerNumber", 0)
-    console.log("lvlIndex "+ lvlIndex)
-    
+    setData("playerNumber", 0)   
   });
 });
 

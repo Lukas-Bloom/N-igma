@@ -10,7 +10,7 @@ function spawnGhostblocks(level) {
   }
 }
 
-function spawnParticles(player, clr, spr) {
+export function spawnParticles(player, clr, spr) {
   if (!clr) { clr = COL.WHITE }
   if (!spr) { spr="particle"}
   let particles = []
@@ -37,7 +37,6 @@ function spawnParticles(player, clr, spr) {
         for (let b = 0; b < particles.length; b++) {
           particles[b].opacity = particles[b].opacity - 1.7/400
           
-          //console.log(particles[b].opacity)
           if (p === 399) {
             destroy(particles[b])
           }
@@ -50,9 +49,6 @@ export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
   return (
     p.collides("powerUp", (obj) => {
       let powerUp = "";
-      play("sound-powerup2");
-      spawnParticles(p, COL.BLUE);
-
       
       if (obj.is("doublejump")) powerUp = "doublejump";
       else if (obj.is("grow")) powerUp = "grow";

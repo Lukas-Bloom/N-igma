@@ -22,8 +22,8 @@ export const createGame = () => {
     
   }
   
-  if (playerNumber === 1) { newGame(); console.log("player1") }
-  if (playerNumber === 2) { joinGame(); console.log("player2") }
+  if (playerNumber === 1) newGame()
+  if (playerNumber === 2) joinGame()
 
   function newGame() {
     if (document.getElementById("newGameButton")) {
