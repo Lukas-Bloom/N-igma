@@ -17,6 +17,9 @@ io.on("connection", (client) => {
   client.on("pos", (posX, posY) => {
     client.broadcast.emit("moveOtherPlayer", posX, posY)
   })
+  client.on("nextLevel", (nextLevel) => {
+    client.broadcast.emit("nextLevel", nextLevel)
+  })
 });
 
 function mama(id) {

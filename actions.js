@@ -1,6 +1,8 @@
 import { PHYS } from "./constants.js";
 import { socket } from "./socket.js";
 
+let nextL = 0;
+
 export const handleActionEvents = (p, otherPlayer) => {
   //reset jumps when landing
   function checkIfGrounded() {
@@ -35,6 +37,20 @@ export const handleActionEvents = (p, otherPlayer) => {
           onDeath();
         }
       });
+      socket.on("nextLevel", (nextLevel) => {
+        nextL++
+        if (nextL === 1) {
+
+          setData("lvlIndex", nextLevel)
+          add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+          setTimeout(function () {
+            location.reload();
+          }, 2000);
+        }
+      })
+      nextL = 0;
+
+
     }),
     p.action(() => {
       let campos = camPos(width() / 2, height() / 2);

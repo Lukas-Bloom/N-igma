@@ -1,6 +1,7 @@
 import { isCorrectCollision,slideLeft,slideRight } from "./collisionEvents.js";
 import { PHYS } from "../constants.js";
 import { game } from "../scenes.js";
+import { socket } from "../socket.js";
 
 function swapGhostBlocks(level, block) {
   level.spawn("G", block.gridPos.sub(0, 0));
@@ -18,11 +19,12 @@ function trampHandler(level, obj, onPlayer) {
 }
 
 
-function nextLevel(p, otherPlayer, nextLevel) {
-  //play("sound-lose");
+function nextLevel(p, otherPlayer) {
+  
   add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   setTimeout(function () {
-    game(p.playerNumber, otherPlayer.playerNumber, nextLevel);
+    location.reload();
+    // game(p.playerNumber, otherPlayer.playerNumber);
   }, 2000);
 }
 
@@ -59,17 +61,22 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
       p.slideLeft = null;
       p.isOnSlime = null;
     }),
-    collides("player", "openedDoor", (player, obj) => {
-      if (!isCorrectCollision(player, obj)) return;
+    p.collides("openedDoor", (obj) => {
+
+      if (p.nextLevel) return;
+      p.nextLevel = true;
       play("sound-win");
-      let lvlInd = getData("lvlInd")
-      lvlInd++
-      setData("lvlInd", lvlInd)
-      nextLevel(p, otherPlayer, ++levelIndex, obj, lvlInd);
+      let lvlIndex = getData("lvlIndex")
+      lvlIndex++
+      setData("lvlIndex", lvlIndex)
+      socket.emit("nextLevel", lvlIndex)
+      nextLevel(p, otherPlayer);
     }),
+
     p.collides("slime", () => {
       p.isOnSlime = true;
     }),
+    
     p.on("ground", (obj) => {
       if (obj.is("tramp1")) trampHandler(level, obj, p);
       if (!obj.is("ice")) {

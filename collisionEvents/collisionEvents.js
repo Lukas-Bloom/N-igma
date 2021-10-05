@@ -2,6 +2,7 @@ import { PHYS } from "../constants.js";
 import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";
+import { game } from "../scenes.js";
 
 export const isCorrectCollision = (player, obj) => {
   if (obj.is("player") || player.isTeleSwap) return false;
@@ -27,6 +28,16 @@ export const slideLeft = (p) => {
     }, 1000 / 60);
   }
 };
+
+export const gameover = (p) => {
+  play("sound-lose");
+  p.isDead = true
+  add([text("You lose!"), pos(0, 0), scale(1.5)]);
+  setTimeout(function () {
+    p.isDead = false;
+    location.reload();
+  }, 2000);
+}
 
 export const handleCollisionEvents = (p, otherPlayer, level, levelIndex) => {
   handlePowerUpCollisions(level, p, otherPlayer, levelIndex);

@@ -75,6 +75,7 @@ export const levelConf = () => {
     "8": () => [sprite("beachTiles", { frame: 52 }), area(), "grow", "powerUp"],                                    //grow
     "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"],                       //ghost
     "U": () => [sprite("beachTiles", { frame: 54 }), area(), "teleSwap",],                                          //teleswap
+    "O": () => [sprite("chest"), body(), area(), "openedDoor",],                                                    //chest
 
     "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",],          //key bronze
     "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",],          //key silver
