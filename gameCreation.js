@@ -13,33 +13,41 @@ export const createGame = () => {
 
   function newGame() {
     socket.emit("startGame");
-    if (document.getElementById("newGameButton")) {
-      document.getElementById("newGameButton").remove();
-      document.getElementById("joinGameButton").remove();
-    }
+    newGameBtn.remove();
+    joinGameBtn.remove();
+    codeInput.remove();
+
     socket.on("joinCode", (c) => {
       console.log(c);
-      joinCode.append(c);
+      joinCode.append("Share this code: ", c);
     });
-    socket.on("init", (pNumber) => {
-      console.log("pnumber", pNumber);
+    socket.on("init", () => {
       const otherPlayer = 2;
-      const p = pNumber;
+      const p = 1;
       game(p, otherPlayer, levelIndex);
+      setTimeout(()=>{joinCode.remove()},10000)
     });
   }
   function joinGame() {
     const code = codeInput.value;
     socket.emit("joinGame", code);
     if (document.getElementById("newGameButton")) {
-      document.getElementById("newGameButton").remove();
-      document.getElementById("joinGameButton").remove();
+      newGameButton.remove();
     }
+    socket.on("wrongCode", () => {
+      console.log("baaaaaaaaaaaaaadcodededede");
+    });
+    socket.on("tooManyP", () => {
+      console.log("Room already full");
+    });
 
-    socket.on("init2", (pNumber) => {
-      console.log("pnumber", pNumber);
+    socket.on("init2", () => {
+      if (document.getElementById("joinGameButton")) {
+        joinGameButton.remove();
+      }
+      codeInput.remove();
       const otherPlayer = 1;
-      const p = pNumber;
+      const p = 2;
       game(p, otherPlayer, levelIndex);
     });
   }
