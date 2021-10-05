@@ -2,7 +2,7 @@ import { PHYS, ANSWERS, MAX_LEVEL } from "../constants.js";
 import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";
-import { game } from "../scenes.js";
+import { win } from "../scenes.js";
 import { socket } from "../socket.js";
 
 let keys = "";
