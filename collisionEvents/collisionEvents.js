@@ -1,4 +1,4 @@
-import { PHYS, ANSWERS, MAX_LEVEL } from "../constants.js";
+import { PHYS, MAX_LEVEL } from "../constants.js";
 import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";

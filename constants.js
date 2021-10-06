@@ -61,13 +61,14 @@ export const OBJECT = {
 };
 export const MAX_LEVEL = 3;
 
-export const ANSWERS = {
-  1: "key1key2key3",
-  2: "key1key2key3",
-  3: "key1key2key3",
-  4: "key1key2key3",
-  5: "key1key2key3",
-  6: "key1key2key3",
-  7: "key1key2key3",
-  8: "key1key2key3",
+export const LEVEL_LENGTH = {
+  0: 58 * 16,
+  1: 0 * 16,
+  2: 0 * 16,
+  3: 0 * 16,
+  4: 0 * 16,
+  5: 0 * 16,
+  6: 0 * 16,
+  7: 0 * 16,
+  8: 0 * 16,
 };

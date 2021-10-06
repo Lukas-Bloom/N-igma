@@ -1,4 +1,4 @@
-import { ANSWERS, PHYS, COL } from "../constants.js";
+import { PHYS, COL } from "../constants.js";
 import { socket } from "../socket.js"
 import { isCorrectCollision, pickUpKey, doTeleSwap } from "./collisionEvents.js"
 
