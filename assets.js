@@ -90,12 +90,12 @@ export const levelConf = () => {
     "6": () => [sprite("beachTiles", { frame: 32 }), area(), solid(), layer(1), z(1), "ice"],                       //oil left
     "7": () => [sprite("beachTiles", { frame: 33 }), area(), solid(), layer(1), z(1), "ice"],                       //oil
     "/": () => [sprite("beachTiles", { frame: 34 }), area(), solid(), layer(1), z(1), "ice"],                       //oil right
-    "w": () => [sprite("beachTiles", { frame: 16 }), area(), z(5), opacity(0.5), "slime"],                          //water
-    "^": () => [sprite("beachTiles", { frame: 35 }), area(), solid(), "spikes", "enemy"],                           //spikes
+    "w": () => [sprite("beachTiles", { frame: 16 }), area({offset:[0,15]}), solid() ,z(5), opacity(0.5) ,"slime"],                          //water
+    "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],                           //spikes
     "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                             //barrel
-    "t": () => [sprite("jellyfish", { animSpeed: 1}), area(), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
+    "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
     "g": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",], //invisible block
     "G": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],//ghostblock
 
@@ -107,7 +107,7 @@ export const levelConf = () => {
     "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"],                       //ghost
     "U": () => [sprite("beachTiles", { frame: 54 }), area(), "teleSwap",],                                          //teleswap
     "O": () => [sprite("chest", { frame: 1 }), body(), area(), "openedDoor",],                                      //chest open
-    "D": () => [sprite("chest", { frame: 0 }), body(), area(), "closedDoor",],                                      //chest open
+    "D": () => [sprite("chest", { frame: 0 }), "closedDoor",],                                      //chest open
 
     "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'bronze' }, "key",],          //key bronze
     "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'silver' }, "key",],          //key silver
