@@ -72,7 +72,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       })
       nextL = 0;
   
-      camPos((p.pos.x > 320 ? p.pos.x : 320), 125);
+      camPos((p.pos.x > 320 ? p.pos.x : 320), 168);
       handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
       checkIfGrounded();
       destroyAllGhostBlocks();

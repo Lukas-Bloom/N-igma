@@ -18,6 +18,7 @@ loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("particle", "sprites/particle.png");
 loadSprite("beanDash", "sprites/beanDash.png");
 loadSprite("chest", "sprites/chest.png", { sliceX: 2, sliceY: 0 });
+loadSprite("sandInside", "sprites/sandInside.png");
 loadSprite("sky", "sprites/sky.png");
 loadSprite("cloud1", "sprites/cloud1.png");
 loadSprite("cloud2", "sprites/cloud2.png");
@@ -58,7 +59,7 @@ export const levelConf = () => {
     ":": () => [sprite("beachTiles", { frame: 21 }), area(), solid(), layer(1), z(1)],                              //sand, stone2
     "¤": () => [sprite("beachTiles", { frame: 25 }), area(), solid(), layer(1), z(1)],                              //sand, star
     "4": () => [sprite("beachTiles", { frame: 26 }), area(), layer(-1), z(-1)],                                     //dark sand
-    "5": () => [sprite("beachTiles", { frame: 27 }), area(), layer(-1), z(-1)],                                     //dark sand, shadow
+    "5": () => [sprite("sandInside"), area(), layer(-1), z(-1)],                                                    //dark sand, shadow
     "£": () => [sprite("beachTiles", { frame: 22 }), area({ width: 12, height: 6 }), solid(),],                     //halfblock sand top
     "$": () => [sprite("beachTiles", { frame: 23 }), area({ width: 12, height: 6 }), solid(),],                     //halfblock sand
 
