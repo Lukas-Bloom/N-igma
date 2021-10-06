@@ -46,24 +46,24 @@ loadSprite("tileMap", "sprites/tileMap.png", {
   sliceY: 20
 });
 
-loadSprite("monster", "sprites/tileMap.png", {
+loadSprite("monster", "sprites/beachTiles.png", {
   sliceX: 20,
   sliceY: 20,
   anims: {
-    walk: { from: 341, to: 342, loop: true },
+    walk: { from: 41, to: 42, loop: true },
   },
 });
-loadSprite("bat", "sprites/tileMap.png", {
+loadSprite("bat", "sprites/beachTiles.png", {
   sliceX: 20,
   sliceY: 20,
   anims: {
-    fly: { from: 383, to: 384, loop: true },
+    fly: { from: 43, to: 44, loop: true },
   },
 });
-loadSprite("platform", "sprites/tileMap.png", {
-  sliceX: 20,
-  sliceY: 20,
-});
+// loadSprite("platform", "sprites/tileMap.png", {
+//   sliceX: 20,
+//   sliceY: 20,
+// });
 
 
 
