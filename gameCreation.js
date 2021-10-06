@@ -1,4 +1,4 @@
-import { game } from "./scenes.js";
+import { game,  } from "./scenes.js";
 import { socket } from "./socket.js";
 
 socket.on("reLoad", () => {
@@ -98,4 +98,11 @@ export const createGame = () => {
       game(p, otherPlayer);
     });
   }
+
+  function toggleDisplay(obj) {
+    var x = obj
+    if (x.style.display === "none") x.style.display = "block"
+    else x.style.display = "none"
+  }
+
 };
