@@ -1,5 +1,6 @@
 import { PLAYER, COL } from "./constants.js";
 import { spawnParticles } from "./collisionEvents/powerUpCollisions.js";
+import { socket } from "./socket.js";
 
 export default function powerUp() {
   return {
@@ -60,6 +61,7 @@ export default function powerUp() {
 
 export const loseBarrier = (counter, player) => {
   if (counter === 7) {
+    socket.emit("powerUp")
     player.clearPowerUps()
     player.jump(1)
     return

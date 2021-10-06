@@ -42,7 +42,7 @@ scene("game", (p, otherPlayer) => {
 });
 
 scene("win", () => {
-  add([text("You completed the game!"), pos(center()), scale(0.2)]);
+  add([text("You completed the game!"), pos(center()), scale(0.2), z(100)]);
   //keyPress(() => go("game", p.playerNumber,otherPlayer.playerNumber));
 });
 

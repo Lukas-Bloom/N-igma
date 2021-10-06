@@ -61,7 +61,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     socket.on("powerUp", (powerUp, obj) => {
       isPowerUp++;
       if (isPowerUp === 1) {
-        console.log(get("powerUp"), obj._id);
+        if(!powerUp && !obj) return otherPlayer.clearPowerUps()
         get("powerUp").forEach((o) => {
           if (o._id === obj._id) otherPlayer.changePowerUp(powerUp, o);
         });
