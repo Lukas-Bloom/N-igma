@@ -63,7 +63,7 @@ export const MAX_LEVEL = 3;
 
 export const LEVEL_LENGTH = {
   0: 58 * 16,
-  1: 0 * 16,
+  1: 157 * 16,
   2: 0 * 16,
   3: 0 * 16,
   4: 0 * 16,
