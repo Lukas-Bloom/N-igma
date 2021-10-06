@@ -55,7 +55,7 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
         p.slideRight = PHYS.SLIDE;
       }
     }),
-    p.collides("grass", () => {
+    p.collides("anything", () => {
       p.isOnIce = null;
       p.slideRight = null;
       p.slideLeft = null;

@@ -55,7 +55,7 @@ export const levelConf = () => {
 
     "P": () => ["startPlayer",],
     "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)],                              //sand
-    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1)],                              //sand top
+    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1), "anything"],                              //sand top
     "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)],                              //sand top left
     "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)],                              //sand top right
     "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(), layer(1), z(1)],                              //sand, stone
