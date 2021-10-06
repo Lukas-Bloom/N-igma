@@ -69,7 +69,6 @@ export const nextLevel = (p) => {
     setData("lvlIndex", 0)
     return
   }
-  console.log("win?")
   add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
   setTimeout(function () {
     location.reload();
@@ -91,8 +90,8 @@ export function pickUpKey(obj, levelIndex, level) {
   keys += obj.name;
   destroy(obj);
   play("sound-pickupKey");
-  if (keys.length === 12 && keys !== ANSWERS[levelIndex]) play("sound-error");
-  if (keys === ANSWERS[levelIndex]) {
+  if (keys.length === 16 && keys !== "bronzesilvergold") play("sound-error");
+  if (keys === "bronzesilvergold") {
     const door = get("closedDoor")[0];
     destroy(door);
     level.spawn("O", door.gridPos.sub(0, 0));

@@ -29,10 +29,8 @@ scene("game", (p, otherPlayer) => {
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
   keyDown("0", () => {
-    let lvlIndex = getData("lvlIndex");
-    setData("lvlIndex", 0);
-    setData("playerNumber", 0);
-    console.log("lvlIndex " + lvlIndex);
+    setData("lvlIndex", 0)
+    setData("playerNumber", 0)   
   });
   canvas.addEventListener(
     "mouseover",

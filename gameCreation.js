@@ -34,9 +34,8 @@ export const createGame = () => {
     newGameBtn.addEventListener("click", newGame);
   }
 
-  if (playerNumber === 1) {
-    newGame();
-  }
+  if (playerNumber === 1) newGame();
+
   if (playerNumber === 2) {
     setTimeout(() => {
       joinGame();
