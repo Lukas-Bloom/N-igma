@@ -48,6 +48,7 @@ export function spawnParticles(player, clr, spr) {
 export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
   return (
     p.collides("powerUp", (obj) => {
+      if(p.isTeleSwap || otherPlayer.isTeleSwap) return
       let powerUp = "";
       
       if (obj.is("doublejump")) powerUp = "doublejump";
@@ -64,6 +65,7 @@ export const handlePowerUpCollisions = (level, p, otherPlayer,levelIndex) => {
       p.changePowerUp(powerUp, obj);
     }),
     p.collides("key", (obj) => {
+      if (p.isTeleSwap || otherPlayer.isTeleSwap) return
       socket.emit("key", obj)
       pickUpKey(obj,levelIndex,level);
     }),
