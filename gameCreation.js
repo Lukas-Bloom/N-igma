@@ -5,20 +5,22 @@ let levelIndex = 4;
 export const createGame = () => {
   const newGameBtn = document.getElementById("newGameButton");
   const joinGameBtn = document.getElementById("joinGameButton");
+  const joinGameBtn2 = document.getElementById("joinGameButton2");
   const codeInput = document.getElementById("codeInput");
   const joinCode = document.getElementById("joinCode");
 
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
+  joinGameBtn2.addEventListener("click", joinGame);
   
   
  
   
   function newGame() {
     socket.emit("startGame");
-    if (document.getElementById("newGameButton")) {
-      document.getElementById("newGameButton").remove();
-      document.getElementById("joinGameButton").remove();
+    if (document.getElementById("newGameButton") || document.getElementById("newGameButton")) {
+      /*document.getElementById("newGameButton").remove();
+      document.getElementById("joinGameButton").remove();*/
       toggleDisplay(document.getElementById("mainMenu"));
       toggleDisplay(document.getElementById("gamecodeDiv"));
   }
@@ -39,8 +41,8 @@ export const createGame = () => {
     const code = codeInput.value;
     socket.emit("joinGame", code);
     if (document.getElementById("newGameButton")) {
-      document.getElementById("newGameButton").remove();
-      document.getElementById("joinGameButton").remove();
+      /*document.getElementById("newGameButton").remove();
+      document.getElementById("joinGameButton").remove();*/
       toggleDisplay(document.getElementById("mainMenu"));
       toggleDisplay(document.getElementById("gamecodeDiv"));
     }
