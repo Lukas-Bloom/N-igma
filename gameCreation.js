@@ -1,4 +1,4 @@
-import { game,  } from "./scenes.js";
+import { game } from "./scenes.js";
 import { socket } from "./socket.js";
 
 socket.on("reLoad", () => {
@@ -24,33 +24,27 @@ export const createGame = () => {
   let joinCode;
   let newGameBtn;
   let joinGameBtn;
+  let joinGameBtn2
+  let mainMenuDiv;
+  let gamecodeDiv;
 
   if (!playerNumber) {
     codeInput = document.getElementById("codeInput");
     joinCode = document.getElementById("joinCode");
     newGameBtn = document.getElementById("newGameButton");
     joinGameBtn = document.getElementById("joinGameButton");
-    joinGameBtn.addEventListener("click", joinGame);
-    newGameBtn.addEventListener("click", newGame);
+    joinGameBtn2 = document.getElementById("joinGameButton2")
+    joinGameBtn.addEventListener("click", toggleDisplay(document.getElementById("mainMenuDiv")), toggleDisplay(document.getElementById("gamecodeDiv")));
+    joinGameBtn2.addEventListener("click", joinGame);
+    newGameBtn.addEventListener("click", newGame, toggleDisplay(document.getElementById("mainMenuDiv")), toggleDisplay(document.getElementById("gamecodeDiv")));
+    mainMenuDiv = document.getElementById("mainMenuDiv");
+    gamecodeDiv = document.getElementById("gamecodeDiv");
   }
 
   if (playerNumber === 1) newGame();
 
-  if (playerNumber === 2) {
-    setTimeout(() => {
-      joinGame();
-      }, 1000);
-  }
-
   function newGame() {
-    //console.log("42", getData("roooom"));
     socket.emit("startGame", getData("roooom"));
-    if (document.getElementById("newGameButton"))
-      document.getElementById("newGameButton").remove();
-    if (document.getElementById("joinGameButton"))
-      document.getElementById("joinGameButton").remove();
-    if (document.getElementById("codeInput"))
-      document.getElementById("codeInput").remove();
 
     socket.on("joinCode", (c) => {
       setData("roooom", c);
@@ -63,11 +57,6 @@ export const createGame = () => {
       setData("playerNumber", playerNumber);
 
       game(p, otherPlayer);
-      if (document.getElementById("joinCode")) {
-        setTimeout(() => {
-          document.getElementById("joinCode").remove();
-        }, 10000);
-      }
     });
   }
 
@@ -76,9 +65,7 @@ export const createGame = () => {
     code = document.getElementById("codeInput").value || getData("roooom");
     setData("roooom", code);
     socket.emit("joinGame", code);
-    if (document.getElementById("newGameButton")) {
-      newGameButton.remove();
-    }
+
     socket.on("wrongCode", (z) => {
       console.log("wrong code msg", z);
     });
