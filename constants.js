@@ -39,12 +39,26 @@ export const PHYS = {
   GRAVITY: 2000,
   SLIDE: 6,  // any factor of MOVE_SPEED. The smaller the more slippery
   JUMP_HEIGHT: 310,
-  SLIME_JUMP: 150,
+  SLIME_JUMP: 230,
   SLIME_MOVE_SPEED: 70,
   TRAMP_JUMP_HEIGHT: 600,
   SWAP: 15,
 };
 
+export const OBJECT = {
+  FAST: 120,
+  MEDIUM: 60,
+  SLOW: 30,
+  LEFT: -1,
+  RIGHT: 1,
+  UP: -1,
+  DOWN: 1,
+  LONG: 100,
+  SHORT: 25,
+  LAGOM: 50,
+
+  MOVE_SPEED: 140,
+};
 export const MAX_LEVEL = 3;
 
 export const ANSWERS = {
