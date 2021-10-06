@@ -10,6 +10,8 @@ export const createGame = () => {
 
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
+  
+  
  
   
   function newGame() {
@@ -17,6 +19,10 @@ export const createGame = () => {
     if (document.getElementById("newGameButton")) {
       document.getElementById("newGameButton").remove();
       document.getElementById("joinGameButton").remove();
+      toggleDisplay(document.getElementById("mainMenu"));
+      toggleDisplay(document.getElementById("gamecodeDiv"));
+  }
+
     }
     socket.on("joinCode", (c) => {
       console.log(c);
@@ -35,6 +41,8 @@ export const createGame = () => {
     if (document.getElementById("newGameButton")) {
       document.getElementById("newGameButton").remove();
       document.getElementById("joinGameButton").remove();
+      toggleDisplay(document.getElementById("mainMenu"));
+      toggleDisplay(document.getElementById("gamecodeDiv"));
     }
 
     socket.on("init2", (pNumber) => {
@@ -44,4 +52,11 @@ export const createGame = () => {
       game(p, otherPlayer, levelIndex);
     });
   }
+  function toggleDisplay(obj) {
+    var x = obj
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      } else {
+      x.style.display = "none";
+      }
 };
