@@ -10,7 +10,8 @@ export const createGame = () => {
 
   newGameBtn.addEventListener("click", newGame);
   joinGameBtn.addEventListener("click", joinGame);
-
+ 
+  
   function newGame() {
     socket.emit("startGame");
     if (document.getElementById("newGameButton")) {
