@@ -8,7 +8,7 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers } from "./gameCreation.js";
 
-setData("lvlIndex", 2);
+//setData("lvlIndex", 2);
 
 scene("game", (p, otherPlayer) => {
   let levelIndex = getData("lvlIndex");
