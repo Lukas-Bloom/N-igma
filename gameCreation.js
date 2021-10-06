@@ -39,7 +39,7 @@ export const createGame = () => {
   if (playerNumber === 2) {
     setTimeout(() => {
       joinGame();
-    }, 3000);
+      }, 1000);
   }
 
   function newGame() {

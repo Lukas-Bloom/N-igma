@@ -32,13 +32,13 @@ scene("game", (p, otherPlayer) => {
     setData("lvlIndex", 0)
     setData("playerNumber", 0)   
   });
-  canvas.addEventListener(
-    "mouseover",
+ /*  canvas.addEventListener(
+    "mouseover", 
     function () {
       console.log("hover");
     },
     false
-  );
+  ); */
 });
 
 scene("win", () => {
