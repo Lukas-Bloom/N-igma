@@ -20,6 +20,9 @@ export const createGame = () => {
     setData("lvlIndex", 0);
     setData("roooom", getData("roooom") || "changeMe");
   }
+  
+  showMenu();
+
   let codeInput;
   let joinCode;
   let newGameBtn;
@@ -34,12 +37,20 @@ export const createGame = () => {
     joinCode = document.getElementById("joinCode");
     newGameBtn = document.getElementById("newGameButton");
     joinGameBtn = document.getElementById("joinGameButton");
-    joinGameBtn.addEventListener("click", joinGame, toggleDisplay(document.getElementById("mainMenuDiv")),toggleDisplay(document.getElementById("gamecodeDiv")));
-    newGameBtn.addEventListener("click", newGame, toggleDisplay(document.getElementById("mainMenuDiv")),toggleDisplay(document.getElementById("gamecodeDiv")));
+    joinGameBtn.addEventListener("click", joinGame);
+    newGameBtn.addEventListener("click", newGame);
     
   }
 
   if (playerNumber === 1) newGame();
+  if (playerNumber === 2) {
+    hideMenu();
+    setTimeout(() => {
+      joinGame();
+    }, 2000);
+  }
+
+  
 
   function newGame() {
     socket.emit("startGame", getData("roooom"));
@@ -53,9 +64,9 @@ export const createGame = () => {
       const p = 1;
       let playerNumber = 1;
       setData("playerNumber", playerNumber);
-      toggleDisplay(document.getElementById("mainMenuDiv"));
-      toggleDisplay(document.getElementById("gamecodeDiv"));
       game(p, otherPlayer);
+      hideMenu();
+      showGamecode();
       
     });
   }
@@ -79,15 +90,23 @@ export const createGame = () => {
       let playerNumber = 2;
       setData("playerNumber", playerNumber);
       game(p, otherPlayer);
-      toggleDisplay(document.getElementById("mainMenuDiv"));
-      toggleDisplay(document.getElementById("gamecodeDiv"));
+      hideMenu();
+      hideGamecode();
     });
   }
 
-  function toggleDisplay(obj) {
-    var x = obj
-    if (x.style.display === "none") x.style.display = "block"
-    else x.style.display = "none"
+  function hideMenu() {
+    document.getElementById("mainMenuDiv").style.display = "none"
   }
+  function showMenu() {
+    document.getElementById("mainMenuDiv").style.display = "block"
+  }
+  function hideGamecode() {
+    document.getElementById("gamecodeDiv").style.display = "none"
+  }
+  function showGamecode() {
+    document.getElementById("gamecodeDiv").style.display = "block"
+  }
+
 
 };
