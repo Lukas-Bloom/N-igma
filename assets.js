@@ -95,6 +95,8 @@ export const levelConf = () => {
     "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                             //barrel
+    "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 7] }), solid(), "btnUp"],                   //button up
+    "_": () => [sprite("beachTiles", { frame: 61 }), area({ offset: [0, 10] }), solid(), "btnDown"],                //button down
     "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
     "g": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",], //invisible block
     "G": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],//ghostblock
