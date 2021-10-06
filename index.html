@@ -6,16 +6,22 @@
     <title>Document</title>
   </head>
   <body style="background-color: rgb(32, 32, 32); text-align: center">
-    <div style="text-align: center">
-      <button type="submit" class="btn btn-success" id="newGameButton">
+   <div id="mainMenu" class="container" style="text-align: center; max-height: 720px; height: 720px; width: 1100px; margin:auto; background-image: url(sprites/menu-background.png); display: none;" >
+      <button type="submit" class="btn btn-success" id="newGameButton" style="font-size: 20px; height: 50px; border-radius: 4px; margin-top: 458px; opacity: 0.0; ">
         Create New Game
       </button>
-      <button type="submit" class="btn btn-success" id="joinGameButton">
+      <button type="submit" class="btn btn-success" id="joinGameButton" style="font-size: 32px; border-radius: 4px; display: block;
+      margin-top: 26px; margin-left: 468px; opacity: 0.0;">
         Join Game
       </button>
-      <input placeholder="code" type="text" id="codeInput" />
-      <span id="joinCode" style="color: white;" />
     </div>
+    <div id="gamecodeDiv" style="display: none"> 
+      <input placeholder="Gamecode" type="text" id="codeInput" style= "text-align: center; font-size: 24px; border-radius: 4px;
+      margin-left: 150px; margin-top: 5px;"/>
+      <span id="joinCode" style="color: white;"/>
+      <button type="submit" class="btn btn-success" id="joinGameButton2" style="font-size: 24px; border-radius: 4px; opacity: 0.8;">
+        Join Game
+      </button>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"
       integrity="sha512-WL6WGKMPBiM9PnHRYIn5YEtq0Z8XP4fkVb4qy7PP4vhmYQErJ/dySyXuFIMDf1eEYCXCrQrMJfkNwKc9gsjTjA=="
