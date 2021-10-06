@@ -8,8 +8,8 @@ export const P2 = {
 };
 
 export const PLAYER = {
-  WIDTH: 12,
-  HEIGHT: 11.4,
+  WIDTH: 15,
+  HEIGHT: 13,
 }
 
 export const COL = {

@@ -33,6 +33,11 @@ export const slideLeft = (p) => {
 };
 
 export const handleMovement = (bool) => {
+  if(!bool) {
+    get("btnUp").forEach(btn => {
+      btn.frame = 60
+    })
+  }
   const blockDowns = get("blockDown")
   blockDowns.forEach(block => {
     if (!block.start && !block.end && !bool || block.start && !bool || block.end && bool || block.isMoving) return
@@ -60,7 +65,7 @@ function moveBlock(block, counter, dir, bool) {
       block.start = !bool
       block.isMoving = false
     }
-  }, 1000 / 30)
+  }, 1)
 }
 
 export const nextLevel = (p) => {
