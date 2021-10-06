@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body style="background-color:rgb(32, 32, 32); text-align: center;">
-    <div style= "text-align: center;">
-    <button  type="submit" class="btn btn-success" id="newGameButton">
-      Create New Game
-    </button>
-    <button type="submit" class="btn btn-success" id="joinGameButton">
-      Join Game
-    </button>
+  <body style="background-color: rgb(32, 32, 32); text-align: center">
+    <div style="text-align: center">
+      <button type="submit" class="btn btn-success" id="newGameButton">
+        Create New Game
+      </button>
+      <button type="submit" class="btn btn-success" id="joinGameButton">
+        Join Game
+      </button>
+      <input placeholder="code" type="text" id="codeInput" />
+      <span id="joinCode" style="color: white;" />
     </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"
@@ -20,6 +22,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-      <script type="module" src="main.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

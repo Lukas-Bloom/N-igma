@@ -7,15 +7,13 @@ function swapGhostBlocks(level, block) {
   level.spawn("G", block.gridPos.sub(0, 0));
 }
 
-function trampHandler(level, obj, onPlayer) {
-  onPlayer.jump(PHYS.TRAMP_JUMP_HEIGHT);
+function trampHandler(p, obj) {
+  p.jump(PHYS.TRAMP_JUMP_HEIGHT);
   play("sound-jump");
-  destroy(obj);
-  const tramp = level.spawn("T", obj.gridPos.sub(0, 0));
-  setTimeout(function () {
-    destroy(tramp);
-    level.spawn("t", tramp.gridPos.sub(0, 0));
-  }, 250);
+  obj.play("bounce")
+  setTimeout(function() {
+    obj.play("idle")
+  }, 500)
 }
 
 
@@ -80,7 +78,7 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
     }),
     
     p.on("ground", (obj) => {
-      if (obj.is("tramp1")) trampHandler(level, obj, p);
+      if (obj.is("tramp")) trampHandler(p, obj);
       if (!obj.is("ice")) {
         p.isOnIce = null;
         p.slideRight = null;
@@ -91,7 +89,7 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
       }
     }),
     otherPlayer.on("ground", (obj) => {
-      if (obj.is("tramp1")) trampHandler(level, obj, otherPlayer);
+      if (obj.is("tramp")) trampHandler(otherPlayer, obj);
     })
   );
 };

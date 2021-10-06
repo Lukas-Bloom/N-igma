@@ -23,7 +23,11 @@ loadSprite("sky", "sprites/sky.png");
 loadSprite("cloud1", "sprites/cloud1.png");
 loadSprite("cloud2", "sprites/cloud2.png");
 loadSprite('beachTiles', 'sprites/beachTiles.png', { sliceX: 8, sliceY: 8 });
-loadSprite('jellyfish', 'sprites/jellyfish.png', { sliceX: 3, sliceY: 0 });
+loadSprite('jellyfish', 'sprites/jellyfish.png', {
+  sliceX: 3, sliceY: 0, anims: {
+    idle: 0,
+    bounce: { from: 0, to: 2, loop: true }
+  }});
 //sounds
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");
@@ -41,6 +45,26 @@ loadSprite("tileMap", "sprites/tileMap.png", {
   sliceX: 20,
   sliceY: 20
 });
+
+loadSprite("monster", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+  anims: {
+    walk: { from: 341, to: 342, loop: true },
+  },
+});
+loadSprite("bat", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+  anims: {
+    fly: { from: 383, to: 384, loop: true },
+  },
+});
+loadSprite("platform", "sprites/tileMap.png", {
+  sliceX: 20,
+  sliceY: 20,
+});
+
 
 
 
@@ -71,8 +95,7 @@ export const levelConf = () => {
     "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                             //barrel
-    "t": () => [sprite("jellyfish", { frame: 0 }), area(), solid(), layer(2), opacity(0.7), z(3), "tramp1",],       //trampoline1
-    "T": () => [sprite("jellyfish", { frame: 1 }), area(), solid(), layer(2), opacity(0.7), z(3), "tramp2",],       //trampoline2
+    "t": () => [sprite("jellyfish", { animSpeed: 1}), area(), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
     "g": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",], //invisible block
     "G": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],//ghostblock
 
@@ -86,9 +109,9 @@ export const levelConf = () => {
     "O": () => [sprite("chest", { frame: 1 }), body(), area(), "openedDoor",],                                      //chest open
     "D": () => [sprite("chest", { frame: 0 }), body(), area(), "closedDoor",],                                      //chest open
 
-    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'key1' }, "key",],          //key bronze
-    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'key2' }, "key",],          //key silver
-    "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'key3' }, "key",],            //key gold
+    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'bronze' }, "key",],          //key bronze
+    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'silver' }, "key",],          //key silver
+    "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'gold' }, "key",],            //key gold
     "k": () => [sprite("beachTiles", { frame: 40 }), color(COL.BRONZE), fixed(), z(1), "answerKey",],               //key bronze (answer)
     "e": () => [sprite("beachTiles", { frame: 40 }), color(COL.SILVER), fixed(), z(1), "answerKey",],               //key silver (answer)
     "y": () => [sprite("beachTiles", { frame: 40 }), color(COL.GOLD), fixed(), z(1), "answerKey",],                 //key gold (answer)

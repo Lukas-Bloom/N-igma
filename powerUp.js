@@ -1,4 +1,6 @@
-import { PLAYER } from "./constants.js";
+import { PLAYER, COL } from "./constants.js";
+import { spawnParticles } from "./collisionEvents/powerUpCollisions.js";
+
 export default function powerUp() {
   return {
     update() {},
@@ -7,6 +9,8 @@ export default function powerUp() {
         return;
       }
 
+      play("sound-powerup2");
+      spawnParticles(this, COL.BLUE);
       destroy(obj);
       this.clearPowerUps();
       this.currentPowerUp = powerUp;
