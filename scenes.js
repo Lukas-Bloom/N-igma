@@ -29,20 +29,19 @@ scene("game", (p, otherPlayer) => {
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
   keyDown("0", () => {
-    setData("lvlIndex", 0)
-    setData("playerNumber", 0)   
+    setData("lvlIndex", 0);
+    setData("playerNumber", 0);
   });
-  canvas.addEventListener(
-    "mouseover",
-    function () {
-      console.log("hover");
-    },
-    false
-  );
+
+  // clicked on the screen and hide the mouse
+  if (!focused()) {
+    focus();
+    document.getElementsByTagName("canvas")[0].style.cursor = "none";
+  }
 });
 
 scene("win", () => {
-  add([text("You completed the game!"), pos(center()), scale(0.2)]);
+  add([text("You completed the game!"), pos(center()), scale(0.2), z(100)]);
   //keyPress(() => go("game", p.playerNumber,otherPlayer.playerNumber));
 });
 

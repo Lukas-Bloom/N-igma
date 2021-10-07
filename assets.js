@@ -76,8 +76,8 @@ export const levelConf = () => {
 
     "P": () => ["startPlayer",],
     "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)],                              //sand
-    "?": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1), "blockUp"],                   //sand move down
-    "!": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1), "blockDown"],                 //sand move up
+    "?": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(6), "blockUp"],                   //sand move down
+    "!": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(6), "blockDown"],                 //sand move up
     "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1), "anything"],                  //sand top
     "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)],                              //sand top left
     "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)],                              //sand top right
@@ -96,7 +96,7 @@ export const levelConf = () => {
     "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],                           //spikes
     "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
-    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                             //barrel
+    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), body()],                                             //barrel
     "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 11] }), solid(), "btnUp", "btn"],                   //button up
     //"_": () => [sprite("beachTiles", { frame: 61 }), area({ offset: [0, 11] }), solid(), "btnDown", "btn"],                //button down
     "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline

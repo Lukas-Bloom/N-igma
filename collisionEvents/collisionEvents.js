@@ -85,7 +85,7 @@ export const nextLevel = (p) => {
     setData("lvlIndex", 0);
     return;
   }
-  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2), z(100)]);
   setTimeout(function () {
     location.reload();
   }, 2000);
@@ -93,8 +93,8 @@ export const nextLevel = (p) => {
 
 export const gameover = (p) => {
   play("sound-lose");
-  p.isDead = true;
-  add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+  p.isDead = true
+  add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2), z(100)]);
   setTimeout(function () {
     p.isDead = false;
     location.reload();

@@ -62,9 +62,9 @@ export const OBJECT = {
 export const MAX_LEVEL = 3;
 
 export const LEVEL_LENGTH = {
-  0: 58 * 16,
-  1: 0 * 16,
-  2: 0 * 16,
+  0: 156.5 * 16,
+  1: 58 * 16,
+  2: 56.5 * 16,
   3: 0 * 16,
   4: 0 * 16,
   5: 0 * 16,

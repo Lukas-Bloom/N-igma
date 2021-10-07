@@ -5,6 +5,7 @@ import { gameover } from "./collisionEvents.js";
 
 export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
   return p.collides("enemy", () => {
+    if(p.isTeleSwap) return
     if (p.currentPowerUp === "loseBarrier") return;
     if(p.currentPowerUp === "barrier") {
       p.currentPowerUp === "loseBarrier"
