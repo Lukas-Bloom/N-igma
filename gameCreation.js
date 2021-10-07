@@ -49,13 +49,26 @@ export const createGame = () => {
       joinGame();
     }, 1000);
   }
+  const rlBtn = document.getElementById("rlBtn");
+  const rgBtn = document.getElementById("rgBtn");
+
+  rlBtn.addEventListener("click", rLvl);
+  rgBtn.addEventListener("click", rGame);
+
+  function rLvl() {
+    location.reload();
+  }
+  function rGame() {
+    localStorage.clear();
+    location.reload();
+  }
 
   function newGame() {
     socket.emit("startGame", getData("roooom"));
 
     socket.on("joinCode", (c) => {
       setData("roooom", c);
-      if (joinCode) joinCode.append("Gamecode: ", c);
+      if (joinCode) joinCode.append("Give this code to your friend:      ", c);
     });
     socket.on("init", () => {
       const otherPlayer = 2;
@@ -97,7 +110,6 @@ export const createGame = () => {
   function showCanvas() {
     document.getElementsByTagName("canvas")[0].style.display = "block";
     document.getElementsByTagName("canvas")[0].style.margin = "0 auto";
-
   }
 
   function hideCanvas() {
