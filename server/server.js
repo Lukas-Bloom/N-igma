@@ -7,13 +7,24 @@ const io = require("socket.io")(gameServer, {
   },
 });
 
+const test = require("os");
+const myCurrentIp = test.networkInterfaces()["Wi-Fi"][1].address;
+exports.myCurrentIp = `${myCurrentIp}`;
+
+
 io.on("connection", (client) => {
+  console.log(
+    "\x1b[35m%s%s\x1b[0m",
+    "Local IP address to use as a SERVER in local network: ",
+    myCurrentIp + ":8080"
+  );
+
   let currentRoom;
 
   client.emit("ini", getClientId(client.id));
 
   client.on("startGame", (z) => {
-    if (z) console.log("One of the rooms is: ", z);
+    if (z) console.log("One of the rooms is: ", "\x1b[36m", z);
 
     if (z.length !== 4) {
       codeToSend = client.id;

@@ -99,8 +99,8 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     );
     checkIfGrounded();
     destroyAllGhostBlocks();
-    handleAllMovingObjects(
+   /*  handleAllMovingObjects(
       otherPlayer.curPlatform()?.is("player") || p.curPlatform()?.is("player")
-    );
+    ); */
   });
 };
