@@ -47,23 +47,23 @@ loadSprite("tileMap", "sprites/tileMap.png", {
 });
 
 loadSprite("monster", "sprites/beachTiles.png", {
-  sliceX: 20,
-  sliceY: 20,
+  sliceX: 8,
+  sliceY: 8,
   anims: {
     walk: { from: 41, to: 42, loop: true },
   },
 });
 loadSprite("bat", "sprites/beachTiles.png", {
-  sliceX: 20,
-  sliceY: 20,
+  sliceX: 8,
+  sliceY: 8,
   anims: {
     fly: { from: 43, to: 44, loop: true },
   },
 });
-// loadSprite("platform", "sprites/tileMap.png", {
-//   sliceX: 20,
-//   sliceY: 20,
-// });
+loadSprite("platform", "sprites/beachTiles.png", {
+  sliceX: 8,
+  sliceY: 8,
+});
 
 
 
@@ -125,9 +125,12 @@ export const levelConf = () => {
     "z": () => [sprite("sky"), area(), layer(-100), z(-100)],                                                       //sky
     "x": () => [sprite("cloud1"), area(), layer(-9)],                                                               //cloud1
     "<": () => [sprite("cloud2"), area(), layer(-9)],                                                               //cloud2
-    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)],                                              //cloud2 flipped
+    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)], //cloud2 flipped
+    "M": () => [sprite("bat",{ frame:43 ,animSpeed:0.3 }),color(COL.RED),area(),"enemy","bat"],
+    "@": () => [sprite("monster",{animSpeed:0.3,frame:41}),area(),body(),color(COL.GREEN),"enemy","monster"],
+    "X": () => [sprite("platform",{frame:36}),area(),solid(),color(COL.ORANGE),"platform"],                                   
+
     
-    //"@": () => [sprite("beanMonster"), area(), body(), color(COL.GREEN), scale(), patrol()],                      //monster
   }
   )
 }

@@ -39,7 +39,7 @@ export const createGame = () => {
   if (playerNumber === 2) {
     setTimeout(() => {
       joinGame();
-    }, 3000);
+    }, 1000);
   }
 
   function newGame() {
@@ -61,7 +61,6 @@ export const createGame = () => {
       const p = 1;
       let playerNumber = 1;
       setData("playerNumber", playerNumber);
-
       game(p, otherPlayer);
       if (document.getElementById("joinCode")) {
         setTimeout(() => {
