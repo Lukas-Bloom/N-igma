@@ -102,7 +102,7 @@ export const createGame = () => {
       setData("playerNumber", playerNumber);
       game(p, otherPlayer);
       hideMenu();
-      hideGamecode();
+      showGamecode();
       showCanvas();
     });
   }
