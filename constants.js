@@ -62,11 +62,11 @@ export const OBJECT = {
 export const MAX_LEVEL = 3;
 
 export const LEVEL_LENGTH = {
-  0: 167 * 16,
+  0: 99 * 16,
   1: 47 * 16,
   2: 58 * 16,
-  3: 59 * 16,
-  4: 100 * 16, // don't exist
+  3: 120 * 16,
+  4: 59 * 16, 
   5: 100 * 16, // don't exist
   6: 100 * 16, // don't exist
   7: 100 * 16, // don't exist
