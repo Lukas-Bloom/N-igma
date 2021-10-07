@@ -90,8 +90,8 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     nextL = 0;
 
     camPos(
-      p.pos.x > levelLength ? levelLength : p.pos.x > 292 ? p.pos.x : 292,
-      168
+      p.pos.x > levelLength ? levelLength : p.pos.x > (width() / 2 + 16) ? p.pos.x : (width() / 2 + 16),
+      height()/2
     );
     handleMovement(
       otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")
