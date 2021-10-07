@@ -128,7 +128,6 @@ export const createGame = () => {
     document.getElementById("gamecodeDiv").style.display = "block";
   }
 };
- 
 
 export const addTutorialText = ()=> {
   if (getData("lvlIndex") === 0) {

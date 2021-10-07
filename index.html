@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body
-    style="background-color: rgb(32, 32, 32); text-align: center; margin: auto"
-  >
+  <body style="background-color: rgb(32, 32, 32); text-align: center; margin: auto">
+    <script src="menu.js"></script>
     <div
       id="mainMenuDiv"
       class="container"
@@ -35,7 +34,8 @@
           border: none;
           outline: none;
         "
-      ><img src="/sprites/newGameBtn.png" alt="">
+      >
+      <img src="/sprites/newGameBtn.png" onmouseover="this.src='/sprites/newGameBtnHov.png'" onmouseout="this.src='/sprites/newGameBtn.png'" alt="" />
       </button>
 
       <button
@@ -55,7 +55,7 @@
           display: block;
         "
       >
-        <img src="/sprites/joinGameBtn.png" alt="">
+      <img src="/sprites/joinGameBtn.png" onmouseover="this.src='/sprites/joinGameBtnHov.png'" onmouseout="this.src='/sprites/joinGameBtn.png'" alt="" />
       </button>
 
       <input
@@ -66,8 +66,10 @@
         style="
           text-align: center;
           color: white;
-          font-size: 24px;
+          font-weight: bold;
+          font-size: 20px;
           width: 120px;
+          height: 30px;
           border-radius: 4px;
           margin-left: 20px;
           margin-top: 20px;
