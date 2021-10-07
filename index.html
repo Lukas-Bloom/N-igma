@@ -100,7 +100,7 @@
       />
     </div>
 
-    <div id="gamecodeDiv" style="display: none">
+    <div id="gamecodeDiv" style="display: none;">
       <div
         id="topBanner"
         style="
@@ -109,9 +109,13 @@
           align-items: center;
         "
       >
-        <button id="rgBtn">Go to Start</button>
+        <button id="rgBtn" style="background-color: transparent; border-style:none;">
+          <img src="/sprites/exitBtn.png" onmouseover="this.src='/sprites/exitBtnHov.png'" onmouseout="this.src='/sprites/exitBtn.png'" alt="" />
+        </button>
         <div id="joinCode" style="color: white"></div>
-        <button id="rlBtn">Restart Level</button>
+        <button id="rlBtn" style="background-color: transparent; border-style:none;">
+          <img src="/sprites/restartBtn.png" onmouseover="this.src='/sprites/restartBtnHov.png'" onmouseout="this.src='/sprites/restartBtn.png'" alt="" />
+        </button>
       </div>
     </div>
     <script
