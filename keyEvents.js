@@ -66,7 +66,7 @@ export const handleKeyEvents = (p) => {
     keyPress("space", () => {
       if (p.isDead) return
       if (p.jumps > 0 && !p.isJumping && !p.isTeleSwap) {
-        p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : PHYS.JUMP_HEIGHT);
+        p.jump(p.isOnSlime ? PHYS.SLIME_JUMP : p.curPlatform()?.is("btn") ? PHYS.JUMP_HEIGHT * 0.9 : PHYS.JUMP_HEIGHT);
         play("sound-jump");
       }
     }),
