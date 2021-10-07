@@ -20,41 +20,44 @@ export const createGame = () => {
     setData("lvlIndex", 0);
     setData("roooom", getData("roooom") || "changeMe");
   }
+  
+  showMenu();
+
   let codeInput;
   let joinCode;
   let newGameBtn;
   let joinGameBtn;
+  let mainMenuDiv;
+  let gamecodeDiv;
 
   if (!playerNumber) {
+    mainMenuDiv = document.getElementById("mainMenuDiv");
+    gamecodeDiv = document.getElementById("gamecodeDiv");
     codeInput = document.getElementById("codeInput");
     joinCode = document.getElementById("joinCode");
     newGameBtn = document.getElementById("newGameButton");
     joinGameBtn = document.getElementById("joinGameButton");
     joinGameBtn.addEventListener("click", joinGame);
     newGameBtn.addEventListener("click", newGame);
+    
   }
 
   if (playerNumber === 1) newGame();
-
   if (playerNumber === 2) {
+    hideMenu();
     setTimeout(() => {
       joinGame();
     }, 1000);
   }
 
-  function newGame() {
-    //console.log("42", getData("roooom"));
-    socket.emit("startGame", getData("roooom"));
-    if (document.getElementById("newGameButton"))
-      document.getElementById("newGameButton").remove();
-    if (document.getElementById("joinGameButton"))
-      document.getElementById("joinGameButton").remove();
-    if (document.getElementById("codeInput"))
-      document.getElementById("codeInput").remove();
+  
 
+  function newGame() {
+    socket.emit("startGame", getData("roooom"));
+ 
     socket.on("joinCode", (c) => {
       setData("roooom", c);
-      if (joinCode) joinCode.append("Share this code: ", c);
+      if (joinCode) joinCode.append("Gamecode: ", c);
     });
     socket.on("init", () => {
       const otherPlayer = 2;
@@ -62,11 +65,9 @@ export const createGame = () => {
       let playerNumber = 1;
       setData("playerNumber", playerNumber);
       game(p, otherPlayer);
-      if (document.getElementById("joinCode")) {
-        setTimeout(() => {
-          document.getElementById("joinCode").remove();
-        }, 10000);
-      }
+      hideMenu();
+      showGamecode();
+      
     });
   }
 
@@ -75,9 +76,7 @@ export const createGame = () => {
     code = document.getElementById("codeInput").value || getData("roooom");
     setData("roooom", code);
     socket.emit("joinGame", code);
-    if (document.getElementById("newGameButton")) {
-      newGameButton.remove();
-    }
+
     socket.on("wrongCode", (z) => {
       console.log("wrong code msg", z);
     });
@@ -86,15 +85,28 @@ export const createGame = () => {
     });
 
     socket.on("init2", () => {
-      if (document.getElementById("joinGameButton"))
-        document.getElementById("joinGameButton").remove();
-      if (document.getElementById("codeInput"))
-        document.getElementById("codeInput").remove();
       const otherPlayer = 1;
       const p = 2;
       let playerNumber = 2;
       setData("playerNumber", playerNumber);
       game(p, otherPlayer);
+      hideMenu();
+      hideGamecode();
     });
   }
+
+  function hideMenu() {
+    document.getElementById("mainMenuDiv").style.display = "none"
+  }
+  function showMenu() {
+    document.getElementById("mainMenuDiv").style.display = "block"
+  }
+  function hideGamecode() {
+    document.getElementById("gamecodeDiv").style.display = "none"
+  }
+  function showGamecode() {
+    document.getElementById("gamecodeDiv").style.display = "block"
+  }
+
+
 };

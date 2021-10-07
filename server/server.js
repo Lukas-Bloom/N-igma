@@ -13,7 +13,7 @@ io.on("connection", (client) => {
   client.emit("ini", getClientId(client.id));
 
   client.on("startGame", (z) => {
-    console.log("One of the rooms is: ", z);
+    if (z) console.log("One of the rooms is: ", z);
 
     if (z.length !== 4) {
       codeToSend = client.id;
