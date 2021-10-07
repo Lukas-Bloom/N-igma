@@ -205,21 +205,21 @@ export const addTutorialText = ()=> {
     add([
       sprite("tutorialTxt11"),
       area(),
-      pos(1455, 175),
+      pos(1435, 175),
       scale(0.5),
       z(-2)
     ]);
     add([
       sprite("tutorialTxt12"),
       area(),
-      pos(1620, 247),
+      pos(1610, 247),
       scale(0.5),
       z(-2)
     ]);
     add([
       sprite("tutorialTxt13"),
       area(),
-      pos(1936, 185),
+      pos(1915, 185),
       scale(0.5),
       z(-2)
     ]);
