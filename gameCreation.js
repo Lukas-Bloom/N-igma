@@ -102,7 +102,7 @@ export const createGame = () => {
       setData("playerNumber", playerNumber);
       game(p, otherPlayer);
       hideMenu();
-      hideGamecode();
+      showGamecode();
       showCanvas();
     });
   }
@@ -128,7 +128,6 @@ export const createGame = () => {
     document.getElementById("gamecodeDiv").style.display = "block";
   }
 };
- 
 
 export const addTutorialText = ()=> {
   if (getData("lvlIndex") === 0) {
