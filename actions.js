@@ -6,12 +6,13 @@ import {
   pickUpKey,
   doTeleSwap,
   nextLevel,
+  handleAllMovingObjects,
 } from "./collisionEvents/collisionEvents.js";
 
 let isDead = 0;
 let isPowerUp = 0;
 let nextL = 0;
-let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - 236
+let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - 236;
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   //reset jumps when landing
@@ -33,8 +34,6 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       }, 50);
     }
   }
-
- 
 
   return action(() => {
     /*      socket.emit("movObjPos", movObjList2);
@@ -75,13 +74,12 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       });
     });
 
-    
     socket.on("teleSwap", (obj) => {
       get("teleSwap").forEach((o) => {
         if (o._id === obj._id) doTeleSwap(o, p, otherPlayer);
       });
     });
-    
+
     socket.on("nextLevel", (nextLvl) => {
       nextL++;
       if (nextL === 1) {
@@ -90,11 +88,18 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       }
     });
     nextL = 0;
-    
-    camPos(p.pos.x > levelLength ? levelLength : (p.pos.x > 292 ? p.pos.x : 292), 168);
-    handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
+
+    camPos(
+      p.pos.x > levelLength ? levelLength : p.pos.x > 292 ? p.pos.x : 292,
+      168
+    );
+    handleMovement(
+      otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")
+    );
     checkIfGrounded();
     destroyAllGhostBlocks();
-  })
-
+    handleAllMovingObjects(
+      otherPlayer.curPlatform()?.is("player") || p.curPlatform()?.is("player")
+    );
+  });
 };

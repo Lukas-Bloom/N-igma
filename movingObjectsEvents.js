@@ -1,22 +1,23 @@
 export const platformHorizontal = (speed, dir, distance) => {
-  let limitLeft, limitRight;
-  return {
-    load() {
-      limitLeft = Math.floor(this.pos.x) - distance;
-      limitRight = Math.floor(this.pos.x) + distance;
-    },
-    update() {
-      const vel = speed * dir;
-      const lol = this.move(vel, 0);
-      if (
-        Math.floor(this.pos.x) < limitLeft ||
-        Math.floor(this.pos.x) > limitRight ||
-        lol
-      ) {
-        dir = vel > 0 ? -1 : 1;
-      }
-    },
-  };
+
+    let limitLeft, limitRight;
+    return {
+      load() {
+        limitLeft = Math.floor(this.pos.x) - distance;
+        limitRight = Math.floor(this.pos.x) + distance;
+      },
+      update() {
+        const vel = speed * dir;
+        const lol = this.move(vel, 0);
+        if (
+          Math.floor(this.pos.x) < limitLeft ||
+          Math.floor(this.pos.x) > limitRight ||
+          lol
+        ) {
+          dir = vel > 0 ? -1 : 1;
+        }
+      },
+    };
 };
 
 export const batVertical = (speed, dir, distance) => {
@@ -25,10 +26,10 @@ export const batVertical = (speed, dir, distance) => {
     id: "fly",
     load() {
       this.play("fly");
-      limitTop = Math.floor(this.pos.y) - distance;
-      limitBot = Math.floor(this.pos.y) + distance;
-    },
-    update() {
+     // limitTop = Math.floor(this.pos.y) - distance;
+     // limitBot = Math.floor(this.pos.y) + distance;
+    }
+/*     update() {
       const vel = speed * dir;
       const lol = this.move(0, vel);
       if (
@@ -38,8 +39,8 @@ export const batVertical = (speed, dir, distance) => {
       ) {
         dir = vel > 0 ? -1 : 1;
       }
-    },
-  };
+    }, */
+  }
 };
 
 export const patrol = (speed = 60, dir = randi(1, 2) === 1 ? -1 : 1) => {

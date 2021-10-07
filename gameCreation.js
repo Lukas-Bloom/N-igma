@@ -20,7 +20,8 @@ export const createGame = () => {
     setData("lvlIndex", 0);
     setData("roooom", getData("roooom") || "changeMe");
   }
-  
+  hideCanvas();
+
   showMenu();
 
   let codeInput;
@@ -39,7 +40,6 @@ export const createGame = () => {
     joinGameBtn = document.getElementById("joinGameButton");
     joinGameBtn.addEventListener("click", joinGame);
     newGameBtn.addEventListener("click", newGame);
-    
   }
 
   if (playerNumber === 1) newGame();
@@ -49,15 +49,26 @@ export const createGame = () => {
       joinGame();
     }, 1000);
   }
+  const rlBtn = document.getElementById("rlBtn");
+  const rgBtn = document.getElementById("rgBtn");
 
-  
+  rlBtn.addEventListener("click", rLvl);
+  rgBtn.addEventListener("click", rGame);
+
+  function rLvl() {
+    location.reload();
+  }
+  function rGame() {
+    localStorage.clear();
+    location.reload();
+  }
 
   function newGame() {
     socket.emit("startGame", getData("roooom"));
- 
+
     socket.on("joinCode", (c) => {
       setData("roooom", c);
-      if (joinCode) joinCode.append("Gamecode: ", c);
+      if (joinCode) joinCode.append("Give this code to your friend:      ", c);
     });
     socket.on("init", () => {
       const otherPlayer = 2;
@@ -67,7 +78,7 @@ export const createGame = () => {
       game(p, otherPlayer);
       hideMenu();
       showGamecode();
-      
+      showCanvas();
     });
   }
 
@@ -92,23 +103,30 @@ export const createGame = () => {
       game(p, otherPlayer);
       hideMenu();
       hideGamecode();
+      showCanvas();
     });
   }
 
+  function showCanvas() {
+    document.getElementsByTagName("canvas")[0].style.display = "block";
+    document.getElementsByTagName("canvas")[0].style.margin = "0 auto";
+  }
+
+  function hideCanvas() {
+    document.getElementsByTagName("canvas")[0].style.display = "none";
+  }
   function hideMenu() {
-    document.getElementById("mainMenuDiv").style.display = "none"
+    document.getElementById("mainMenuDiv").style.display = "none";
   }
   function showMenu() {
-    document.getElementById("mainMenuDiv").style.display = "block"
+    document.getElementById("mainMenuDiv").style.display = "block";
   }
   function hideGamecode() {
-    document.getElementById("gamecodeDiv").style.display = "none"
+    document.getElementById("gamecodeDiv").style.display = "none";
   }
   function showGamecode() {
-    document.getElementById("gamecodeDiv").style.display = "block"
+    document.getElementById("gamecodeDiv").style.display = "block";
   }
-
-
 };
 
 
