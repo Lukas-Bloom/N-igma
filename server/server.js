@@ -7,10 +7,12 @@ const io = require("socket.io")(gameServer, {
   },
 });
 
-const test = require("os");
-const myCurrentIp = test.networkInterfaces()["Wi-Fi"][1].address;
+const checkIp = require("os");
+let myCurrentIp;
+try {
+  myCurrentIp = checkIp.networkInterfaces()["Wi-Fi"][1].address;
+} catch (e) {}
 exports.myCurrentIp = `${myCurrentIp}`;
-
 
 io.on("connection", (client) => {
   console.log(
