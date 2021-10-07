@@ -29,16 +29,15 @@ scene("game", (p, otherPlayer) => {
   handleKeyEvents(p);
   handleCollisionEvents(p, otherPlayer, level, levelIndex);
   keyDown("0", () => {
-    setData("lvlIndex", 0)
-    setData("playerNumber", 0)   
+    setData("lvlIndex", 0);
+    setData("playerNumber", 0);
   });
-  canvas.addEventListener(
-    "mouseover",
-    function () {
-      console.log("hover");
-    },
-    false
-  );
+
+  // clicked on the screen and hide the mouse
+  if (!focused()) {
+    focus();
+    document.getElementsByTagName("canvas")[0].style.cursor = "none";
+  }
 });
 
 scene("win", () => {
