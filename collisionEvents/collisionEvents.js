@@ -61,6 +61,26 @@ export const handleMovement = (bool) => {
       return;
     moveBlock(block, 1, -1, bool);
   });
+
+  const allPlatformHors = get("platformHor");
+  for (let i = 0; i < allPlatformHors.length; i++) {
+    allPlatformHors[i].dir = allPlatformHors[i].dir || 1
+    const colliding = allPlatformHors[i].move(bool ? 75 * allPlatformHors[i].dir : 0, 0)
+    if(colliding) {
+      console.log('colliding')
+      allPlatformHors[i].dir *= -1
+    }
+  }
+
+  const allPlatformVers = get("platformVer");
+  for (let i = 0; i < allPlatformVers.length; i++) {
+    allPlatformVers[i].dir = allPlatformVers[i].dir || 1
+    const colliding = allPlatformVers[i].move(0, bool ? 75 * allPlatformVers[i].dir : 0)
+    if (colliding) {
+      console.log('colliding')
+      allPlatformVers[i].dir *= -1
+    }
+  }
 };
 
 function moveBlock(block, counter, dir, bool) {
@@ -227,24 +247,7 @@ export const handleAllMovingObjects = (activated) => {
          // Math.floor(time()) % 2 === 0 ? this.move(0, -vel) : this.move(0, vel);
         },
       });
-    }
-
-    //move platforms
-    const allPlatforms = get("platform");
-    for (let i = 0; i < allPlatforms.length; i++) {
-      let speed = 30;
-      let dir = randi(1, 2) === 1 ? -1 : 1;
-
-      allPlatforms[i].use({
-        update() {
-          const vel = speed * dir;
-          const colliding = this.move(vel, 0);
-          if (colliding) {
-            dir = vel > 0 ? -1 : 1;
-          }
-        },
-      });
-    }
+    }    
   }
 };
 

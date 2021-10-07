@@ -94,7 +94,6 @@ export const levelConf = () => {
     "/": () => [sprite("beachTiles", { frame: 34 }), area(), solid(), layer(1), z(1), "ice"],                       //oil right
     "w": () => [sprite("beachTiles", { frame: 16 }), area({offset:[0,15]}), solid() ,z(5), opacity(0.5) ,"slime"],                          //water
     "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],                           //spikes
-    "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
     "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), body()],                                             //barrel
     "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 11] }), solid(), "btnUp", "btn"],                   //button up
@@ -128,7 +127,8 @@ export const levelConf = () => {
     ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)], //cloud2 flipped
     "M": () => [sprite("bat",{ frame:43 ,animSpeed:0.3 }),color(COL.RED),area(),"enemy","bat"],
     "@": () => [sprite("monster",{animSpeed:0.3,frame:41}),area(),body(),color(COL.GREEN),"enemy","monster"],
-    "X": () => [sprite("platform",{frame:36}),area(),solid(),color(COL.ORANGE),"platform"],                                   
+    "X": () => [sprite("platform",{frame:36}),area(),solid(),color(COL.ORANGE),"platformHor"], 
+    "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE), "platformVer"],                           //platform
 
     
   }
