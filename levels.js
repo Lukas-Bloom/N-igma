@@ -148,7 +148,7 @@ export const levels = () => {
       "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||", //bottom
     ],*/
     [
-      "#z       z       z       z       z       z       z       z       z       z       z       z       z       z      z       z       z       z    ",
+      "#z       z       z       z       z       z       z       z       z       z       z       z       z       z      z       z       z     z    z ",
       "#           <             x                                                                                        <             x          #",
       "#                                          >                                           x            <                                       #",
       "#   P   P                   J                                  <                                                                            #",
