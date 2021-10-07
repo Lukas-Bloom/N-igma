@@ -8,7 +8,7 @@ import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
 import { spawnPlayers,addTutorialText } from "./gameCreation.js";
 
-//setData("lvlIndex", 2);
+//setData("lvlIndex", 4);
 
 scene("game", (p, otherPlayer) => {
   let levelIndex = getData("lvlIndex");
@@ -43,9 +43,17 @@ scene("game", (p, otherPlayer) => {
   }
 });
 
+loadSprite("winScreen", "sprites/menu-background.png");
 scene("win", () => {
+  add([
+    sprite("winScreen"),
+    area(),
+    pos(0, 0),
+    scale(0.5),
+    z(-2)
+  ]);
+  drawText
   add([text("You completed the game!"), pos(center()), scale(0.2), z(100)]);
-  //keyPress(() => go("game", p.playerNumber,otherPlayer.playerNumber));
 });
 
 export const game = (p, otherPlayer) => {
