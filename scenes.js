@@ -6,7 +6,7 @@ import { handleKeyEvents } from "./keyEvents.js";
 import { handleCollisionEvents } from "./collisionEvents/collisionEvents.js";
 import { handleActionEvents } from "./actions.js";
 import { socket } from "./socket.js";
-import { spawnPlayers } from "./gameCreation.js";
+import { spawnPlayers,addTutorialText } from "./gameCreation.js";
 
 //setData("lvlIndex", 2);
 
@@ -24,6 +24,9 @@ scene("game", (p, otherPlayer) => {
     otherPlayer = p1();
     spawnPlayers(otherPlayer, p);
   }
+
+  addTutorialText();
+
 
   handleActionEvents(p, otherPlayer, levelIndex, level);
   handleKeyEvents(p);

@@ -1,19 +1,21 @@
 import { COL } from "./constants.js";
 
+//tutorial texts
+loadSprite("tutorialTxt1", "sprites/tutorialTxt1.png");
+loadSprite("tutorialTxt2", "sprites/tutorialTxt2.png");
+loadSprite("tutorialTxt3", "sprites/tutorialTxt3.png");
+loadSprite("tutorialTxt4", "sprites/tutorialTxt4.png");
+loadSprite("tutorialTxt5", "sprites/tutorialTxt5.png");
+loadSprite("tutorialTxt6", "sprites/tutorialTxt6.png");
+loadSprite("tutorialTxt7", "sprites/tutorialTxt7.png");
+loadSprite("tutorialTxt8", "sprites/tutorialTxt8.png");
+loadSprite("tutorialTxt9", "sprites/tutorialTxt9.png");
+loadSprite("tutorialTxt10", "sprites/tutorialTxt10.png");
+loadSprite("tutorialTxt11", "sprites/tutorialTxt11.png");
+loadSprite("tutorialTxt12", "sprites/tutorialTxt12.png");
+loadSprite("tutorialTxt13", "sprites/tutorialTxt13.png");
+
 //gfx
-//loadSprite("beanMonster", "sprites/bean.png");
-// loadSprite("box", "sprites/box.png");
-// loadSprite("spikes", "sprites/spikes.png");
-// loadSprite("key", "sprites/key.png");
-// loadSprite("closedDoor", "sprites/doorClosed.png");
-// loadSprite("openedDoor", "sprites/doorOpened.png");
-// loadSprite("tramp1", "sprites/tramp1.png");
-// loadSprite("tramp2", "sprites/tramp2.png");
-// loadSprite("doublejump", "sprites/doublejump.png");
-// loadSprite("teleSwap", "sprites/teleSwap.png");
-// loadSprite("ghost", "sprites/ghost.png");
-// loadSprite("ghostblock", "sprites/ghostblock.png");
-// loadSprite("halfBlock", "sprites/halfBlock.png");
 loadSprite("blackBox", "sprites/blackBox.png");
 loadSprite("particle", "sprites/particle.png");
 loadSprite("beanDash", "sprites/beanDash.png");
@@ -28,6 +30,8 @@ loadSprite('jellyfish', 'sprites/jellyfish.png', {
     idle: 0,
     bounce: { from: 0, to: 2, loop: true }
   }});
+  
+
 //sounds
 loadSound("sound-powerup", "sounds/sound-powerup.wav");
 loadSound("sound-powerup2", "sounds/sound-powerup2.wav");

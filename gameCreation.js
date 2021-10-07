@@ -110,3 +110,100 @@ export const createGame = () => {
 
 
 };
+
+
+export const addTutorialText = ()=> {
+  if (getData("lvlIndex") === 0) {
+    add([
+      sprite("tutorialTxt1"),
+      area(),
+      pos(90, 210),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt2"),
+      area(),
+      pos(240, 230),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt3"),
+      area(),
+      pos(420, 230),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt4"),
+      area(),
+      pos(570, 180),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt5"),
+      area(),
+      pos(805, 255),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt6"),
+      area(),
+      pos(905, 155),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt7"),
+      area(),
+      pos(1105, 195),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt8"),
+      area(),
+      pos(1055, 275),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt9"),
+      area(),
+      pos(1210, 315),
+      scale(0.5),
+      z(4)
+    ]);
+    add([
+      sprite("tutorialTxt10"),
+      area(),
+      pos(1360, 215),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt11"),
+      area(),
+      pos(1455, 175),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt12"),
+      area(),
+      pos(1620, 247),
+      scale(0.5),
+      z(-2)
+    ]);
+    add([
+      sprite("tutorialTxt13"),
+      area(),
+      pos(1936, 185),
+      scale(0.5),
+      z(-2)
+    ]);
+  }
+}
