@@ -12,7 +12,7 @@ import {
 let isDead = 0;
 let isPowerUp = 0;
 let nextL = 0;
-let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - 236;
+let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - width()/2;
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   //reset jumps when landing
