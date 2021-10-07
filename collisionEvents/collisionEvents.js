@@ -1,4 +1,4 @@
-import { PHYS, ANSWERS, MAX_LEVEL } from "../constants.js";
+import { PHYS, MAX_LEVEL } from "../constants.js";
 import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";
@@ -33,6 +33,11 @@ export const slideLeft = (p) => {
 };
 
 export const handleMovement = (bool) => {
+  if(!bool) {
+    get("btnUp").forEach(btn => {
+      btn.frame = 60
+    })
+  }
   const blockDowns = get("blockDown")
   blockDowns.forEach(block => {
     if (!block.start && !block.end && !bool || block.start && !bool || block.end && bool || block.isMoving) return
@@ -60,7 +65,7 @@ function moveBlock(block, counter, dir, bool) {
       block.start = !bool
       block.isMoving = false
     }
-  }, 1000 / 30)
+  }, 1)
 }
 
 export const nextLevel = (p) => {
@@ -69,7 +74,7 @@ export const nextLevel = (p) => {
     setData("lvlIndex", 0)
     return
   }
-  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+  add([text("Good job!"), pos(p.pos.x, p.pos.y - 50), scale(0.2), z(100)]);
   setTimeout(function () {
     location.reload();
 
@@ -79,7 +84,7 @@ export const nextLevel = (p) => {
 export const gameover = (p) => {
   play("sound-lose");
   p.isDead = true
-  add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2)]);
+  add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2), z(100)]);
   setTimeout(function () {
     p.isDead = false;
     location.reload();

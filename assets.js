@@ -46,24 +46,24 @@ loadSprite("tileMap", "sprites/tileMap.png", {
   sliceY: 20
 });
 
-loadSprite("monster", "sprites/tileMap.png", {
+loadSprite("monster", "sprites/beachTiles.png", {
   sliceX: 20,
   sliceY: 20,
   anims: {
-    walk: { from: 341, to: 342, loop: true },
+    walk: { from: 41, to: 42, loop: true },
   },
 });
-loadSprite("bat", "sprites/tileMap.png", {
+loadSprite("bat", "sprites/beachTiles.png", {
   sliceX: 20,
   sliceY: 20,
   anims: {
-    fly: { from: 383, to: 384, loop: true },
+    fly: { from: 43, to: 44, loop: true },
   },
 });
-loadSprite("platform", "sprites/tileMap.png", {
-  sliceX: 20,
-  sliceY: 20,
-});
+// loadSprite("platform", "sprites/tileMap.png", {
+//   sliceX: 20,
+//   sliceY: 20,
+// });
 
 
 
@@ -76,7 +76,9 @@ export const levelConf = () => {
 
     "P": () => ["startPlayer",],
     "+": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(1)],                              //sand
-    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1)],                              //sand top
+    "?": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(6), "blockUp"],                   //sand move down
+    "!": () => [sprite("beachTiles", { frame: 17 }), area(), solid(), layer(1), z(6), "blockDown"],                 //sand move up
+    "=": () => [sprite("beachTiles", { frame: 18 }), area(), solid(), layer(1), z(1), "anything"],                  //sand top
     "1": () => [sprite("beachTiles", { frame: 19 }), area(), solid(), layer(1), z(1)],                              //sand top left
     "2": () => [sprite("beachTiles", { frame: 20 }), area(), solid(), layer(1), z(1)],                              //sand top right
     "3": () => [sprite("beachTiles", { frame: 24 }), area(), solid(), layer(1), z(1)],                              //sand, stone
@@ -84,8 +86,8 @@ export const levelConf = () => {
     "¤": () => [sprite("beachTiles", { frame: 25 }), area(), solid(), layer(1), z(1)],                              //sand, star
     "4": () => [sprite("beachTiles", { frame: 26 }), area(), layer(-1), z(-1)],                                     //dark sand
     "5": () => [sprite("sandInside"), area(), layer(-1), z(-1)],                                                    //dark sand, shadow
-    "£": () => [sprite("beachTiles", { frame: 22 }), area({ width: 12, height: 6 }), solid(),],                     //halfblock sand top
-    "$": () => [sprite("beachTiles", { frame: 23 }), area({ width: 12, height: 6 }), solid(),],                     //halfblock sand
+    "£": () => [sprite("beachTiles", { frame: 22 }), area({ width: 16, height: 7 }), solid(),],                     //halfblock sand top
+    "$": () => [sprite("beachTiles", { frame: 23 }), area({ width: 16, height: 7 }), solid(),],                     //halfblock sand
 
     "6": () => [sprite("beachTiles", { frame: 32 }), area(), solid(), layer(1), z(1), "ice"],                       //oil left
     "7": () => [sprite("beachTiles", { frame: 33 }), area(), solid(), layer(1), z(1), "ice"],                       //oil
@@ -94,7 +96,9 @@ export const levelConf = () => {
     "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],                           //spikes
     "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE)],                           //platform
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
-    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(),],                                             //barrel
+    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), body()],                                             //barrel
+    "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 11] }), solid(), "btnUp", "btn"],                   //button up
+    //"_": () => [sprite("beachTiles", { frame: 61 }), area({ offset: [0, 11] }), solid(), "btnDown", "btn"],                //button down
     "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
     "g": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",], //invisible block
     "G": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],//ghostblock
@@ -107,7 +111,7 @@ export const levelConf = () => {
     "0": () => [sprite("beachTiles", { frame: 53 }), area(), opacity(1), "ghost", "powerUp"],                       //ghost
     "U": () => [sprite("beachTiles", { frame: 54 }), area(), "teleSwap",],                                          //teleswap
     "O": () => [sprite("chest", { frame: 1 }), body(), area(), "openedDoor",],                                      //chest open
-    "D": () => [sprite("chest", { frame: 0 }), body(), area(), "closedDoor",],                                      //chest open
+    "D": () => [sprite("chest", { frame: 0 }), "closedDoor",],                                      //chest open
 
     "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'bronze' }, "key",],          //key bronze
     "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'silver' }, "key",],          //key silver
