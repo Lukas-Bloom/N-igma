@@ -8,8 +8,8 @@ export const P2 = {
 };
 
 export const PLAYER = {
-  WIDTH: 12,
-  HEIGHT: 11.4,
+  WIDTH: 15,
+  HEIGHT: 13,
 }
 
 export const COL = {
@@ -61,13 +61,14 @@ export const OBJECT = {
 };
 export const MAX_LEVEL = 3;
 
-export const ANSWERS = {
-  1: "key1key2key3",
-  2: "key1key2key3",
-  3: "key1key2key3",
-  4: "key1key2key3",
-  5: "key1key2key3",
-  6: "key1key2key3",
-  7: "key1key2key3",
-  8: "key1key2key3",
+export const LEVEL_LENGTH = {
+  0: 156.5 * 16,
+  1: 58 * 16,
+  2: 56.5 * 16,
+  3: 0 * 16,
+  4: 0 * 16,
+  5: 0 * 16,
+  6: 0 * 16,
+  7: 0 * 16,
+  8: 0 * 16,
 };

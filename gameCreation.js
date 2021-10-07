@@ -47,7 +47,7 @@ export const createGame = () => {
     hideMenu();
     setTimeout(() => {
       joinGame();
-    }, 2000);
+    }, 1000);
   }
 
   

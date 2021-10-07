@@ -55,7 +55,8 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
         p.slideRight = PHYS.SLIDE;
       }
     }),
-    p.collides("grass", () => {
+    p.collides("anything", (obj, side) => {
+      if(side !== "bottom") return
       p.isOnIce = null;
       p.slideRight = null;
       p.slideLeft = null;
@@ -87,9 +88,12 @@ export const handleEnvCollisions = (level, levelIndex, p, otherPlayer) => {
       if (!obj.is("slime")) {
         p.isOnSlime = null;
       }
+
+      if(obj.is("btnUp")) obj.frame = 61 
     }),
     otherPlayer.on("ground", (obj) => {
       if (obj.is("tramp")) trampHandler(otherPlayer, obj);
+      if (obj.is("btnUp")) obj.frame = 61 
     })
   );
 };

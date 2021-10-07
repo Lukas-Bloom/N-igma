@@ -1,4 +1,4 @@
-import { PHYS } from "./constants.js";
+import { LEVEL_LENGTH } from "./constants.js";
 import { socket } from "./socket.js";
 import {
   handleMovement,
@@ -11,6 +11,7 @@ import {
 let isDead = 0;
 let isPowerUp = 0;
 let nextL = 0;
+let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - 236
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   //reset jumps when landing
@@ -60,7 +61,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     socket.on("powerUp", (powerUp, obj) => {
       isPowerUp++;
       if (isPowerUp === 1) {
-        console.log(get("powerUp"), obj._id);
+        if(!powerUp && !obj) return otherPlayer.clearPowerUps()
         get("powerUp").forEach((o) => {
           if (o._id === obj._id) otherPlayer.changePowerUp(powerUp, o);
         });
@@ -90,11 +91,10 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     });
     nextL = 0;
     
-    
-          camPos((p.pos.x > 320 ? p.pos.x : 320), 168);
-          handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
-          checkIfGrounded();
-          destroyAllGhostBlocks();
-        })
+    camPos(p.pos.x > levelLength ? levelLength : (p.pos.x > 292 ? p.pos.x : 292), 168);
+    handleMovement((otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")))
+    checkIfGrounded();
+    destroyAllGhostBlocks();
+  })
 
 };
