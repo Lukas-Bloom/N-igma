@@ -59,7 +59,7 @@ export const OBJECT = {
 
   MOVE_SPEED: 140,
 };
-export const MAX_LEVEL = 3;
+export const MAX_LEVEL = 4;
 
 export const LEVEL_LENGTH = {
   0: 99 * 16,
