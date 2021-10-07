@@ -84,6 +84,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       nextL++;
       if (nextL === 1) {
         setData("lvlIndex", nextLvl);
+        p.nextLevel = true
         nextLevel(p, otherPlayer);
       }
     });
