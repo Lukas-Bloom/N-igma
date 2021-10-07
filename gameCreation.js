@@ -68,7 +68,12 @@ export const createGame = () => {
 
     socket.on("joinCode", (c) => {
       setData("roooom", c);
-      if (joinCode) joinCode.append("Give this code to your friend:      ", c);
+      let codeDiv = document.createElement("span");
+      codeDiv.innerHTML = c;
+      codeDiv.style.color = "red";
+      codeDiv.style.fontSize = "25px";
+      if (joinCode)
+        joinCode.append("Give this code to your friend:      ", codeDiv);
     });
     socket.on("init", () => {
       const otherPlayer = 2;
