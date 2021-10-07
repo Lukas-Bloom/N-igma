@@ -39,7 +39,7 @@ scene("game", (p, otherPlayer) => {
   // clicked on the screen and hide the mouse
   if (!focused()) {
     focus();
-    document.getElementsByTagName("canvas")[0].style.cursor = "none";
+    //document.getElementsByTagName("canvas")[0].style.cursor = "none";
   }
 });
 

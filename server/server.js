@@ -38,6 +38,7 @@ io.on("connection", (client) => {
       if (roomCode.length !== 4) {
         //console.log("baaaaaaaaaaad", roomCode);
         io.emit("wrongCode", roomCode);
+        console.log("bad 1");
         return;
       }
 
@@ -46,7 +47,10 @@ io.on("connection", (client) => {
         arrayRooms = Array.from(checkRooms[0].rooms);
       } catch (err) {
         console.log("baaad2", err, roomCode);
-        io.emit("wrongCode");
+        io.emit("wrongCode", "say whaaaat. bad 2");
+        // joining player will move to a temp room in currrent level when host ends game
+        client.join("tempRoom");
+        client.emit("init2");
         return;
       }
 
