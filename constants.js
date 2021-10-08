@@ -65,7 +65,7 @@ export const LEVEL_LENGTH = {
   0: 99 * 16,
   1: 47 * 16,
   2: 58 * 16,
-  3: 120 * 16,
+  3: 95 * 16,
   4: 59 * 16, 
   5: 100 * 16, // don't exist
   6: 100 * 16, // don't exist
