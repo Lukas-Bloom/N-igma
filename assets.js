@@ -96,13 +96,13 @@ export const levelConf = () => {
     "6": () => [sprite("beachTiles", { frame: 32 }), area(), solid(), layer(1), z(1), "ice"],                       //oil left
     "7": () => [sprite("beachTiles", { frame: 33 }), area(), solid(), layer(1), z(1), "ice"],                       //oil
     "/": () => [sprite("beachTiles", { frame: 34 }), area(), solid(), layer(1), z(1), "ice"],                       //oil right
-    "w": () => [sprite("beachTiles", { frame: 16 }), area({offset:[0,15]}), solid() ,z(5), opacity(0.5) ,"slime"],                          //water
-    "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],                           //spikes
+    "w": () => [sprite("beachTiles", { frame: 16 }), area({offset:[0,15]}), solid() ,z(5), opacity(0.5) ,"slime"],  //water
+    "^": () => [sprite("beachTiles", { frame: 35 }), area({offset:[0,8]}), solid(), "spikes", "enemy"],             //spikes
     "#": () => [sprite("beachTiles", { frame: 56 }), area(), solid(), "box"],                                       //box
-    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), body()],                                             //barrel
-    "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 11] }), solid(), "btnUp", "btn"],                   //button up
-    //"_": () => [sprite("beachTiles", { frame: 61 }), area({ offset: [0, 11] }), solid(), "btnDown", "btn"],                //button down
-    "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],       //trampoline
+    "b": () => [sprite("beachTiles", { frame: 57 }), area(), solid(), body()],                                      //barrel
+    "-": () => [sprite("beachTiles", { frame: 60 }), area({ offset: [0, 11] }), solid(), "btnUp", "btn"],           //button up
+    //"_": () => [sprite("beachTiles", { frame: 61 }), area({ offset: [0, 11] }), solid(), "btnDown", "btn"],       //button down
+    "t": () => [sprite("jellyfish", { animSpeed: 1}), area({offset:[0,8]}), solid(), layer(2), opacity(0.7), z(3), "tramp",],//trampoline
     "g": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(0), color(COL.LIGHT_BLUE), "invisibleBlock",], //invisible block
     "G": () => [sprite("beachTiles", { frame: 37 }), area(), opacity(1), solid(), color(COL.PURPLE), "ghostblock",],//ghostblock
 
@@ -116,23 +116,23 @@ export const levelConf = () => {
     "O": () => [sprite("chest", { frame: 1 }), body(), area(), "openedDoor",],                                      //chest open
     "D": () => [sprite("chest", { frame: 0 }), "closedDoor",],                                      //chest open
 
-    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'bronze' }, "key",],          //key bronze
-    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'silver' }, "key",],          //key silver
+    "K": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.BRONZE), { name: 'bronze' }, "key",],        //key bronze
+    "E": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.SILVER), { name: 'silver' }, "key",],        //key silver
     "Y": () => [sprite("beachTiles", { frame: 40 }), area(), color(COL.GOLD), { name: 'gold' }, "key",],            //key gold
     "k": () => [sprite("beachTiles", { frame: 40 }), color(COL.BRONZE), fixed(), z(1), "answerKey",],               //key bronze (answer)
     "e": () => [sprite("beachTiles", { frame: 40 }), color(COL.SILVER), fixed(), z(1), "answerKey",],               //key silver (answer)
     "y": () => [sprite("beachTiles", { frame: 40 }), color(COL.GOLD), fixed(), z(1), "answerKey",],                 //key gold (answer)
     "|": () => [sprite("beachTiles", { frame: 23 }), area(), solid(), opacity(0), "enemy",],                        //level bottom (death)
     
-    ".": () => [sprite("beachTiles", { frame: 38 }), area(), opacity(0.5), "particle",],                                        //particle
+    ".": () => [sprite("beachTiles", { frame: 38 }), area(), opacity(0.5), "particle",],                            //particle
     "z": () => [sprite("sky"), area(), layer(-100), z(-100)],                                                       //sky
     "x": () => [sprite("cloud1"), area(), layer(-9)],                                                               //cloud1
     "<": () => [sprite("cloud2"), area(), layer(-9)],                                                               //cloud2
-    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)], //cloud2 flipped
-    "M": () => [sprite("bat",{ frame:43 ,animSpeed:0.3 }),color(COL.RED),area(),"enemy","bat"],
-    "@": () => [sprite("monster",{animSpeed:0.3,frame:41}),area(),body(),color(COL.GREEN),"enemy","monster"],
-    "X": () => [sprite("platform",{frame:36}),area(),solid(),color(COL.ORANGE),"platformHor"], 
-    "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE), "platformVer"],                           //platform
+    ">": () => [sprite("cloud2", { flipX: true }), area(), layer(-9)],                                              //cloud2 flipped
+    "M": () => [sprite("bat",{ frame:43 ,animSpeed:0.3 }),color(COL.RED),area(),"enemy","bat"],                     //bat
+    "@": () => [sprite("monster",{animSpeed:0.3,frame:41}),area(),body(),color(COL.GREEN),"enemy","monster"],       //monster
+    "X": () => [sprite("platform",{frame:36}),area(),solid(),color(COL.ORANGE),"platformHor"],                      //platform hor
+    "p": () => [sprite("beachTiles", { frame: 36 }), area(), solid(), color(COL.BRONZE), "platformVer"],            //platform vert
 
     
   }
