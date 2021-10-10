@@ -3,7 +3,6 @@ import { socket } from "./socket.js";
 
 socket.on("reLoad", () => {
   location.reload();
-  console.log("reloadinggg");
 });
 
 export const spawnPlayers = (p1, p2) => {
@@ -90,9 +89,7 @@ export const createGame = () => {
   let code;
   function joinGame() {
     if (document.getElementById("codeInput").value === "Gamecode") {
-      console.log(document.getElementById("codeInput").value);
       code = getData("roooom");
-      console.log("code now", code);
     } else {
       code = document.getElementById("codeInput").value;
     }
@@ -100,10 +97,8 @@ export const createGame = () => {
     socket.emit("joinGame", code);
 
     socket.on("wrongCode", (z) => {
-      console.log("wrong code msg", z);
     });
     socket.on("tooManyP", () => {
-      console.log("Room already full msg");
     });
 
     socket.on("init2", () => {
@@ -132,9 +127,6 @@ export const createGame = () => {
   function showMenu() {
     document.getElementById("mainMenuDiv").style.display = "block";
   }
-  function hideGamecode() {
-    document.getElementById("gamecodeDiv").style.display = "none";
-  }
   function showGamecode() {
     document.getElementById("gamecodeDiv").style.display = "block";
   }
@@ -142,18 +134,18 @@ export const createGame = () => {
 
 export const addTutorialText = () => {
   if (getData("lvlIndex") === 0) {
-    add([sprite("tutorialTxt1"), area(), pos(25, 220), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt2"), area(), pos(25, 305), scale(0.5), z(2)]);
-    add([sprite("tutorialTxt3"), area(), pos(135, 290), scale(0.5), z(2)]);
-    add([sprite("tutorialTxt4"), area(), pos(270, 180), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt5"), area(), pos(470, 310), scale(0.5), z(2)]);
-    add([sprite("tutorialTxt6"), area(), pos(520, 155), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt7"), area(), pos(680, 195), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt8"), area(), pos(640, 310), scale(0.5), z(2)]);
-    add([sprite("tutorialTxt9"), area(), pos(740, 310), scale(0.5), z(4)]);
-    add([sprite("tutorialTxt10"), area(), pos(870, 220), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt11"), area(), pos(870, 310), scale(0.5), z(20)]);
-    add([sprite("tutorialTxt12"), area(), pos(1035, 230), scale(0.5), z(-2)]);
-    add([sprite("tutorialTxt13"), area(), pos(1200, 185), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt1"), pos(25, 220), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt2"), pos(25, 305), scale(0.5), z(2)]);
+    add([sprite("tutorialTxt3"), pos(135, 290), scale(0.5), z(2)]);
+    add([sprite("tutorialTxt4"), pos(270, 180), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt5"), pos(470, 310), scale(0.5), z(2)]);
+    add([sprite("tutorialTxt6"), pos(520, 155), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt7"), pos(680, 195), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt8"), pos(640, 310), scale(0.5), z(2)]);
+    add([sprite("tutorialTxt9"), pos(740, 310), scale(0.5), z(4)]);
+    add([sprite("tutorialTxt10"), pos(870, 220), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt11"), pos(870, 310), scale(0.5), z(20)]);
+    add([sprite("tutorialTxt12"), pos(1035, 230), scale(0.5), z(-2)]);
+    add([sprite("tutorialTxt13"), pos(1200, 185), scale(0.5), z(-2)]);
   }
 };

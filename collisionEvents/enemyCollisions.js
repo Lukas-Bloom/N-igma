@@ -3,7 +3,7 @@ import { socket } from "../socket.js";
 import { gameover } from "./collisionEvents.js";
 
 
-export const handleEnemyCollisions = (p,otherPlayer,levelIndex) => {
+export const handleEnemyCollisions = (p) => {
   return p.collides("enemy", () => {
     if(p.isTeleSwap) return
     if (p.currentPowerUp === "loseBarrier") return;

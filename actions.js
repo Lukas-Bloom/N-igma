@@ -12,7 +12,7 @@ import {
 let isDead = 0;
 let isPowerUp = 0;
 let nextL = 0;
-let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - width()/2;
+let levelLength = LEVEL_LENGTH[getData("lvlIndex")] - width() / 2;
 
 export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   //reset jumps when landing
@@ -36,17 +36,6 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
   }
 
   return action(() => {
-    /*      socket.emit("movObjPos", movObjList2);
-      socket.on("syncObj", (stuff) => {
-        console.log("holaaa");
-        for (let i = 0; i < stuff.length; i++) {
-          movObjList2[i].moveTo(
-            Math.floor(stuff[i].pos.x),
-            Math.floor(stuff[i].pos.y)
-          );
-        }
-      }); */
-
     socket.emit("pos", p.pos.x, p.pos.y);
     socket.on("moveOtherPlayer", (x, y) => otherPlayer.moveTo(x, y));
     socket.on("gameOver", () => {
@@ -60,7 +49,7 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
     socket.on("powerUp", (powerUp, obj) => {
       isPowerUp++;
       if (isPowerUp === 1) {
-        if(!powerUp && !obj) return otherPlayer.clearPowerUps()
+        if (!powerUp && !obj) return otherPlayer.clearPowerUps();
         get("powerUp").forEach((o) => {
           if (o._id === obj._id) otherPlayer.changePowerUp(powerUp, o);
         });
@@ -84,23 +73,27 @@ export const handleActionEvents = (p, otherPlayer, levelIndex, level) => {
       nextL++;
       if (nextL === 1) {
         setData("lvlIndex", nextLvl);
-        p.nextLevel = true
+        p.nextLevel = true;
         nextLevel(p, otherPlayer);
       }
     });
     nextL = 0;
 
     camPos(
-      p.pos.x > levelLength ? levelLength : p.pos.x > (width() / 2 + 16) ? p.pos.x : (width() / 2 + 16),
-      height()/2
+      p.pos.x > levelLength
+        ? levelLength
+        : p.pos.x > width() / 2 + 16
+        ? p.pos.x
+        : width() / 2 + 16,
+      height() / 2
     );
     handleMovement(
       otherPlayer.curPlatform()?.is("btn") || p.curPlatform()?.is("btn")
     );
     checkIfGrounded();
     destroyAllGhostBlocks();
-   /*  handleAllMovingObjects(
+    handleAllMovingObjects(
       otherPlayer.curPlatform()?.is("player") || p.curPlatform()?.is("player")
-    ); */
+    );
   });
 };

@@ -1,6 +1,5 @@
 import { isCorrectCollision,slideLeft,slideRight, nextLevel } from "./collisionEvents.js";
 import { PHYS } from "../constants.js";
-import { game } from "../scenes.js";
 import { socket } from "../socket.js";
 
 function swapGhostBlocks(level, block) {

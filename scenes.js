@@ -5,7 +5,6 @@ import { levelConf } from "./assets.js";
 import { handleKeyEvents } from "./keyEvents.js";
 import { handleCollisionEvents } from "./collisionEvents/collisionEvents.js";
 import { handleActionEvents } from "./actions.js";
-import { socket } from "./socket.js";
 import { spawnPlayers,addTutorialText } from "./gameCreation.js";
 
 //setData("lvlIndex", 4);

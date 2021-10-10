@@ -3,7 +3,6 @@ import { handlePowerUpCollisions } from "./powerUpCollisions.js";
 import { handleEnvCollisions } from "./envCollisions.js";
 import { handleEnemyCollisions } from "./enemyCollisions.js";
 import { win } from "../scenes.js";
-import { socket } from "../socket.js";
 
 let keys = "";
 
@@ -64,21 +63,25 @@ export const handleMovement = (bool) => {
 
   const allPlatformHors = get("platformHor");
   for (let i = 0; i < allPlatformHors.length; i++) {
-    allPlatformHors[i].dir = allPlatformHors[i].dir || 1
-    const colliding = allPlatformHors[i].move(bool ? 75 * allPlatformHors[i].dir : 0, 0)
-    if(colliding) {
-      console.log('colliding')
-      allPlatformHors[i].dir *= -1
+    allPlatformHors[i].dir = allPlatformHors[i].dir || 1;
+    const colliding = allPlatformHors[i].move(
+      bool ? 75 * allPlatformHors[i].dir : 0,
+      0
+    );
+    if (colliding) {
+      allPlatformHors[i].dir *= -1;
     }
   }
 
   const allPlatformVers = get("platformVer");
   for (let i = 0; i < allPlatformVers.length; i++) {
-    allPlatformVers[i].dir = allPlatformVers[i].dir || 1
-    const colliding = allPlatformVers[i].move(0, bool ? 75 * allPlatformVers[i].dir : 0)
+    allPlatformVers[i].dir = allPlatformVers[i].dir || 1;
+    const colliding = allPlatformVers[i].move(
+      0,
+      bool ? 75 * allPlatformVers[i].dir : 0
+    );
     if (colliding) {
-      console.log('colliding')
-      allPlatformVers[i].dir *= -1
+      allPlatformVers[i].dir *= -1;
     }
   }
 };
@@ -113,7 +116,7 @@ export const nextLevel = (p) => {
 
 export const gameover = (p) => {
   play("sound-lose");
-  p.isDead = true
+  p.isDead = true;
   add([text("You lose!"), pos(p.pos.x, p.pos.y - 50), scale(0.2), z(100)]);
   setTimeout(function () {
     p.isDead = false;
@@ -223,7 +226,7 @@ export const handleAllMovingObjects = (activated) => {
       let dir = randi(1, 2) === 1 ? -1 : 1;
       let up = 0;
       let turn = false;
-      let speed= 30
+      let speed = 30;
       allBats[i].use({
         load() {
           this.play("fly");
@@ -243,11 +246,11 @@ export const handleAllMovingObjects = (activated) => {
           }, 100);
 
           //option2
-         // const vel = speed * dir;
-         // Math.floor(time()) % 2 === 0 ? this.move(0, -vel) : this.move(0, vel);
+          // const vel = speed * dir;
+          // Math.floor(time()) % 2 === 0 ? this.move(0, -vel) : this.move(0, vel);
         },
       });
-    }    
+    }
   }
 };
 
